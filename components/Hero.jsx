@@ -14,12 +14,10 @@ const fadeUp = {
 };
 
 const HERO_IMG = "/hero.webp";
-const LEFT_ART = "/hero-left.jpg"; // put hero-left.jpg in /public
+const LEFT_ART = "/hero-left.jpg"; 
 
-// Slanted left edge of the image panel (matches the design)
-const SLANT = "polygon(26% 0, 100% 0, 100% 100%, 0 100%)";
-// Orange band that hugs the slanted edge
-const SWOOSH = "polygon(21.5% 0, 26% 0, 0 100%, 0 95%)";
+const SLANT = "polygon(33% 0, 100% 0, 100% 100%, 0 100%)";
+const SWOOSH = "polygon(40.5% 0, 27% 0, 0 92%, 0 103%)";
 
 export default function Hero() {
   const [videoOpen, setVideoOpen] = useState(false);
@@ -46,10 +44,7 @@ export default function Hero() {
         }}
       />
 
-      {/* ---------- LEFT: text (+ image panel anchored right next to it) ---------- */}
       <div className="section-pad relative z-10 flex min-h-[640px] items-center pb-16 pt-8">
-        {/* RIGHT: full-height image panel (desktop). Starts right after the text and
-            bleeds to the viewport's right edge, so there is never a big gap. */}
         <motion.div
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}

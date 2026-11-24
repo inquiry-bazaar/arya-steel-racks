@@ -5,6 +5,8 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import Process from "@/components/Process";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
+import Testimonials from "@/components/Testimonials";
+import Industries from "@/components/Industries";
 
 export default function Home() {
   return (
@@ -13,7 +15,9 @@ export default function Home() {
       <Hero />
       <Products />
       <WhyChooseUs />
+      <Testimonials/>
       <Process />
+      <Industries/>
       <FAQ />
       <Footer />
     </main>

@@ -52,7 +52,7 @@ export default function Navbar() {
               key={link.label}
               href={link.href}
               onClick={() => setActive(link.label)}
-              className="relative flex items-center gap-1 text-[13.5px] font-semibold hover:text-brand"
+              className="relative flex items-center gap-1 text-[16.5px] font-semibold hover:text-brand"
             >
               {link.label}
               {link.dropdown && <ChevronDown className="h-3.5 w-3.5" />}
