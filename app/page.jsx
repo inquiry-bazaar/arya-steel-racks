@@ -7,6 +7,7 @@ import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import Testimonials from "@/components/Testimonials";
 import Industries from "@/components/Industries";
+import CTABanner from "@/components/CTABanner";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <Process />
       <Industries/>
       <FAQ />
+      <CTABanner/>
       <Footer />
     </main>
   );
