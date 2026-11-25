@@ -41,16 +41,17 @@ export default function ProductsPage() {
 
   return (
     <main>
-      <Navbar />
-
-      {/* Page Header */}
-      <BgHeader
-        title="Products"
-        eyebrow="Let Us Know your Query"
-        accent="#f9c32f"
-        text="Display racks, counters, trolleys and baskets built for supermarkets, garment stores and retail shops. Pick a category or scroll through everything."
-        backgroundImage="/products_hero.webp"
-      />
+  <BgHeader
+  title="Products"
+  eyebrow="Let Us Know your Query"
+  accent="#f9c32f"
+  text="Display racks, counters, trolleys and baskets built for supermarkets, garment stores and retail shops. Pick a category or scroll through everything."
+  backgroundImage="/products_hero.webp"
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: "Products" },     
+  ]}
+/>
 
       {/* Sticky Category Slider */}
       <CategorySlider grouped={grouped} />
@@ -108,7 +109,6 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      <Footer />
     </main>
   );
 }
