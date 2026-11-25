@@ -8,7 +8,7 @@ import { steps } from "@/data/content";
 const STAIR_BASE = 13; // left gap so row 1 also has room for the speed streaks
 const STAIR_SHIFT_DESKTOP = 6;
 const STAIR_SHIFT_MOBILE = 8;
-const HEADER_OFFSET = 230; 
+const HEADER_OFFSET = 230; // px: rendered height of the sticky header, adjust if the content overlaps it
 
 const EXTRA = [
   {
@@ -248,7 +248,7 @@ function StepRow({ step, index, isLast }) {
             : undefined
         }
       >
-        <div className="relative z-10 ml-[var(--shift-m)] flex w-full flex-col gap-8 lg:ml-[var(--shift-d)] lg:block lg:w-auto">
+        <div className="relative z-10 ml-[var(--shift-m)] flex w-full flex-col gap-8 lg:ml-[var(--shift-d)] lg:block lg:min-w-0 lg:flex-1">
           {/* speed streaks trailing behind the card */}
           <SpeedLines />
 

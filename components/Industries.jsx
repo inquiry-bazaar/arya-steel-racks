@@ -329,7 +329,7 @@ function ListItem({ item, index, active, total, sizes, onSelect }) {
   );
 }
 
-function IndustryImage({ src, alt, number }) {
+function IndustryImage({ src, alt, number, imageScale = 1 }) {
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
@@ -348,15 +348,17 @@ function IndustryImage({ src, alt, number }) {
 
   return (
     <div className="absolute inset-[7%] flex items-center justify-center">
-      <motion.img
+      <img
         src={src}
         alt={alt}
         onError={() => setFailed(true)}
-        className="block h-full w-full object-contain object-center"
         draggable={false}
-        initial={false}
-        animate={{ scale: 1, x: 0, y: 0, rotate: 0 }}
-        transition={{ duration: 0.35, ease: EASE_OUT }}
+        className="block h-full w-full object-contain object-center"
+        style={{
+          transform: `scale(${imageScale})`,
+          transformOrigin: "center center",
+          transition: "transform 500ms cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
       />
     </div>
   );
@@ -557,6 +559,8 @@ export default function Industries({
         src={srcOf(current.image)}
         alt={current.name}
         number={active + 1}
+        // First source artwork has a larger visual footprint, so normalize it.
+        imageScale={active === 0 ? 0.78 : 1}
       />
     </motion.div>
   </AnimatePresence>
