@@ -59,7 +59,21 @@ const pop = {
     transition: { type: "spring", stiffness: 420, damping: 18 },
   },
 };
+const NAV_H = 96; // px – set this to your real header height
 
+function useViewportScale() {
+  const [scale, setScale] = useState(1);
+  useEffect(() => {
+    const update = () =>
+      setScale(
+        Math.min(1.1, Math.max(0.6, (window.innerHeight - NAV_H) / 800))
+      );
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+  return scale;
+}
 function useMediaQuery(query) {
   const [matches, setMatches] = useState(false);
   useEffect(() => {
@@ -72,17 +86,6 @@ function useMediaQuery(query) {
   return matches;
 }
 
-function useViewportScale() {
-  const [scale, setScale] = useState(1);
-  useEffect(() => {
-    const update = () =>
-      setScale(Math.min(1.1, Math.max(0.78, window.innerHeight / 820)));
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-  return scale;
-}
 
 function wavePath({ len, period, amp, mid, vertical = false, close = "" }) {
   const pt = (along, cross) =>
@@ -380,13 +383,13 @@ export default function Industries({
   const small = useMediaQuery("(max-width: 767px)");
   const scale = useViewportScale();
 
-  const sizes = small
-    ? { active: 32, inactive: 20, pad: 8 }
-   : {
-    active: Math.round(46 * scale),
-    inactive: Math.round(30 * scale),
-    pad: Math.round(10 * scale),
-};
+const sizes = small
+  ? { active: 20, inactive: 20, pad: 6 }
+  : {
+      active: Math.round(30 * scale),
+      inactive: Math.round(30 * scale),
+      pad: Math.round(8 * scale),
+    };
 
   const { scrollYProgress } = useScroll({
     target: trackRef,
@@ -414,7 +417,7 @@ export default function Industries({
     <MotionConfig reducedMotion="user">
       <section id="industries" className="bg-soft relative overflow-x-clip">
         <div className="w-full px-4 sm:px-6 lg:px-8">
-          <header className="pb-6 pt-10 md:pt-14">
+          <header className="pb-6 pt-10 md:pt-14 mb-12">
             <span className="eyebrow">
               <span className="h-[2px] w-5 bg-brand" /> {eyebrow}
             </span>
@@ -432,7 +435,10 @@ export default function Industries({
             style={{ height: `calc(${N * SCROLL_PER_ITEM_VH}vh + 100vh)` }}
             aria-label="Industries"
           >
-            <div className="sticky top-0 flex h-screen items-start py-3 md:items-center md:py-6">
+<div
+  className="sticky flex items-start py-2 md:items-center md:py-4"
+  style={{ top: NAV_H, height: `calc(100vh - ${NAV_H}px)` }}
+>
               <div className="relative w-full">
                 <EdgeDecor />
                 <div className="glass-card !border-0 !bg-transparent !shadow-none !backdrop-blur-none relative isolate z-[1] w-full px-4 py-5 md:px-16 md:pb-12 md:pt-12 lg:px-24">
@@ -454,8 +460,6 @@ export default function Industries({
                   </ul>
 
 <div className="relative mx-auto aspect-[3/2] w-full min-w-0 max-w-[min(420px,90vw)] md:max-w-[min(720px,65vw)] overflow-visible">
-{/* BACKDROP ART: centered independently so Framer Motion transforms
-    never conflict with Tailwind translate utilities. */}
 <motion.div
   aria-hidden="true"
   className="
@@ -603,10 +607,10 @@ export default function Industries({
                   </div>
                 </div>
 
-                <p className="absolute bottom-6 left-16 z-[1] hidden text-xs font-bold tabular-nums text-[#8e98b8] md:block lg:left-24">
+                {/* <p className="absolute bottom-6 left-16 z-[1] hidden text-xs font-bold tabular-nums text-[#8e98b8] md:block lg:left-24">
                   <span className="text-[#0f2557]">{pad(active + 1)}</span> /{" "}
                   {pad(N)}
-                </p>
+                </p> */}
               </div>
               </div>
             </div>

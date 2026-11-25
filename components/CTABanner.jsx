@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
 
-const CTA_BG = "/Pd_cta_.png";
+const CTA_BG = "/hero.webp";
 const contact = {
   name: "Arya Display Rack",
   phone: "+91 7942647738",
