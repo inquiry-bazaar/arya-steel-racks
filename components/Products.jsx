@@ -145,14 +145,14 @@ export default function Products() {
                           group-[.swiper-slide-active]/slide:border-orange-400
                           group-[.swiper-slide-active]/slide:shadow-[0_0_0_3px_rgba(255,122,0,0.25),0_18px_40px_rgba(255,122,0,0.28)]"
                       >
-                        {/* product image */}
-                        <div className="absolute inset-x-3 top-3 bottom-[34%] overflow-hidden rounded-[20px] bg-white">
-                          <MediaSlot
-                            src={item.image}
-                            alt={item.title}
-                            className="absolute inset-0 h-full w-full object-contain p-3"
-                          />
-                        </div>
+{/* product image — flush to card edges */}
+<div className="absolute inset-x-0 top-0 bottom-[28%] overflow-hidden rounded-t-[24px]">
+  <MediaSlot
+    src={item.image}
+    alt={item.title}
+    className="absolute inset-0 h-full w-full object-cover"
+  />
+</div>
 
                         {/* top-right corner accent: blue by default, orange when active */}
                         <span
