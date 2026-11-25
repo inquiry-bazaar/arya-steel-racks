@@ -27,12 +27,10 @@ export default function Hero() {
       id="home"
       className="relative overflow-hidden bg-gradient-to-br from-white via-[#eef3fb] to-[#e3ebf8] pt-[84px]"
     >
-      {/* large white glass wedge behind the text */}
       <div
         className="pointer-events-none absolute left-0 top-0 hidden h-full w-[48%] bg-gradient-to-r from-white/70 to-transparent lg:block"
         style={{ clipPath: "polygon(0 0, 100% 0, 78% 100%, 0 100%)" }}
       />
-      {/* left-edge 3D glass illustration (from the design) */}
       <img
         src={LEFT_ART}
         alt=""
@@ -52,12 +50,10 @@ export default function Hero() {
           className="absolute -top-[84px] bottom-0 hidden lg:block"
           style={{ left: "max(51%, 600px)", right: "calc(50% - 50vw)" }}
         >
-          {/* orange swoosh */}
           <div
             className="absolute inset-0 bg-gradient-to-b from-brand via-brand/70 to-brand/10"
             style={{ clipPath: SWOOSH }}
           />
-          {/* image */}
           <div className="absolute inset-0 overflow-hidden" style={{ clipPath: SLANT }}>
             <div className="relative h-full w-full">
               <MediaSlot
@@ -65,7 +61,6 @@ export default function Hero() {
                 alt="Hero image"
                 className="absolute inset-0 h-full w-full object-cover"
               />
-              {/* soft light fade under the navbar */}
               <div className="absolute inset-x-0 top-0 h-[16%] bg-gradient-to-b from-white/80 to-transparent" />
             </div>
           </div>
@@ -111,14 +106,12 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* ---------- Mobile / tablet image ---------- */}
       <div className="section-pad relative pb-12 lg:hidden">
         <div className="aspect-[4/3.1] overflow-hidden rounded-[36px] shadow-glass">
           <MediaSlot src={media.heroImage || HERO_IMG} alt="Hero image" className="h-full w-full object-cover" />
         </div>
       </div>
 
-      {/* ---------- Floating badges (right edge) ---------- */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}

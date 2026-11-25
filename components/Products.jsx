@@ -3,7 +3,16 @@
 import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  ShoppingCart,
+  Layers,
+  Server,
+  Package,
+  Store,
+} from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
@@ -11,8 +20,14 @@ import "swiper/css/effect-coverflow";
 import MediaSlot from "./MediaSlot";
 import { products } from "@/data/content";
 
-// Coverflow + loop needs enough slides in the DOM, so the short list is repeated.
 const MIN_SLIDES = 12;
+
+// small icon shown above each product title (cycled by product index)
+const ICONS = [ShoppingCart, Layers, Server, Package, Store];
+
+// wavy top edge for the bottom info panel (used as a CSS mask)
+const WAVE_MASK =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0 26 C22 -4 42 0 60 24 S90 52 100 30 L100 100 L0 100 Z' fill='black'/%3E%3C/svg%3E\")";
 
 export default function Products() {
   const swiperRef = useRef(null);
@@ -21,7 +36,7 @@ export default function Products() {
   const slides = useMemo(() => {
     const copies = Math.max(1, Math.ceil(MIN_SLIDES / products.length));
     return Array.from({ length: copies }, (_, c) =>
-      products.map((p) => ({ ...p, _key: `${p.slug}-${c}` }))
+      products.map((p, i) => ({ ...p, _key: `${p.slug}-${c}`, _icon: ICONS[i % ICONS.length] }))
     ).flat();
   }, []);
 
@@ -44,9 +59,9 @@ export default function Products() {
           <p className="mt-5 max-w-[330px] text-[14.5px] leading-relaxed text-navy/80">
             A few of our best-selling racks, counters and trolleys. Tap a product for details, or browse the full range.
           </p>
-          <a href="#catalogue" className="btn-navy mt-7 !py-3">
+          <Link href="/products" className="btn-navy mt-7 !py-3">
             View All Products <ArrowRight className="h-4 w-4" />
-          </a>
+          </Link>
         </motion.div>
 
         {/* right: 3D coverflow stage */}
@@ -109,48 +124,97 @@ export default function Products() {
             }}
             autoplay={{ delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true }}
           >
-            {slides.map((item) => (
-              <SwiperSlide
-                key={item._key}
-                className="product-slide group/slide !h-auto !w-[210px] sm:!w-[240px] lg:!w-[250px]"
-              >
-                {/* mirror reflection lives on this wrapper so it moves with the card */}
-                <div
-                  className="product-card-wrap"
-                  style={{
-                    WebkitBoxReflect:
-                      "below 6px linear-gradient(to bottom, transparent 76%, rgba(255,255,255,0.32))",
-                  }}
+            {slides.map((item) => {
+              const Icon = item._icon;
+              return (
+                <SwiperSlide
+                  key={item._key}
+                  className="product-slide group/slide !h-auto !w-[210px] sm:!w-[240px] lg:!w-[250px]"
                 >
-                  {/* whole card opens the product page */}
-                  <Link href={`/products/${item.slug}`} aria-label={`View ${item.title}`} className="block h-full">
-                    <article className="product-card relative flex h-full flex-col overflow-hidden rounded-[26px] border border-[#e6ecf7] bg-white p-3 shadow-[0_12px_30px_rgba(30,55,110,0.08)]">
-                      {/* glass sheen */}
-                      <span className="pointer-events-none absolute inset-0 z-10 rounded-[26px] bg-[linear-gradient(115deg,rgba(255,255,255,0.55)_0%,rgba(255,255,255,0)_38%,rgba(255,255,255,0)_70%,rgba(255,255,255,0.35)_100%)]" />
-
-                      <div className="aspect-[3/3.2] overflow-hidden rounded-2xl bg-[#f4f7fc]">
-                        <MediaSlot src={item.image} alt={item.title} className="h-full w-full object-contain p-2" />
-                      </div>
-
-                      {/* fixed-height footer so nothing reflows when a card becomes active */}
-                      <div className="flex h-[72px] items-center justify-between gap-2 px-2 pt-3">
-                        <div className="min-w-0">
-                          <h3 className="product-title line-clamp-2 text-[16px] font-extrabold leading-tight text-navy">
-                            {item.title}
-                          </h3>
-                          {item.subtitle && (
-                            <p className="product-sub mt-0.5 truncate text-[12px] text-navy/60">{item.subtitle}</p>
-                          )}
+                  {/* mirror reflection lives on this wrapper so it moves with the card */}
+                  <div
+                    className="product-card-wrap"
+                    style={{
+                      WebkitBoxReflect:
+                        "below 6px linear-gradient(to bottom, transparent 76%, rgba(255,255,255,0.32))",
+                    }}
+                  >
+                    <Link href={`/${item.slug}`} aria-label={`View ${item.title}`} className="block">
+                      <article
+                        className="product-card relative aspect-[250/335] overflow-hidden rounded-[26px] border-2 border-[#e6ecf7] bg-white shadow-[0_12px_30px_rgba(30,55,110,0.10)] transition-[border-color,box-shadow] duration-500
+                          group-[.swiper-slide-active]/slide:border-orange-400
+                          group-[.swiper-slide-active]/slide:shadow-[0_0_0_3px_rgba(255,122,0,0.25),0_18px_40px_rgba(255,122,0,0.28)]"
+                      >
+                        {/* product image */}
+                        <div className="absolute inset-x-3 top-3 bottom-[34%] overflow-hidden rounded-[20px] bg-white">
+                          <MediaSlot
+                            src={item.image}
+                            alt={item.title}
+                            className="absolute inset-0 h-full w-full object-contain p-3"
+                          />
                         </div>
-                        <span className="product-arrow flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-orange-400 to-brand text-white shadow-orange">
-                          <ArrowRight className="h-5 w-5" />
-                        </span>
-                      </div>
-                    </article>
-                  </Link>
-                </div>
-              </SwiperSlide>
-            ))}
+
+                        {/* top-right corner accent: blue by default, orange when active */}
+                        <span
+                          aria-hidden
+                          className="pointer-events-none absolute right-0 top-0 z-20 h-9 w-9 rounded-tr-[26px] border-r-[5px] border-t-[5px] border-[#2f6fd6] transition-colors duration-500
+                            group-[.swiper-slide-active]/slide:border-orange-400"
+                        />
+
+                        {/* wavy info panel (shape via mask, colour via gradient) */}
+                        <div
+                          aria-hidden
+                          className="absolute inset-x-0 bottom-0 z-10 h-[46%] bg-gradient-to-b from-white to-[#eef2fa] transition-all duration-500
+                            group-[.swiper-slide-active]/slide:h-[50%]
+                            group-[.swiper-slide-active]/slide:from-[#2f74e0]
+                            group-[.swiper-slide-active]/slide:to-[#0f3f9e]"
+                          style={{
+                            WebkitMaskImage: WAVE_MASK,
+                            maskImage: WAVE_MASK,
+                            WebkitMaskSize: "100% 100%",
+                            maskSize: "100% 100%",
+                            WebkitMaskRepeat: "no-repeat",
+                            maskRepeat: "no-repeat",
+                          }}
+                        />
+
+                        {/* panel content */}
+                        <div className="absolute inset-x-0 bottom-0 z-20 flex h-[40%] items-end justify-between gap-2 px-4 pb-4">
+                          <div className="min-w-0">
+                            <Icon
+                              className="mb-1.5 h-6 w-6 text-orange-500 transition-colors duration-500
+                                group-[.swiper-slide-active]/slide:h-7 group-[.swiper-slide-active]/slide:w-7
+                                group-[.swiper-slide-active]/slide:text-white"
+                              strokeWidth={1.7}
+                            />
+                            <h3
+                              className="product-title line-clamp-2 text-[15px] font-extrabold leading-tight text-navy transition-all duration-500
+                                group-[.swiper-slide-active]/slide:text-[19px] group-[.swiper-slide-active]/slide:text-white"
+                            >
+                              {item.title}
+                            </h3>
+                            {item.subtitle && (
+                              <p
+                                className="product-sub mt-0.5 truncate text-[11.5px] text-navy/60 transition-colors duration-500
+                                  group-[.swiper-slide-active]/slide:text-white/90"
+                              >
+                                {item.subtitle}
+                              </p>
+                            )}
+                          </div>
+                          <span
+                            className="product-arrow flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-orange-400 to-brand text-white shadow-orange transition-all duration-500
+                              group-[.swiper-slide-active]/slide:h-12 group-[.swiper-slide-active]/slide:w-12"
+                          >
+                            <ArrowRight className="h-5 w-5" />
+                          </span>
+                        </div>
+                      </article>
+                    </Link>
+                  </div>
+                </SwiperSlide>
+              );
+            })}
           </Swiper>
 
           {/* indicator dots: one per real product (not per duplicated slide) */}

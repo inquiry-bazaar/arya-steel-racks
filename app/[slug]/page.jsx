@@ -4,8 +4,6 @@ import { catalogue, categoryList } from "@/data/products";
 import { company } from "@/data/content";
 import Category from "@/components/Category";
 
-// One route for both product pages (/gondola-display-rack) and
-// category pages (/garment-and-apparel). /products stays its own page.
 export const dynamicParams = false;
 
 export function generateStaticParams() {

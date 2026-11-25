@@ -38,9 +38,9 @@ export default function ProductDetail({ product }) {
 
           <div className="mt-8 grid gap-10 lg:grid-cols-2">
             <div className="rounded-[28px] border border-[#e6ecf7] bg-white p-4 shadow-[0_12px_30px_rgba(30,55,110,0.08)]">
-              <div className="aspect-square overflow-hidden rounded-2xl bg-[#f4f7fc]">
-                <MediaSlot src={product.image} alt={product.title} className="h-full w-full object-contain p-4" />
-              </div>
+<div className="relative aspect-square overflow-hidden rounded-2xl bg-white">
+  <MediaSlot src={product.image} alt={product.title} className="absolute inset-0 h-full w-full object-contain p-4" />
+</div>
             </div>
 
             <div>
@@ -98,9 +98,9 @@ export default function ProductDetail({ product }) {
                   href={`/${p.slug}`}
                   className="group overflow-hidden rounded-2xl border border-[#e6ecf7] bg-white shadow-[0_8px_24px_rgba(30,55,110,0.06)] transition hover:-translate-y-1"
                 >
-                  <div className="aspect-square bg-[#f4f7fc]">
-                    <MediaSlot src={p.image} alt={p.title} className="h-full w-full object-contain p-2" />
-                  </div>
+ <div className="relative aspect-square shrink-0 overflow-hidden border-b border-[#eef2fa] bg-white">
+  <MediaSlot src={p.image} alt={p.title} className="absolute inset-0 h-full w-full object-contain p-3" />
+</div>
                   <div className="flex items-center justify-between gap-2 p-3">
                     <h3 className="text-[14px] font-extrabold leading-snug text-navy">{p.title}</h3>
                     <ArrowRight className="h-4 w-4 shrink-0 text-brand transition group-hover:translate-x-1" />

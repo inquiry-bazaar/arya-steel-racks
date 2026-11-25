@@ -1,6 +1,5 @@
 import { catalogue } from "./products";
 
-// Source: https://www.aryadisplayrack.com/ (home, profile, testimonial pages)
 export const company = {
   name: "Arya Display Rack",
   tagline: "Manufacturer of Supermarket Display Racks & Shopping Trolleys",
@@ -39,8 +38,8 @@ export const media = {
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products", dropdown: true },
-  { label: "About Us", href: "/why" },
-  { label: "Contact Us", href: "/contact" },
+  { label: "About Us", href: "/#why" },
+  { label: "Contact Us", href: "/#contact" },
 ];
 
 const FEATURED = [
@@ -56,7 +55,6 @@ const FEATURED = [
 
 export const products = FEATURED.map((t) => catalogue.find((p) => p.title === t)).filter(Boolean);
 
-// icon names are matched in components/WhyChooseUs.jsx
 export const features = [
   { label: "Quality-Tested Products", icon: "gem" },
   { label: "Customizable Designs", icon: "settings" },
@@ -64,7 +62,6 @@ export const features = [
   { label: "Pan-India Supply", icon: "headset" },
 ];
 
-// icon names are matched in components/Process.jsx
 export const steps = [
   { title: "Share Your Requirements", icon: "message" },
   { title: "Get a Custom Design", icon: "ruler" },
@@ -74,14 +71,13 @@ export const steps = [
 
 const count = (cat) => catalogue.filter((p) => p.category === cat).length;
 
-// Store types we supply, with counts taken from the real catalogue
 export const industries = [
-  { name: "Supermarkets & Grocery", image: "/industries/supermarket.jpg", desc: "Gondola, wall and centre racks for every aisle.", cat: "Supermarket & Grocery" },
-  { name: "Garment & Apparel", image: "/industries/garment.jpg", desc: "Hanging stands, saree racks and nesting tables.", cat: "Garment & Apparel" },
-  { name: "Footwear, Beauty & Pharmacy", image: "/industries/pharmacy.jpg", desc: "Shoe, cosmetic and medicine racks.", cat: "Footwear, Beauty & Pharmacy" },
-  { name: "Electronics, Books & Gifts", image: "/industries/electronics.jpg", desc: "Display racks for electronics, books and gifts.", cat: "Electronics, Books & Gifts" },
-  { name: "Fixtures & Accessories", image: "/industries/fixtures.jpg", desc: "Slatwall, pegboards and custom branded stands.", cat: "Fixtures & Accessories" },
-  { name: "Counters, Trolleys & Baskets", image: "/industries/counters.jpg", desc: "Checkout counters, trolleys and baskets.", cat: "Counters, Trolleys & Baskets" },
+  { name: "Supermarkets & Grocery", image: "/images/products/gondola-display-rack.jpg", desc: "Gondola, wall and centre racks for every aisle.", cat: "Supermarket & Grocery" },
+  { name: "Garment & Apparel", image: "/images/products/garment-display-rack.jpg", desc: "Hanging stands, saree racks and nesting tables.", cat: "Garment & Apparel" },
+  { name: "Footwear, Beauty & Pharmacy", image: "/images/products/pharmacy-medical-store-rack.png", desc: "Shoe, cosmetic and medicine racks.", cat: "Footwear, Beauty & Pharmacy" },
+  { name: "Electronics, Books & Gifts", image: "/images/products/book-rack-library-rack.jpg", desc: "Display racks for electronics, books and gifts.", cat: "Electronics, Books & Gifts" },
+  { name: "Fixtures & Accessories", image: "/images/products/peg-hooks-pegboard-and-brackets.jpeg", desc: "Slatwall, pegboards and custom branded stands.", cat: "Fixtures & Accessories" },
+  { name: "Counters, Trolleys & Baskets", image: "/images/products/cash-checkout-counter.jpg", desc: "Checkout counters, trolleys and baskets.", cat: "Counters, Trolleys & Baskets" },
 ].map(({ cat, ...i }) => ({
   ...i,
   stats: [
@@ -91,7 +87,6 @@ export const industries = [
   ],
 }));
 
-// Real reviewers from the site's Ratings & Reviews page (only one left a written comment).
 export const testimonials = [
   {
     name: "Vineet Mishra",

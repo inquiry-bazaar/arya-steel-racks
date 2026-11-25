@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { ImageIcon } from "lucide-react";
 
-// Shows your image. If the file isn't added yet, shows a placeholder instead.
 export default function MediaSlot({ src, alt, className = "" }) {
   const [failed, setFailed] = useState(false);
 
@@ -19,6 +18,5 @@ export default function MediaSlot({ src, alt, className = "" }) {
     );
   }
 
-  // eslint-disable-next-line @next/next/no-img-element
   return <img src={src} alt={alt} className={className} onError={() => setFailed(true)} />;
 }

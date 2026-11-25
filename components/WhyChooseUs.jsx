@@ -62,11 +62,6 @@ const cardV = {
   show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: EASE } },
 };
 
-/* ------------------------------------------------------------------ */
-/*  Small building blocks                                               */
-/* ------------------------------------------------------------------ */
-
-// Moves with the mouse at a given depth (parallax)
 function Parallax({ mx, my, depth = 20, className = "", children }) {
   const x = useTransform(mx, (v) => v * depth);
   const y = useTransform(my, (v) => v * depth);
@@ -77,7 +72,6 @@ function Parallax({ mx, my, depth = 20, className = "", children }) {
   );
 }
 
-// Endless gentle float
 function Float({ className = "", dur = 6, y = 14, rotate = 0, delay = 0, children }) {
   return (
     <motion.div
@@ -91,7 +85,6 @@ function Float({ className = "", dur = 6, y = 14, rotate = 0, delay = 0, childre
   );
 }
 
-// Number that counts up when it scrolls into view
 function Counter({ to = 1000, suffix = "+" }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
@@ -137,7 +130,6 @@ function Plus({ className = "" }) {
   );
 }
 
-// Spinning circular-text badge
 function RotatingBadge() {
   return (
     <div className="relative flex h-28 w-28 items-center justify-center rounded-full bg-white shadow-glass">
@@ -162,7 +154,6 @@ function RotatingBadge() {
   );
 }
 
-// Steel cross-brace zig-zag that draws itself along the bottom edge
 function Brace() {
   const step = 40;
   const count = 72;
@@ -191,7 +182,6 @@ function Brace() {
   );
 }
 
-// Feature card: staggered entrance, shimmer sweep, 3D tilt, cursor spotlight, gradient border
 function FeatureCard({ item, index }) {
   const Icon = icons[item.icon];
 

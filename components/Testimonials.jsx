@@ -12,11 +12,9 @@ import {
 import { Quote, Star } from "lucide-react";
 import { testimonials } from "@/data/content";
 
-const SCROLL_PER_REVIEW = 90; // vh of scrolling for each review
+const SCROLL_PER_REVIEW = 90; 
 
 const DEFAULT_ITEMS = testimonials;
-
-/* ---------- Typewriter ---------- */
 
 function Typewriter({ text }) {
   const reduce = useReducedMotion();
@@ -65,7 +63,6 @@ function Confetti({ burstKey }) {
   const reduce = useReducedMotion();
   const [pieces, setPieces] = useState([]);
 
-  // generated in an effect so server and client HTML never mismatch
   useEffect(() => {
     if (reduce) return;
     const count = 40;
@@ -107,7 +104,7 @@ function Confetti({ burstKey }) {
           initial={{ x: 0, y: 0, opacity: 1, scale: 0, rotate: 0 }}
           animate={{
             x: p.x,
-            y: [0, p.y, p.y + 70], // burst out, then fall with gravity
+            y: [0, p.y, p.y + 70], 
             opacity: [1, 1, 0],
             scale: [0, 1, 1],
             rotate: p.rotate,
@@ -124,7 +121,6 @@ function Confetti({ burstKey }) {
   );
 }
 
-/* ---------- The 2D guy: one GIF per review, crossfaded ---------- */
 
 function Guy({ item, index }) {
   const reduce = useReducedMotion();
@@ -133,7 +129,6 @@ function Guy({ item, index }) {
     <div className="relative h-full w-full">
       <AnimatePresence mode="wait" initial={false}>
         <motion.img
-          // new key = new <img>, so every GIF starts from its first frame
           key={index}
           src={item.gif}
           alt={`Presenter talking about ${item.name}'s review`}
@@ -149,10 +144,9 @@ function Guy({ item, index }) {
   );
 }
 
-/* ---------- One review card ---------- */
 
 function ReviewCard({ item, index, active }) {
-  const depth = active - index; // <0 not yet shown, 0 current, >0 already passed
+  const depth = active - index; 
   const state =
     depth < 0
       ? { opacity: 0, y: 120, scale: 0.92, rotate: 3, x: 40 }
@@ -172,7 +166,6 @@ function ReviewCard({ item, index, active }) {
     .join("")
     .slice(0, 2);
 
-  // fades the photo out toward the top-left, where the text lives
   const fade = "linear-gradient(to top left, black 25%, transparent 78%)";
 
   return (
@@ -273,7 +266,6 @@ export default function Testimonials({ items = DEFAULT_ITEMS }) {
     offset: ["start start", "end end"],
   });
 
-  // preload every GIF and project photo so switching reviews never flashes
   useEffect(() => {
     items.forEach((it) => {
       if (it.gif) new window.Image().src = it.gif;
@@ -282,7 +274,6 @@ export default function Testimonials({ items = DEFAULT_ITEMS }) {
     });
   }, [items]);
 
-  // scroll position -> which review is showing
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     const next = Math.min(
       total - 1,

@@ -6,13 +6,11 @@ import { Plus } from "lucide-react";
 import { faqs } from "@/data/content";
 
 export default function FAQ() {
-  // index of the open question (first one open by default, null = all closed)
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
     <section id="faq" className="bg-soft py-20">
       <div className="section-pad grid gap-12 lg:grid-cols-[340px_1fr]">
-        {/* left: heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -33,7 +31,6 @@ export default function FAQ() {
           </a>
         </motion.div>
 
-        {/* right: accordion */}
         <div className="space-y-4">
           {faqs.map((item, index) => {
             const isOpen = openIndex === index;

@@ -68,9 +68,9 @@ function Connector() {
     offset: ["start 80%", "end 88%"],
   });
 
-  const a = useTransform(t, [0, 0.35], [0, 1]); // first drop
-  const b = useTransform(t, [0.35, 0.7], [0, 1]); // step right
-  const c = useTransform(t, [0.7, 1], [0, 1]); // second drop
+  const a = useTransform(t, [0, 0.35], [0, 1]);
+  const b = useTransform(t, [0.35, 0.7], [0, 1]); 
+  const c = useTransform(t, [0.7, 1], [0, 1]);
 
   return (
     <div
@@ -110,7 +110,6 @@ function Reveal({ p, range, x = 0, y = 0, className, children }) {
   );
 }
 
-/* ---------- Image with a safe fallback ---------- */
 
 function CardImage({ src, alt, number }) {
   const [failed, setFailed] = useState(false);
@@ -122,7 +121,6 @@ function CardImage({ src, alt, number }) {
     );
   }
   return (
-    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src}
       alt={alt}
@@ -132,7 +130,6 @@ function CardImage({ src, alt, number }) {
   );
 }
 
-/* ---------- One staircase row ---------- */
 
 function StepRow({ step, index, isLast }) {
   const ref = useRef(null);
@@ -178,11 +175,9 @@ function StepRow({ step, index, isLast }) {
         "--shift-d": `${index * STAIR_SHIFT_DESKTOP}%`,
       }}
     >
-      {/* ORANGE CONNECTOR: from this card's bottom to the next card's top */}
 {!isLast && <Connector />}
 
       <div className="relative z-10 ml-[var(--shift-m)] flex w-full flex-col gap-8 lg:ml-[var(--shift-d)] lg:block lg:w-auto">
-        {/* CARD */}
         <motion.div
           style={{ opacity: cardOpacity, x: cardX, y: cardY, rotate: cardRotate, scale: cardScale }}
           className="glass-card relative w-full max-w-[420px] overflow-hidden rounded-3xl shadow-xl lg:w-[390px]"

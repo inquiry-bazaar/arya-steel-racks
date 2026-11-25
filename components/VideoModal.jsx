@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 
-// Pop-up video player. Close with the X, a click outside, or the Esc key.
 export default function VideoModal({ open, onClose, src }) {
   useEffect(() => {
     if (!open) return;
