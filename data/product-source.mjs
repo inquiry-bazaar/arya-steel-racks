@@ -83,9 +83,248 @@ export const raw = [
   { title: "Wire Bin Basket / Dump Bin", image: "/images/products/wire-bin-basket-dump-bin.jpg", category: COUNTER, subtitle: "Promo dump bin", desc: "Wire dump bin for bulk, discounted and promotional items.", page: "shopping-trolley", alts: ["Shopping Basket Trolley"] },
 ];
 
+
+
 export const slugify = (s) =>
   s
     .toLowerCase()
     .replace(/&/g, "and")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+
+export const SPECS = {
+  "supermarket-display-rack": { height: "1800 – 2100 mm", length: "1200 mm", depth: "450 / 600 mm", shelves: "4 / 5 / 6", load: "" },
+  "supermarket-wall-rack": { height: "1800 – 2100 mm", length: "1200 mm", depth: "450 mm", shelves: "4 / 5 / 6", load: "" },
+  "supermarket-center-rack-island-rack": { height: "1500 – 1800 mm", length: "1200 mm", depth: "900 mm", shelves: "4 / 5 / Custom", load: "60 kg per shelf" },
+  "gondola-display-rack": { height: "1600 mm", length: "1200 mm", depth: "900 mm", shelves: "4 / 5 / Custom", load: "" },
+  "double-sided-display-rack": { height: "1600 mm", length: "1200 mm", depth: "900 mm", shelves: "4 / 5 / Custom", load: "250 kg" },
+  "gondola-end-cap-rack": { height: "1600 mm", length: "900 mm", depth: "450 mm", shelves: "4 / 5", load: "" },
+  "corner-display-rack": { height: "1800 mm", length: "900 mm", depth: "450 mm", shelves: "5 / 6", load: "" },
+  "grocery-store-rack": { height: "1830 mm", length: "1200 mm", depth: "450 / 600 mm", shelves: "5 / 6", load: "600 kg" },
+  "kirana-store-rack": { height: "1500 mm", length: "900 mm", depth: "300 / 450 mm", shelves: "4 / 5", load: "" },
+  "departmental-store-rack": { height: "1800 mm", length: "1200 mm", depth: "450 / 600 mm", shelves: "6", load: "250 kg" },
+  "hypermarket-display-rack": { height: "2100 mm", length: "1200 / 1500 mm", depth: "600 / 900 mm", shelves: "5 / 6 / Custom", load: "" },
+  "retail-display-rack": { height: "1500 – 1800 mm", length: "1200 mm", depth: "450 mm", shelves: "4", load: "" },
+  "pillar-display-rack": { height: "1500 mm", length: "As per pillar", depth: "300 mm", shelves: "3 / 4", load: "" },
+  "perforated-display-rack-with-hooks": { height: "1800 mm", length: "1200 mm", depth: "300 mm", shelves: "Hooks / Custom", load: "" },
+  "wall-channel-display-rack": { height: "2100 mm", length: "1200 mm", depth: "400 mm", shelves: "Adjustable", load: "" },
+  "round-revolving-display-rack": { height: "1500 mm", length: "Ø 900 mm", depth: "Ø 900 mm", shelves: "3 / 4 tiers", load: "" },
+  "wire-mesh-basket-display-rack": { height: "2130 mm", length: "900 mm", depth: "450 mm", shelves: "5 / 6", load: "" },
+  "ms-mild-steel-display-rack": { height: "Up to 2440 mm", length: "1200 mm", depth: "450 / 600 mm", shelves: "Up to 7", load: "250 kg" },
+  "ss-stainless-steel-display-rack": { height: "1800 mm", length: "1200 mm", depth: "450 / 600 mm", shelves: "4 / 5", load: "350 kg" },
+  "wooden-display-rack": { height: "1800 mm", length: "1200 mm", depth: "400 mm", shelves: "4 / 5", load: "" },
+  "glass-display-rack": { height: "1800 mm", length: "900 mm", depth: "400 mm", shelves: "4 / 5", load: "" },
+  "fruit-and-vegetable-rack": { height: "1200 mm", length: "1500 mm", depth: "750 mm", shelves: "2 / 3", load: "" },
+  "bakery-display-rack": { height: "1800 mm", length: "1200 mm", depth: "450 mm", shelves: "4 / 5", load: "" },
+  "snacks-and-chips-display-rack": { height: "2130 mm", length: "610 mm", depth: "450 mm", shelves: "5 / 6", load: "" },
+  "chocolate-display-stand": { height: "1200 mm", length: "450 mm", depth: "350 mm", shelves: "3 / 4", load: "" },
+  "impulse-rack-cash-counter-rack": { height: "900 mm", length: "450 mm", depth: "300 mm", shelves: "2 / 3", load: "" },
+  "broom-display-stand": { height: "1500 mm", length: "600 mm", depth: "300 mm", shelves: "Hooks / Custom", load: "" },
+  "garment-display-rack": { height: "1500 – 1800 mm", length: "1200 mm", depth: "450 mm", shelves: "Rails / Custom", load: "" },
+  "garment-hanging-stand": { height: "1000 – 1700 mm", length: "900 mm", depth: "450 mm", shelves: "Adjustable", load: "" },
+  "2-way-4-way-garment-stand": { height: "1500 mm", length: "900 mm", depth: "900 mm", shelves: "2 / 4 arms", load: "" },
+  "garment-nesting-table": { height: "750 mm", length: "900 mm", depth: "600 mm", shelves: "Set of 2 / 3", load: "" },
+  "wall-mounted-garment-rack": { height: "1800 mm", length: "1200 mm", depth: "450 mm", shelves: "Rails / Custom", load: "" },
+  "saree-display-rack": { height: "1800 mm", length: "1200 mm", depth: "600 mm", shelves: "4 / 5", load: "" },
+  "garment-center-rack": { height: "1600 mm", length: "1200 mm", depth: "600 mm", shelves: "Adjustable arms", load: "" },
+  "shoe-display-rack": { height: "1500 mm", length: "1200 mm", depth: "450 mm", shelves: "5 / 6", load: "" },
+  "wall-mounted-shoe-rack": { height: "1800 mm", length: "1200 mm", depth: "300 mm", shelves: "5 / 6", load: "" },
+  "cosmetic-display-rack": { height: "1500 mm", length: "1000 mm", depth: "300 mm", shelves: "4 / 5", load: "" },
+  "pharmacy-medical-store-rack": { height: "2100 mm", length: "1200 mm", depth: "300 mm", shelves: "6 / 7", load: "" },
+  "medicine-rack-with-drawers": { height: "1800 mm", length: "1200 mm", depth: "400 mm", shelves: "5 + drawers", load: "" },
+  "electronics-display-rack": { height: "1800 mm", length: "1200 mm", depth: "450 mm", shelves: "4 / 5", load: "" },
+  "lcd-led-tv-display-rack": { height: "1500 mm", length: "1200 mm", depth: "600 mm", shelves: "2 / 3", load: "" },
+  "mobile-shop-display-rack": { height: "1800 mm", length: "1000 mm", depth: "300 mm", shelves: "4 / 5", load: "" },
+  "home-appliance-display-rack": { height: "1800 mm", length: "1500 mm", depth: "750 mm", shelves: "2 / 3", load: "" },
+  "book-rack-library-rack": { height: "1500 mm", length: "900 mm", depth: "300 mm", shelves: "4", load: "" },
+  "stationery-display-rack": { height: "1500 mm", length: "1000 mm", depth: "350 mm", shelves: "4 / 5", load: "" },
+  "crockery-display-rack": { height: "1800 mm", length: "1000 mm", depth: "450 mm", shelves: "4 / 5", load: "" },
+  "toy-display-rack": { height: "1200 mm", length: "1200 mm", depth: "450 mm", shelves: "3 / 4", load: "" },
+  "sports-goods-display-rack": { height: "1800 mm", length: "1200 mm", depth: "450 mm", shelves: "3 / 4", load: "" },
+  "gift-and-fancy-store-rack": { height: "1800 mm", length: "1000 mm", depth: "350 mm", shelves: "4 / 5", load: "" },
+  "optical-showcase-rack": { height: "1500 mm", length: "1000 mm", depth: "300 mm", shelves: "Display tiers", load: "" },
+  "slatwall-display-rack-panel": { height: "1200 / 2400 mm", length: "1200 mm", depth: "18 – 25 mm", shelves: "Slats / Custom", load: "" },
+  "peg-hooks-pegboard-and-brackets": { height: "As per layout", length: "As per layout", depth: "As per hook", shelves: "Hooks / Custom", load: "" },
+  "promotional-display-stand": { height: "1500 mm", length: "600 mm", depth: "450 mm", shelves: "3 / 4", load: "" },
+  "custom-branded-display-rack": { height: "Custom", length: "Custom", depth: "Custom", shelves: "Custom", load: "" },
+  "cash-checkout-counter": { height: "900 – 1000 mm", length: "1200 – 1800 mm", depth: "600 mm", shelves: "Shelf / Drawer", load: "" },
+  "glass-display-counter": { height: "950 mm", length: "1200 / 1500 mm", depth: "600 mm", shelves: "2 glass shelves", load: "" },
+  "pharmacy-service-counter": { height: "900 mm", length: "1800 mm (L-shaped)", depth: "600 mm", shelves: "With drawers", load: "" },
+  "shopping-trolley": { height: "950 mm", length: "900 mm", depth: "550 mm", shelves: "Basket + tray", load: "60 kg" },
+  "shopping-basket": { height: "300 mm", length: "450 mm", depth: "300 mm", shelves: "Single basket", load: "" },
+  "wire-bin-basket-dump-bin": { height: "800 mm", length: "900 mm", depth: "600 mm", shelves: "Single bin", load: "" },
+};
+
+/* ------------------------------------------------------------------ */
+/* Category defaults                                                   */
+/* ------------------------------------------------------------------ */
+const RACK_SIZES = ["900 mm", "1200 mm", "1500 mm", "1800 mm"];
+
+const DEFAULT_COLORS = [
+  { name: "Blue", hex: "#1d4ed8" },
+  { name: "White", hex: "#f3f4f6" },
+  { name: "Grey", hex: "#4b5563" },
+  { name: "Orange", hex: "#f97316" },
+];
+
+const F = {
+  area: { icon: "cart", label: "High Display Area" },
+  double: { icon: "layers", label: "Double-Sided Design" },
+  durable: { icon: "shield", label: "Durable & Sturdy" },
+  space: { icon: "maximize", label: "Space Optimized" },
+  assembly: { icon: "wrench", label: "Easy Assembly" },
+  custom: { icon: "layers", label: "Custom Built" },
+};
+
+const CATEGORY = {
+  "Supermarket & Grocery": {
+    shelfLabel: "No. of Shelves",
+    features: [F.area, F.assembly, F.durable, F.space],
+    applications: [
+      { icon: "cart", label: "Supermarkets" },
+      { icon: "basket", label: "Grocery Stores" },
+      { icon: "bag", label: "Retail Outlets" },
+      { icon: "package", label: "Department Stores" },
+    ],
+    // free Unsplash photo used in the round overview image (replace with your own store photo)
+    scene: "https://unsplash.com/photos/2Vl1JZFmtOw/download?force=true&w=1000",
+  },
+  "Garment & Apparel": {
+    shelfLabel: "Configuration",
+    features: [F.area, F.assembly, F.durable, F.space],
+    applications: [
+      { icon: "shirt", label: "Clothing Stores" },
+      { icon: "bag", label: "Boutiques" },
+      { icon: "store", label: "Showrooms" },
+      { icon: "package", label: "Department Stores" },
+    ],
+  },
+  "Footwear, Beauty & Pharmacy": {
+    shelfLabel: "No. of Shelves",
+    features: [F.area, F.assembly, F.durable, F.space],
+    applications: [
+      { icon: "shoe", label: "Footwear Stores" },
+      { icon: "sparkles", label: "Cosmetic Stores" },
+      { icon: "pill", label: "Pharmacies" },
+      { icon: "bag", label: "Retail Outlets" },
+    ],
+  },
+  "Electronics, Books & Gifts": {
+    shelfLabel: "No. of Shelves",
+    features: [F.area, F.assembly, F.durable, F.space],
+    applications: [
+      { icon: "tv", label: "Electronics Stores" },
+      { icon: "book", label: "Book Shops" },
+      { icon: "gift", label: "Gift Shops" },
+      { icon: "store", label: "Showrooms" },
+    ],
+  },
+  "Fixtures & Accessories": {
+    shelfLabel: "Configuration",
+    features: [F.custom, F.assembly, F.durable, F.space],
+    applications: [
+      { icon: "bag", label: "Retail Outlets" },
+      { icon: "megaphone", label: "Promotions" },
+      { icon: "store", label: "Showrooms" },
+      { icon: "cart", label: "Supermarkets" },
+    ],
+  },
+  "Counters, Trolleys & Baskets": {
+    shelfLabel: "Configuration",
+    features: [F.custom, F.assembly, F.durable, F.space],
+    applications: [
+      { icon: "cart", label: "Supermarkets" },
+      { icon: "pill", label: "Pharmacies" },
+      { icon: "gem", label: "Jewellery Shops" },
+      { icon: "headset", label: "Service Desks" },
+    ],
+  },
+};
+
+const FALLBACK = CATEGORY["Supermarket & Grocery"];
+
+/* ------------------------------------------------------------------ */
+/* Per-product overrides (all optional)                                */
+/* ------------------------------------------------------------------ */
+const TWO_SIDED = [F.area, F.double, F.durable, F.space];
+
+const OVERRIDES = {
+  "double-sided-display-rack": { features: TWO_SIDED },
+  "gondola-display-rack": { features: TWO_SIDED },
+  "gondola-end-cap-rack": { features: TWO_SIDED },
+  "supermarket-center-rack-island-rack": { features: TWO_SIDED },
+
+  "round-revolving-display-rack": { sizes: ["Ø 750 mm", "Ø 900 mm", "Ø 1200 mm"] },
+  "garment-nesting-table": { sizes: ["Set of 2", "Set of 3", "Set of 4"] },
+  "chocolate-display-stand": { sizes: ["450 mm", "600 mm", "900 mm"] },
+  "impulse-rack-cash-counter-rack": { sizes: ["450 mm", "600 mm", "900 mm"] },
+  "broom-display-stand": { sizes: ["450 mm", "600 mm", "900 mm"] },
+  "slatwall-display-rack-panel": { sizes: ["1200 mm", "2400 mm"] },
+  "peg-hooks-pegboard-and-brackets": { sizes: ["100 mm", "150 mm", "200 mm", "300 mm"] },
+  "custom-branded-display-rack": { sizes: ["Custom size"] },
+  "pillar-display-rack": { sizes: ["Custom size"] },
+  "shopping-trolley": { sizes: ["Standard", "Large"] },
+  "shopping-basket": { sizes: ["Small", "Medium", "Large"] },
+  "wire-bin-basket-dump-bin": { sizes: ["Small", "Medium", "Large"] },
+};
+
+export function getProductDetails(product, company = {}) {
+  const key = product.slug || slugify(product.title);
+  const cat = CATEGORY[product.category] || FALLBACK;
+  const over = OVERRIDES[key] || {};
+  const own = product.details || {};
+  const spec = { ...(SPECS[key] || {}), ...(own.specs || {}) };
+
+  const load = spec.load || "";
+
+  const gallery =
+    Array.isArray(product.gallery) && product.gallery.length
+      ? product.gallery.map((src, i) => ({ src, crop: 0, key: i }))
+      : [0, 1, 2, 3].map((crop) => ({ src: product.image, crop, key: crop }));
+
+  const faqs = own.faqs || [
+    { q: `What is a ${product.title}?`, a: product.desc },
+    {
+      q: "What materials are used in this product?",
+      a: `${product.title} is made with high-quality raw material and finished for strength, smoothness and rust resistance, and every range is tested in our own unit before dispatch.`,
+    },
+    {
+      q: "Can the size and color be customized?",
+      a: "Yes. Sizes, shelf count and colour can be customized to suit your store. Share your requirement by call or WhatsApp and we will quote accordingly.",
+    },
+    {
+      q: "Is it suitable for heavy products?",
+      a: load
+        ? `Yes. It is built for heavy daily use with a load capacity of ${load}.`
+        : "Yes. It is made to carry normal retail stock and is tested for strength. Tell us your load requirement and we will configure it accordingly.",
+    },
+    {
+      q: "Do you provide installation support?",
+      a: "Our products are designed for easy assembly on site, and we deliver by road across India in about 7 to 10 days. Contact us if you need help with setup.",
+    },
+  ];
+
+  return {
+    sizes: own.sizes || over.sizes || RACK_SIZES,
+    colors: own.colors || over.colors || DEFAULT_COLORS,
+    features: own.features || over.features || cat.features,
+    applications: own.applications || over.applications || cat.applications,
+    overview:
+      own.overview ||
+      `${product.desc} Made by ${company.name || "us"} with high-quality raw material and a powder-coated or perfect finish. Sizes, shelf count and colour can be customized to your store.`,
+    specs: {
+      height: spec.height || "Custom",
+      length: spec.length || "Custom",
+      depth: spec.depth || "Custom",
+      shelves: spec.shelves || "Custom",
+      load,
+      shelfLabel: cat.shelfLabel,
+    },
+    gallery,
+    view360: product.view360 || [],
+    scene: own.scene || over.scene || cat.scene || null,
+    video: product.video || null,
+    brochure: product.brochure || company.brochure || "/brochure.pdf",
+    faqs,
+  };
+}

@@ -106,26 +106,8 @@ function Counter({ to = 1000, suffix = "+" }) {
   );
 }
 
-function DotGrid({ className = "" }) {
-  return (
-    <svg className={className} width="120" height="120" viewBox="0 0 120 120" aria-hidden="true">
-      <defs>
-        <pattern id="why-dots" width="15" height="15" patternUnits="userSpaceOnUse">
-          <circle cx="2.5" cy="2.5" r="2" fill="currentColor" />
-        </pattern>
-      </defs>
-      <rect width="120" height="120" fill="url(#why-dots)" />
-    </svg>
-  );
-}
 
-function Plus({ className = "" }) {
-  return (
-    <svg className={className} width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
-      <path d="M14 3v22M3 14h22" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-    </svg>
-  );
-}
+
 
 function RotatingBadge() {
   return (
@@ -151,33 +133,7 @@ function RotatingBadge() {
   );
 }
 
-function Brace() {
-  const step = 40;
-  const count = 72;
-  let d = "M0 36";
-  for (let i = 1; i <= count; i++) d += ` L${i * step} ${i % 2 ? 4 : 36}`;
-  return (
-    <svg
-      className="pointer-events-none absolute bottom-0 left-0 h-9 w-full text-brand"
-      viewBox={`0 0 ${count * step} 40`}
-      preserveAspectRatio="none"
-      fill="none"
-      aria-hidden="true"
-    >
-      <motion.path
-        d={d}
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeOpacity="0.35"
-        vectorEffect="non-scaling-stroke"
-        initial={{ pathLength: 0 }}
-        whileInView={{ pathLength: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 2.8, ease: "easeInOut" }}
-      />
-    </svg>
-  );
-}
+
 
 function FeatureCard({ item, index }) {
   const Icon = icons[item.icon];
@@ -343,11 +299,7 @@ export default function WhyChooseUs() {
               aria-hidden="true"
             />
 
-            <Parallax mx={mx} my={my} depth={30} className="absolute right-36 -top-1 hidden lg:block">
-              <motion.div variants={pop}>
-                <DotGrid className="h-24 w-24 text-brand/60" />
-              </motion.div>
-            </Parallax>
+        
 
             {/* main image: wipe-in reveal + slow zoom settle */}
             <motion.div
@@ -494,7 +446,6 @@ export default function WhyChooseUs() {
           </motion.div>
         </div>
 
-        <Brace />
         <VideoModal open={videoOpen} onClose={() => setVideoOpen(false)} src={media.whyVideo} />
       </section>
     </MotionConfig>

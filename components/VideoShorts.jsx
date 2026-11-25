@@ -15,23 +15,17 @@ import {
   Store,
 } from "lucide-react";
 
-/* ------------------------------------------------------------------
-   EDIT THIS: paste normal YouTube links (watch, youtu.be or /shorts/).
-   The first video opens as the big player. duration is shown as a label
-   (YouTube does not give it to us without an API key).
------------------------------------------------------------------- */
 const CHANNEL_URL = "https://www.youtube.com/@yourchannel";
 
 const RAW_VIDEOS = [
-  { title: "Heavy Duty Display Rack Installation", duration: "5:42", type: "vlog", url: "https://www.youtube.com/watch?v=VIDEO_ID_1" },
-  { title: "Gondola rack setup in 45 seconds", duration: "0:45", type: "short", url: "https://www.youtube.com/shorts/VIDEO_ID_2" },
-  { title: "Supermarket aisle layout walkthrough", duration: "2:36", type: "vlog", url: "https://www.youtube.com/watch?v=VIDEO_ID_3" },
-  { title: "Pharmacy rack client setup", duration: "3:18", type: "vlog", url: "https://www.youtube.com/watch?v=VIDEO_ID_4" },
-  { title: "Quick load test on a shelf", duration: "0:59", type: "short", url: "https://www.youtube.com/shorts/VIDEO_ID_5" },
-  { title: "Inside our powder coating plant", duration: "4:12", type: "vlog", url: "https://www.youtube.com/watch?v=VIDEO_ID_6" },
-  { title: "Wall rack assembly tips", duration: "1:05", type: "short", url: "https://www.youtube.com/shorts/VIDEO_ID_7" },
-  { title: "Cash counter and billing rack ideas", duration: "3:50", type: "vlog", url: "https://www.youtube.com/watch?v=VIDEO_ID_8" },
-  { title: "Packing and dispatch day", duration: "0:38", type: "short", url: "https://www.youtube.com/shorts/VIDEO_ID_9" },
+  { title: "Heavy Duty Display Rack Installation", duration: "5:42", type: "vlog", url: "https://youtube.com/shorts/uLoB7KTVS3A?si=ckW4vTC_igLarO3G" },
+  { title: "Gondola rack setup in 45 seconds", duration: "0:45", type: "short", url: "https://youtube.com/shorts/DTc5RKwwxOI?si=-FMKqDTLG--Dt-99" },
+  { title: "Supermarket aisle layout walkthrough", duration: "2:36", type: "vlog", url: "https://youtube.com/shorts/JBAWity6n5k?si=lE2Lmjk1550EKJTU" },
+  { title: "Pharmacy rack client setup", duration: "3:18", type: "vlog", url: "https://youtube.com/shorts/JU9kHiZmmz4?si=i0rJdfQcFY5CXg7e" },
+  { title: "Quick load test on a shelf", duration: "0:59", type: "short", url: "https://youtube.com/shorts/arBo9VtUVQg?si=OetCP_XbZzkapI7m" },
+  { title: "Inside our powder coating plant", duration: "4:12", type: "vlog", url: "https://youtube.com/shorts/tVao0XMXaXk?si=qr9uRvvPX6kCF5o8" },
+  { title: "Wall rack assembly tips", duration: "1:05", type: "short", url: "https://youtube.com/shorts/HCP2mN-X844?si=pYqW90-bB8pL77Jh" },
+  { title: "Cash counter and billing rack ideas", duration: "3:50", type: "vlog", url: "https://youtube.com/shorts/2Mk3HhrILf8?si=Qf00ZqH8Z1O4zPnt" },
 ];
 
 const FEATURES = [
@@ -137,72 +131,7 @@ function Media({ video }) {
   );
 }
 
-/* ---------- Backdrop shapes (desktop) ---------- */
 
-function Backdrop() {
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 1672 941"
-      preserveAspectRatio="none"
-      className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
-    >
-      <defs>
-        <linearGradient id="vb-blue" x1="0.2" y1="1" x2="0.95" y2="0.1">
-          <stop offset="0" stopColor="#1d4fc2" />
-          <stop offset="0.5" stopColor="#2a62dc" />
-          <stop offset="0.8" stopColor="#4a7be8" />
-          <stop offset="1" stopColor="#a9c4f5" />
-        </linearGradient>
-        <linearGradient id="vb-orange" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#ffb02e" />
-          <stop offset="1" stopColor="#f26a0b" />
-        </linearGradient>
-      </defs>
-
-      {/* soft light wave at the bottom */}
-      <path d="M470 941 C640 895 900 912 1130 941 Z" fill="#e6eefd" />
-
-      {/* big blue shape: top-right wedge + lower blob */}
-      <path
-        d="M1195 0 H1672 V560 C1672 650 1640 720 1590 780 C1520 865 1380 895 1230 885 C1040 872 800 890 650 868 C545 852 505 795 545 745 C590 690 650 640 720 595 L900 330 Q1060 120 1195 0 Z"
-        fill="url(#vb-blue)"
-      />
-      {/* inner highlight on the lower blob */}
-      <path
-        d="M575 770 C610 700 665 655 735 612 L1560 600 C1590 660 1560 740 1500 800 C1420 860 1300 872 1200 862 C1000 850 800 868 680 850 C600 838 560 805 575 770 Z"
-        fill="#fff"
-        opacity="0.05"
-      />
-
-      {/* bottom corner swooshes */}
-      <path d="M0 868 C110 872 240 905 330 941 H0 Z" fill="url(#vb-orange)" />
-      <path d="M0 905 C90 910 170 925 235 941 H0 Z" fill="#ffc15a" opacity="0.8" />
-      <path d="M1672 798 C1610 880 1505 925 1385 941 H1672 Z" fill="url(#vb-orange)" />
-    </svg>
-  );
-}
-
-function RackLines() {
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 320 280"
-      fill="none"
-      stroke="#6f8bd0"
-      strokeOpacity="0.35"
-      strokeWidth="1.3"
-      className="pointer-events-none absolute left-0 top-0 hidden w-[17%] lg:block"
-    >
-      <path d="M10 270V120M70 270V92M130 258V62M200 244V42M262 232V28" />
-      <path d="M10 200 70 180 130 160 200 140 262 126M10 150 70 130 130 112 200 95 262 82M10 108 70 92 130 76 200 62 262 50" />
-      <path d="M10 270 70 200M70 270 10 200M70 180 130 258M130 180 70 258M130 160 200 244M200 160 130 244M200 140 262 232M262 140 200 232" />
-      <path d="M10 120 70 92 130 62 200 42 262 28M10 270 70 270 130 258 200 244 262 232" />
-    </svg>
-  );
-}
-
-/* ---------- Main player ---------- */
 
 function MainCard({ video, playing, onPlay }) {
   return (
@@ -330,8 +259,7 @@ export default function VideoVlogs() {
         className="relative mx-auto w-full max-w-[1920px] pb-10 lg:aspect-[1672/790] lg:pb-0"
         style={{ containerType: "inline-size" }}
       >
-        <Backdrop />
-        <RackLines />
+       
 
         {/* ---------------- LEFT ---------------- */}
         <div className="relative z-10 space-y-5 px-6 pt-10 lg:contents lg:space-y-0">
@@ -343,46 +271,28 @@ export default function VideoVlogs() {
             </span>
           </div>
 
-          {/* heading */}
-          <h2
-            className="text-[30px] font-extrabold leading-[1.14] tracking-tight sm:text-4xl lg:absolute lg:left-[6.2%] lg:top-[19.2%] lg:z-10 lg:text-[length:3.3cqw]"
-            style={{ color: NAVY }}
-          >
-            <span className="lg:whitespace-nowrap">Watch, Learn &amp; Explore</span>
-            <br />
-            <span className="lg:whitespace-nowrap">
-              with Our{" "}
-              <span className="relative inline-block" style={{ color: BLUE }}>
-                Video Vlogs
-                <svg
-                  aria-hidden
-                  viewBox="0 0 200 20"
-                  className="absolute -bottom-[0.3em] left-0 w-full lg:-bottom-[0.28em]"
-                  fill="none"
-                >
-                  <path d="M3 13 Q100 22 197 5" stroke="#f58a0c" strokeWidth="5" strokeLinecap="round" />
-                </svg>
-              </span>
-            </span>
-          </h2>
-
+<h2
+  className="text-[30px] font-extrabold leading-[1.2] tracking-tight sm:text-4xl lg:absolute lg:left-[6.2%] lg:top-[19.2%] lg:z-10 lg:text-[length:3.3cqw] lg:leading-[1.18]"
+  style={{ color: NAVY }}
+>
+  <span className="lg:whitespace-nowrap pb-3 lg:pb-[0.55cqw] block">
+    Watch, Learn &amp; Explore
+  </span>
+  <span className="lg:whitespace-nowrap">
+    with Our{" "}
+    <span className="relative inline-block" style={{ color: BLUE }}>
+      Video Vlogs
+    </span>
+  </span>
+</h2>
           {/* sub copy */}
           <p className="max-w-md text-base leading-relaxed text-[#6b7290] lg:absolute lg:left-[6.2%] lg:top-[37.2%] lg:z-10 lg:w-[36%] lg:max-w-none lg:text-[length:1.43cqw] lg:leading-[1.38]">
             Product demos, installations, client setups and expert tips — all in one place.
           </p>
 
-          {/* orange swoosh above list */}
-          <svg
-            aria-hidden
-            viewBox="0 0 104 30"
-            fill="none"
-            className="hidden lg:absolute lg:left-[5.7%] lg:top-[46.8%] lg:block lg:w-[6.4%]"
-          >
-            <path d="M3 27 Q10 8 101 4" stroke="#f58a0c" strokeWidth="4" strokeLinecap="round" />
-          </svg>
+       
 
-          {/* feature list */}
-          <ul className="space-y-3 pt-2 lg:absolute lg:left-[6.3%] lg:top-[50.6%] lg:z-10 lg:space-y-[0.2cqw] lg:pt-0">
+<ul className="space-y-4 pt-2 lg:absolute lg:left-[6.3%] lg:top-[50.6%] lg:z-10 lg:space-y-[1.1cqw] lg:pt-0">
             {FEATURES.map(({ icon: Icon, label }) => (
               <li key={label} className="flex items-center gap-4 lg:gap-[1.2cqw]">
                 <span className="flex h-12 w-14 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_10px_22px_-10px_rgba(31,79,216,0.5)] lg:h-[3.75cqw] lg:w-[4.4cqw]">
@@ -404,7 +314,8 @@ export default function VideoVlogs() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-b from-[#f02a1d] to-[#d4130c] px-7 py-4 text-base font-bold text-white shadow-[0_16px_28px_-10px_rgba(225,20,10,0.65)] transition-transform hover:-translate-y-0.5 lg:absolute lg:left-[6.3%] lg:top-[88.3%] lg:z-10 lg:h-[3.8cqw] lg:w-[21.8%] lg:gap-[0.9cqw] lg:px-0 lg:py-0 lg:text-[length:1.27cqw]"
-          >
+            style={{marginTop: "12px"}}
+           >
             <YtMarkWhite className="w-9 lg:w-[2.7cqw]" />
             Subscribe on YouTube
             <ArrowRight className="h-5 w-5 lg:h-[1.4cqw] lg:w-[1.4cqw]" />
@@ -413,11 +324,7 @@ export default function VideoVlogs() {
 
         {/* ---------------- RIGHT ---------------- */}
         <div className="relative z-10 mx-4 mt-8 rounded-[2rem] bg-gradient-to-br from-[#1e4fc5] to-[#2d66e0] p-4 lg:contents">
-          {/* orange block peeking behind the player */}
-          <div
-            aria-hidden
-            className="hidden lg:absolute lg:left-[42.8%] lg:top-[5.2%] lg:block lg:h-[10.5cqw] lg:w-[13.5%] lg:-rotate-[7deg] lg:rounded-[2.4cqw] lg:bg-gradient-to-br lg:from-[#ffa21f] lg:to-[#f47a0a]"
-          />
+
 
           {/* player */}
           <div className="lg:absolute lg:left-[43.8%] lg:top-[7.1%] lg:z-10 lg:h-[26cqw] lg:w-[46%] lg:[transform:perspective(1700px)_rotateZ(-3deg)_rotateY(-7deg)]">

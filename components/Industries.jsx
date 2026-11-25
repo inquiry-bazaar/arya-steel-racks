@@ -302,19 +302,19 @@ function ListItem({ item, index, active, total, sizes, onSelect }) {
                   ease: EASE_OUT,
                 }}
               >
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f97316] text-white shadow-[0_4px_14px_rgba(249,115,22,0.35)] transition-transform group-hover:scale-105 md:h-9 md:w-9">
+                {/* <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f97316] text-white shadow-[0_4px_14px_rgba(249,115,22,0.35)] transition-transform group-hover:scale-105 md:h-9 md:w-9">
                   <ArrowRight
                     className="h-4 w-4 md:h-[18px] md:w-[18px]"
                     strokeWidth={2.4}
                   />
-                </span>
+                </span> */}
               </motion.span>
             )}
           </AnimatePresence>
         </span>
       </button>
 
-      <AnimatePresence initial={false}>
+      {/* <AnimatePresence initial={false}>
         {isActive && (
           <motion.p
             key="desc"
@@ -327,7 +327,7 @@ function ListItem({ item, index, active, total, sizes, onSelect }) {
             <span className="block pb-1.5 pt-0.5">{item.desc}</span>
           </motion.p>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </li>
   );
 }
@@ -460,7 +460,7 @@ const sizes = small
                   </ul>
 
 <div className="relative mx-auto aspect-[3/2] w-full min-w-0 max-w-[min(420px,90vw)] md:max-w-[min(720px,65vw)] overflow-visible">
-<motion.div
+{/* <motion.div
   aria-hidden="true"
   className="
     pointer-events-none
@@ -491,7 +491,7 @@ const sizes = small
       opacity-90
     "
   />
-</motion.div>
+</motion.div> */}
                     <AnimatePresence mode="wait" initial={false}>
                       <motion.span
                         key={active}

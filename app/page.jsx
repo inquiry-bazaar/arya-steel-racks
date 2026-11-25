@@ -10,6 +10,7 @@ import Industries from "@/components/Industries";
 import ProductCatalog from "@/components/ProductCatalog";
 import CTABanner from "@/components/CTABanner";
 import VideoShorts from "@/components/VideoShorts";
+import AboutUs from "@/components/AboutUs";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Products />
+      <AboutUs/>
       <ProductCatalog />
       <WhyChooseUs />
       <VideoShorts/>
