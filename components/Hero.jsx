@@ -77,23 +77,23 @@ export default function Hero() {
             className="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-[13px] font-semibold shadow-sm"
           >
             <span className="h-2.5 w-2.5 rounded-full bg-brand" />
-            Smart Storage. Stronger Business.
+            Manufacturer from New Delhi · Since 2021
           </motion.span>
 
           <motion.h1
             variants={fadeUp}
             className="mt-6 text-[40px] font-extrabold leading-[1.1] tracking-tight text-navy sm:text-[52px] lg:text-[58px]"
           >
-            Retail Steel Racks <br className="hidden lg:block" />
+            Retail Display Racks <br className="hidden lg:block" />
             for a More <span className="text-brand">Organized</span> <br className="hidden lg:block" />
             &amp; <span className="text-brand">Productive</span> Space
           </motion.h1>
 
           <motion.p variants={fadeUp} className="mt-6 text-[17px] font-bold">
-            Durable. Space-Saving. Cost-Effective.
+            Durable. Customizable. Made in India.
           </motion.p>
           <motion.p variants={fadeUp} className="mt-1 max-w-[420px] text-[16px] leading-relaxed">
-            Upgrade your storage with premium steel racks built for strength and style.
+            Supermarket racks, garment stands, counters and trolleys, built for strength and a perfect finish.
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-9 flex flex-wrap items-center gap-6">
@@ -143,8 +143,8 @@ export default function Hero() {
         <div className="glass-card flex animate-float items-center gap-3 px-5 py-3">
           <Users className="h-8 w-8" />
           <div className="leading-tight">
-            <p className="text-[17px] font-extrabold">1000+</p>
-            <p className="text-[12px] font-medium text-navy/70">Happy Clients</p>
+            <p className="text-[17px] font-extrabold">60+</p>
+            <p className="text-[12px] font-medium text-navy/70">Display Products</p>
           </div>
         </div>
       </motion.div>

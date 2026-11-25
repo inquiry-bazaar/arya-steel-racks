@@ -152,7 +152,7 @@ function RotatingBadge() {
           <path id="why-circle" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" />
         </defs>
         <text fontSize="10.5" fontWeight="700" letterSpacing="2.2" fill="#0f2557">
-          <textPath href="#why-circle">ARYA INSULATION • RETAIL STORAGE • </textPath>
+          <textPath href="#why-circle">ARYA DISPLAY RACK • NEW DELHI • </textPath>
         </text>
       </motion.svg>
       <span className="flex h-12 w-12 rotate-45 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-brand-400 text-white shadow-orange">
@@ -417,7 +417,7 @@ export default function WhyChooseUs() {
               >
                 <MediaSlot
                   src={media.whyPoster}
-                  alt="Steel rack detail"
+                  alt="Display rack detail"
                   className="h-full w-full scale-[1.8] object-cover object-[78%_60%]"
                 />
               </motion.div>
@@ -441,9 +441,9 @@ export default function WhyChooseUs() {
                     </span>
                     <div className="leading-tight">
                       <p className="text-[20px] font-extrabold tabular-nums">
-                        <Counter to={1000} />
+                        <Counter to={60} />
                       </p>
-                      <p className="text-[13px] font-medium text-navy/70">Happy Clients</p>
+                      <p className="text-[13px] font-medium text-navy/70">Display Products</p>
                     </div>
                   </div>
                 </Float>
@@ -488,8 +488,7 @@ export default function WhyChooseUs() {
             </motion.h2>
 
             <motion.p variants={rise} className="mt-5 max-w-[520px] text-[15px] leading-relaxed text-navy/80">
-              We deliver innovative, durable and affordable steel rack solutions that help you maximize space and boost
-              efficiency.
+              Established in 2021, we make display racks with high-quality raw material and test every range for rust resistance, finishing, strength and smoothness.
             </motion.p>
 
             <motion.div variants={stagger(0.13, 0.05)} className="mt-9 grid max-w-[620px] gap-4 sm:grid-cols-2">

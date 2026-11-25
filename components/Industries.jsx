@@ -17,89 +17,9 @@ import {
   ShieldCheck,
   TrendingUp,
 } from "lucide-react";
+import { industries } from "@/data/content";
 
-const INDUSTRIES = [
-  {
-    name: "Healthcare",
-    image: "/industries/healthcare.jpg",
-    desc: "Secure care platforms that put patients first.",
-    stats: [
-      { icon: "shield", value: "60+", label: "clinics" },
-      { icon: "globe", value: "9", label: "countries" },
-      { icon: "chart", value: "99.9%", label: "uptime" },
-    ],
-  },
-  {
-    name: "Finance",
-    image: "/industries/finance.jpg",
-    desc: "Faster, safer money movement at scale.",
-    stats: [
-      { icon: "briefcase", value: "80+", label: "projects" },
-      { icon: "globe", value: "12", label: "countries" },
-      { icon: "shield", value: "100%", label: "compliant" },
-    ],
-  },
-  {
-    name: "E-commerce",
-    image: "/industries/ecommerce.jpg",
-    desc: "Connecting businesses with customers, faster.",
-    stats: [
-      { icon: "briefcase", value: "120+", label: "projects" },
-      { icon: "globe", value: "15", label: "countries" },
-      { icon: "shield", value: "98%", label: "retention" },
-    ],
-  },
-  {
-    name: "Education",
-    image: "/industries/education.jpg",
-    desc: "Learning that adapts to every student.",
-    stats: [
-      { icon: "briefcase", value: "45+", label: "projects" },
-      { icon: "globe", value: "8", label: "countries" },
-      { icon: "chart", value: "92%", label: "completion" },
-    ],
-  },
-  {
-    name: "Manufacturing",
-    image: "/industries/manufacturing.jpg",
-    desc: "Smarter factories with less downtime.",
-    stats: [
-      { icon: "briefcase", value: "70+", label: "projects" },
-      { icon: "globe", value: "11", label: "countries" },
-      { icon: "chart", value: "35%", label: "less downtime" },
-    ],
-  },
-  {
-    name: "Logistics",
-    image: "/industries/logistics.jpg",
-    desc: "Live visibility from dock to doorstep.",
-    stats: [
-      { icon: "briefcase", value: "90+", label: "projects" },
-      { icon: "globe", value: "18", label: "countries" },
-      { icon: "chart", value: "2x", label: "faster routes" },
-    ],
-  },
-  {
-    name: "Real Estate",
-    image: "/industries/real-estate.jpg",
-    desc: "Listings and leasing, made effortless.",
-    stats: [
-      { icon: "briefcase", value: "55+", label: "projects" },
-      { icon: "globe", value: "7", label: "countries" },
-      { icon: "shield", value: "97%", label: "retention" },
-    ],
-  },
-  {
-    name: "Travel",
-    image: "/industries/travel.jpg",
-    desc: "Journeys planned and booked in minutes.",
-    stats: [
-      { icon: "briefcase", value: "65+", label: "projects" },
-      { icon: "globe", value: "24", label: "countries" },
-      { icon: "chart", value: "4.8", label: "avg rating" },
-    ],
-  },
-];
+const INDUSTRIES = industries;
 
 const STAT_ICONS = {
   briefcase: Briefcase,
@@ -504,13 +424,13 @@ function IndustryImage({ src, alt, number }) {
 
 export default function Industries({
   industries = INDUSTRIES,
-  eyebrow = "Industries",
+  eyebrow = "Store Types",
   title = (
     <>
-      Built for <span className="text-brand">Every Industry</span>
+      Racks for <span className="text-brand">Every Store Type</span>
     </>
   ),
-  subtitle = "Scroll to move through each sector.",
+  subtitle = "Scroll to move through each category.",
 }) {
   const N = industries.length;
   const [active, setActive] = useState(0);
@@ -685,7 +605,7 @@ export default function Industries({
                           >
                             <IndustryImage
                               src={srcOf(current.image)}
-                              alt={`${current.name} industry`}
+                              alt={current.name}
                               number={active + 1}
                             />
                           </motion.div>

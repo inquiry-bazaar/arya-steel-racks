@@ -7,6 +7,7 @@ import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 import Testimonials from "@/components/Testimonials";
 import Industries from "@/components/Industries";
+import ProductCatalog from "@/components/ProductCatalog";
 import CTABanner from "@/components/CTABanner";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Products />
+      <ProductCatalog />
       <WhyChooseUs />
       <Testimonials/>
       <Process />

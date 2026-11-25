@@ -10,59 +10,11 @@ import {
   useTransform,
 } from "framer-motion";
 import { Quote, Star } from "lucide-react";
+import { testimonials } from "@/data/content";
 
 const SCROLL_PER_REVIEW = 90; // vh of scrolling for each review
 
-const DEFAULT_ITEMS = [
-  {
-    name: "Priya Sharma",
-    place: "Gurugram",
-    project: "Living room sliding windows",
-    rating: 5,
-    gif: "/testimonials/guy-1.gif",
-    image: "/testimonials/projects/priya-living-room.jpg", // shaded project photo (optional)
-    avatar: "/testimonials/people/priya.jpg", // customer photo (optional)
-    review:
-      "They measured everything on site and the windows fit perfectly. The sound from the road outside has dropped a lot and the team cleaned up after themselves.",
-    say: "Priya from Gurugram loved her new sliding windows. The fit was perfect and her living room is much quieter. Thank you, {name}!",
-  },
-  {
-    name: "Rahul Mehta",
-    place: "Noida",
-    project: "Full home UPVC windows",
-    rating: 5,
-    gif: "/testimonials/guy-2.gif",
-    image: "/testimonials/projects/rahul-home.jpg",
-    avatar: "/testimonials/people/rahul.jpg",
-    review:
-      "The design drawing was approved in two days, and delivery came exactly on the date they promised. Finishing is better than what I saw in showrooms.",
-    say: "Rahul got his whole home done and the delivery landed right on the promised date. Thank you so much, {name}!",
-  },
-  {
-    name: "Anita Verma",
-    place: "Delhi",
-    project: "Balcony doors",
-    rating: 5,
-    gif: "/testimonials/guy-3.gif",
-    image: "/testimonials/projects/anita-balcony.jpg",
-    avatar: "/testimonials/people/anita.jpg",
-    review:
-      "I had many questions and they answered every one without any pressure. The balcony doors close smoothly and feel very solid.",
-    say: "Anita had a lot of questions and we were happy to answer each one. Her balcony doors are working beautifully. Thanks, {name}!",
-  },
-  {
-    name: "Sanjay Kapoor",
-    place: "Faridabad",
-    project: "Office glass partitions",
-    rating: 5,
-    gif: "/testimonials/guy-3.gif",
-    image: "/testimonials/projects/sanjay-office.jpg",
-    avatar: "/testimonials/people/sanjay.jpg",
-    review:
-      "Installation took a single day and nobody had to stop working. A few months later everything still looks and works like new.",
-    say: "Sanjay's office was fitted in one day with zero downtime. Months later it still looks new. Thank you, {name}!",
-  },
-];
+const DEFAULT_ITEMS = testimonials;
 
 /* ---------- Typewriter ---------- */
 
@@ -360,7 +312,7 @@ export default function Testimonials({ items = DEFAULT_ITEMS }) {
                 <span className="h-[2px] w-5 bg-brand" /> Happy Customers
               </span>
               <h2 className="mt-3 text-2xl font-extrabold leading-[1.15] tracking-tight sm:text-3xl lg:text-[34px]">
-                Hear it from the people we’ve worked with
+                What our customers say about us
               </h2>
             </div>
             <div className="flex items-center gap-4">

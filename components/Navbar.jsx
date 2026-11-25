@@ -9,13 +9,13 @@ export function Logo() {
   return (
     <a href="/" className="flex flex-col leading-none">
       <span className="flex items-center text-[26px] font-extrabold tracking-tight text-navy">
-        Arya &nbsp; <span className="text-brand"> Insulation</span>
+        Arya <span className="ml-1.5 text-brand">Display Rack</span>
         <svg viewBox="0 0 24 24" className="ml-1 h-5 w-5 text-brand" fill="none" stroke="currentColor" strokeWidth="2.4">
           <path d="M4 20V6l8-3 8 3v14M4 12h16M4 16h16M12 3v17" />
         </svg>
       </span>
       <span className="mt-1 text-[9px] font-semibold uppercase tracking-[0.22em] text-navy/70">
-        Racking Solutions
+        Manufacturer · New Delhi
       </span>
     </a>
   );

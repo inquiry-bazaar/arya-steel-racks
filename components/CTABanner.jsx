@@ -15,12 +15,12 @@ import Reveal from "@/components/Reveal";
 
 const CTA_BG = "/Pd_cta_.png";
 const contact = {
-  name: "Arya Insulation",
+  name: "Arya Display Rack",
   phone: "+91 7942647738",
-  phoneHref: "+91 7942647738",
+  phoneHref: "+917942647738",
   email: "rvpariwar@yahoo.com",
   whatsapp: "+917942647738",
-  whatsappText: "Hello, I would like a quote for Steel Racks.",
+  whatsappText: "Hello, I would like a quote for display racks.",
   gst: "07BTWPM5031P1ZV",
   website: "https://www.aryadisplayrack.com/",
 };
@@ -28,16 +28,20 @@ const contact = {
 const ctaPerks = [
   { icon: HeadphonesIcon, title: "Expert", sub: "Guidance" },
   { icon: Clock, title: "Quick", sub: "Response" },
-  { icon: HardHat, title: "Right Equipment", sub: "for Every Project" },
+  { icon: HardHat, title: "Made to Fit", sub: "Your Store Layout" },
 ];
 
 const ctaPills = [
-  { icon: BarChart3, text: "Higher Productivity", offset: "lg:mr-0" },
-  { icon: ShieldCheck, text: "Enhanced Safety", offset: "lg:-mr-6" },
+  { icon: BarChart3, text: "Better Product Display", offset: "lg:mr-0" },
+  { icon: ShieldCheck, text: "Sturdy Construction", offset: "lg:-mr-6" },
   { icon: Settings, text: "Reliable Performance", offset: "lg:-mr-3" },
 ];
 
-export default function CTABanner({ name, onQuote, waHref }) {
+export default function CTABanner({
+  name,
+  onQuote = () => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }),
+  waHref = `https://wa.me/${contact.whatsapp.replace("+", "")}?text=${encodeURIComponent(contact.whatsappText)}`,
+}) {
   return (
     <section className="relative isolate overflow-hidden bg-navy">
       <div
@@ -60,12 +64,12 @@ export default function CTABanner({ name, onQuote, waHref }) {
             </p>
 
             <h3 className="mt-2 text-2xl font-extrabold leading-[1.1] tracking-tight text-navy sm:text-3xl lg:text-[2.1rem]">
-              Need the right equipment <br className="hidden sm:block" />
-              for <span className="text-brand">your project?</span>
+              Need the right rack <br className="hidden sm:block" />
+              for <span className="text-brand">your store?</span>
             </h3>
 
             <p className="mt-2 max-w-md text-sm text-slate-500 sm:text-[15px]">
-              Get expert advice and best pricing for products and other steel racks.
+              Get expert advice and the best price on display racks, counters and trolleys.
             </p>
 
             <div className="mt-4 flex flex-wrap items-center gap-2.5">

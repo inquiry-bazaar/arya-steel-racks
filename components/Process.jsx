@@ -11,52 +11,52 @@ const ROW_GAP = "45vh";
 
 const EXTRA = [
   {
-    tag: "Day 1",
+    tag: "Enquiry",
     description:
-      "Tell us about your project: window or door type, sizes, material, colours and the look you want. Share it by call, WhatsApp, email or a site visit, whichever is easiest for you.",
+      "Tell us what you need: rack type, size, number of shelves, material and finish. Share it by call, WhatsApp or email, whichever is easiest for you.",
     points: [
       "Free consultation with our team",
-      "Site visit and on-site measurement if needed",
-      "Clear idea of options, timeline and budget",
-      "No obligation, no hidden charges",
+      "Rack types for your store category",
+      "Clear idea of options and budget",
+      "We send you the price immediately",
     ],
-    note: "We respond within 24 hours",
+    note: "Quick response to every enquiry",
   },
   {
-    tag: "Day 2-4",
+    tag: "Design",
     description:
-      "Our designers turn your requirements into a detailed drawing and a transparent quotation. You review it, ask for changes, and approve only when you're completely happy.",
+      "We turn your requirements into the right size and layout with a transparent quotation. You review it, ask for changes, and approve only when you're happy.",
     points: [
-      "Custom drawings made to your exact sizes",
-      "Material, glass and hardware recommendations",
+      "Custom sizes and shelf counts",
+      "Material and finish recommendations",
       "Itemised quote with no surprises",
-      "Unlimited revisions before approval",
+      "Changes before approval",
     ],
     note: "Design approved by you",
   },
   {
-    tag: "Day 5-15",
+    tag: "Production",
     description:
-      "Once approved, production begins. Every frame is cut, assembled and glazed in our factory, then checked at multiple stages before it's cleared for dispatch.",
+      "Once approved, production begins in our own unit with CRC turret punch press, NC press brakes, welding shop and powder coating plant, then every rack is quality checked before dispatch.",
     points: [
-      "Precision cutting and welding",
-      "Quality checks at every stage",
-      "Tested for strength, sealing and finish",
-      "Protective packing for safe transport",
+      "Punching, bending and welding in-house",
+      "Tank phosphating and powder coating",
+      "Tested for rust resistance and strength",
+      "Finishing and smoothness checks",
     ],
-    note: "Multi-point quality inspection",
+    note: "Quality tested before dispatch",
   },
   {
-    tag: "Day 16+",
+    tag: "Delivery",
     description:
-      "We deliver to your site on the agreed date, and our trained installers fit everything neatly, test it, and clean up before they leave. We stay available after handover for support.",
+      "We dispatch by road across India. Typical delivery time listed for our racks is 7 to 10 days, and the racks are assembled easily on site.",
     points: [
-      "Scheduled, on-time delivery",
-      "Professional installation team",
-      "Final fit and operation check",
-      "After-sales support and warranty",
+      "Shipment by road across India",
+      "Delivery in about 7 to 10 days",
+      "Easy assembly on site",
+      "Support for reorders and add-ons",
     ],
-    note: "Installed, tested and handed over",
+    note: "Delivered across India",
   },
 ];
 
@@ -285,7 +285,7 @@ export default function Process() {
                 <span className="h-[2px] w-5 bg-brand" /> How It Works
               </span>
               <h2 className="mt-3 text-2xl font-extrabold leading-[1.15] tracking-tight sm:text-3xl lg:text-[34px]">
-                From Inquiry to Installation in{" "}
+                From Enquiry to Delivery in{" "}
                 <span className="text-brand">4 Simple Steps</span>
               </h2>
             </div>

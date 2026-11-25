@@ -1,25 +1,27 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, EffectCoverflow } from "swiper/modules";
+import { Autoplay, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-import "swiper/css/pagination";
 import MediaSlot from "./MediaSlot";
 import { products } from "@/data/content";
 
+// Coverflow + loop needs enough slides in the DOM, so the short list is repeated.
 const MIN_SLIDES = 12;
 
 export default function Products() {
   const swiperRef = useRef(null);
+  const [active, setActive] = useState(0);
 
   const slides = useMemo(() => {
     const copies = Math.max(1, Math.ceil(MIN_SLIDES / products.length));
     return Array.from({ length: copies }, (_, c) =>
-      products.map((p) => ({ ...p, _key: `${p.title}-${c}` }))
+      products.map((p) => ({ ...p, _key: `${p.slug}-${c}` }))
     ).flat();
   }, []);
 
@@ -37,12 +39,12 @@ export default function Products() {
             <span className="h-[2px] w-5 bg-brand" /> Our Products
           </span>
           <h2 className="mt-4 text-[38px] font-extrabold leading-[1.12] tracking-tight sm:text-[42px]">
-            Explore Our <span className="text-brand">Retail Steel</span> Rack Range
+            Explore Our <span className="text-brand">Display Rack</span> Range
           </h2>
           <p className="mt-5 max-w-[330px] text-[14.5px] leading-relaxed text-navy/80">
-            From display racks to heavy-duty shelving — we have the perfect solution for your retail space.
+            A few of our best-selling racks, counters and trolleys. Tap a product for details, or browse the full range.
           </p>
-          <a href="#contact" className="btn-navy mt-7 !py-3">
+          <a href="#catalogue" className="btn-navy mt-7 !py-3">
             View All Products <ArrowRight className="h-4 w-4" />
           </a>
         </motion.div>
@@ -86,8 +88,9 @@ export default function Products() {
 
           <Swiper
             className="products-swiper relative z-10 !pb-24 !pt-6 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
-            modules={[Autoplay, Pagination, EffectCoverflow]}
+            modules={[Autoplay, EffectCoverflow]}
             onSwiper={(s) => (swiperRef.current = s)}
+            onSlideChange={(s) => setActive(s.realIndex % products.length)}
             effect="coverflow"
             grabCursor
             centeredSlides
@@ -104,20 +107,6 @@ export default function Products() {
               scale: 0.9,
               slideShadows: false,
             }}
-            // Show one dot per real product, not per duplicated slide
-            pagination={{
-              clickable: true,
-              type: "custom",
-              renderCustom: (_swiper, current) => {
-                const n = products.length;
-                const active = (current - 1) % n;
-                return Array.from({ length: n }, (_, i) =>
-                  `<span class="swiper-pagination-bullet${
-                    i === active ? " swiper-pagination-bullet-active" : ""
-                  }"></span>`
-                ).join("");
-              },
-            }}
             autoplay={{ delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true }}
           >
             {slides.map((item) => (
@@ -133,43 +122,51 @@ export default function Products() {
                       "below 6px linear-gradient(to bottom, transparent 76%, rgba(255,255,255,0.32))",
                   }}
                 >
-                  <article className="product-card relative flex h-full flex-col overflow-hidden rounded-[26px] border border-[#e6ecf7] bg-white p-3 shadow-[0_12px_30px_rgba(30,55,110,0.08)]">
-                    {/* glass sheen */}
-                    <span className="pointer-events-none absolute inset-0 z-10 rounded-[26px] bg-[linear-gradient(115deg,rgba(255,255,255,0.55)_0%,rgba(255,255,255,0)_38%,rgba(255,255,255,0)_70%,rgba(255,255,255,0.35)_100%)]" />
+                  {/* whole card opens the product page */}
+                  <Link href={`/products/${item.slug}`} aria-label={`View ${item.title}`} className="block h-full">
+                    <article className="product-card relative flex h-full flex-col overflow-hidden rounded-[26px] border border-[#e6ecf7] bg-white p-3 shadow-[0_12px_30px_rgba(30,55,110,0.08)]">
+                      {/* glass sheen */}
+                      <span className="pointer-events-none absolute inset-0 z-10 rounded-[26px] bg-[linear-gradient(115deg,rgba(255,255,255,0.55)_0%,rgba(255,255,255,0)_38%,rgba(255,255,255,0)_70%,rgba(255,255,255,0.35)_100%)]" />
 
-                    <div className="aspect-[3/3.2] overflow-hidden rounded-2xl bg-[#f4f7fc]">
-                      <MediaSlot
-                        src={item.image}
-                        alt={item.title}
-                        className="h-full w-full object-contain p-2"
-                      />
-                    </div>
-
-                    {/* fixed-height footer so nothing reflows when a card becomes active */}
-                    <div className="flex h-[64px] items-center justify-between gap-2 px-2 pt-3">
-                      <div className="min-w-0">
-                        <h3 className="product-title truncate text-[19px] font-extrabold leading-tight text-navy">
-                          {item.title}
-                        </h3>
-                        {item.subtitle && (
-                          <p className="product-sub mt-0.5 truncate text-[12px] text-navy/60">
-                            {item.subtitle}
-                          </p>
-                        )}
+                      <div className="aspect-[3/3.2] overflow-hidden rounded-2xl bg-[#f4f7fc]">
+                        <MediaSlot src={item.image} alt={item.title} className="h-full w-full object-contain p-2" />
                       </div>
-                      <a
-                        href="#contact"
-                        aria-label={`View ${item.title}`}
-                        className="product-arrow flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-orange-400 to-brand text-white shadow-orange"
-                      >
-                        <ArrowRight className="h-5 w-5" />
-                      </a>
-                    </div>
-                  </article>
+
+                      {/* fixed-height footer so nothing reflows when a card becomes active */}
+                      <div className="flex h-[72px] items-center justify-between gap-2 px-2 pt-3">
+                        <div className="min-w-0">
+                          <h3 className="product-title line-clamp-2 text-[16px] font-extrabold leading-tight text-navy">
+                            {item.title}
+                          </h3>
+                          {item.subtitle && (
+                            <p className="product-sub mt-0.5 truncate text-[12px] text-navy/60">{item.subtitle}</p>
+                          )}
+                        </div>
+                        <span className="product-arrow flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-orange-400 to-brand text-white shadow-orange">
+                          <ArrowRight className="h-5 w-5" />
+                        </span>
+                      </div>
+                    </article>
+                  </Link>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
+
+          {/* indicator dots: one per real product (not per duplicated slide) */}
+          <div className="absolute inset-x-0 bottom-3 z-30 flex justify-center gap-2">
+            {products.map((p, i) => (
+              <button
+                key={p.slug}
+                type="button"
+                aria-label={`Go to ${p.title}`}
+                onClick={() => swiperRef.current?.slideToLoop(i)}
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  i === active ? "w-7 bg-brand" : "w-2.5 bg-navy/20 hover:bg-navy/40"
+                }`}
+              />
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

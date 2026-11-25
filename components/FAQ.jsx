@@ -26,7 +26,7 @@ export default function FAQ() {
             Frequently Asked <span className="text-brand">Questions</span>
           </h2>
           <p className="mt-4 text-[14.5px] leading-relaxed text-navy/80">
-            Everything you need to know about our retail steel racking. Can’t find your answer? Talk to our team.
+            Everything you need to know about our display racks and trolleys. Can’t find your answer? Talk to our team.
           </p>
           <a href="#contact" className="btn-orange mt-7 !py-3">
             Contact Us
