@@ -100,20 +100,22 @@ const isLight = (hex) => {
   return (r * 299 + g * 587 + b * 114) / 1000 > 180;
 };
 
-/* ---------------- small building blocks ---------------- */
-
-function Pic({ g, pad = "p-3" }) {
+function Pic({ g, pad = "p-0" }) {
   const c = CROPS[(g.crop || 0) % CROPS.length];
+
   return (
     <div className="absolute inset-0 overflow-hidden">
       <div
         className="absolute inset-0"
-        style={{ transform: `scale(${c.s})`, transformOrigin: c.o }}
+        style={{
+          transform: `scale(${c.s})`,
+          transformOrigin: c.o,
+        }}
       >
         <MediaSlot
           src={g.src}
           alt=""
-          className={`absolute inset-0 h-full w-full object-contain ${pad}`}
+          className={`absolute inset-0 h-full w-full object-cover ${pad}`}
         />
       </div>
     </div>
@@ -124,10 +126,11 @@ function Section({ id, lead, accent, blurb, children }) {
   return (
     <section
       id={id}
-      className="scroll-mt-36 border-t border-slate-200/70 py-14 first:border-t-0"
+      className="scroll-mt-36 border-t border-slate-200/70 py-12 first:border-t-0"
     >
-      <div className="section-pad grid gap-8 lg:grid-cols-[260px_1fr] lg:gap-12">
-        <header>
+      <div className="section-pad grid gap-6 lg:grid-cols-[240px_1fr] lg:gap-12">
+        <header className="lg:sticky lg:top-40 lg:self-start">
+          <span className="mb-3 block h-1 w-10 rounded-full bg-orange-500" />
           <h2 className="text-2xl font-bold tracking-tight text-navy sm:text-3xl">
             {lead} {accent && <span style={{ color: BLUE }}>{accent}</span>}
           </h2>
@@ -143,12 +146,45 @@ function Section({ id, lead, accent, blurb, children }) {
   );
 }
 
-function Tile({ icon, label, fallback }) {
+/* Feature row: icon chip + label, numbered. Odd last item spans full width. */
+function FeatureItem({ icon, label, index, fallback, span }) {
   const Icon = ICONS[icon] || fallback;
   return (
-    <li className={`${CARD} flex flex-col items-center justify-center gap-2 px-3 py-5 text-center`}>
-      <Icon className="h-6 w-6 text-orange-500" strokeWidth={1.6} />
-      <span className="text-xs font-semibold leading-tight text-navy">{label}</span>
+    <li
+      className={`${CARD} group relative flex items-center gap-3.5 overflow-hidden px-4 py-3.5 transition hover:border-orange-300 hover:shadow-md ${
+        span ? "sm:col-span-2" : ""
+      }`}
+    >
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-orange-500 transition group-hover:bg-orange-500 group-hover:text-white">
+        <Icon className="h-5 w-5" strokeWidth={1.8} />
+      </span>
+      <span className="text-sm font-semibold leading-tight text-navy">{label}</span>
+      <span className="ml-auto text-xl font-bold tabular-nums text-slate-200 transition group-hover:text-orange-200">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+    </li>
+  );
+}
+
+/* Application card: tinted icon, label, arrow reveal on hover */
+function AppCard({ icon, label, fallback }) {
+  const Icon = ICONS[icon] || fallback;
+  return (
+    <li
+      className={`${CARD} group relative flex flex-col items-start gap-4 overflow-hidden p-4 transition duration-200 hover:-translate-y-0.5 hover:border-[#1f5fd6] hover:shadow-md`}
+    >
+      <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-[#1f5fd6] transition group-hover:bg-[#1f5fd6] group-hover:text-white">
+        <Icon className="h-6 w-6" strokeWidth={1.6} />
+      </span>
+      <div className="flex w-full items-center justify-between gap-2">
+        <span className="text-sm font-semibold leading-tight text-navy">{label}</span>
+        <ArrowRight className="h-4 w-4 shrink-0 -translate-x-1 text-[#1f5fd6] opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100" />
+      </div>
+      <Icon
+        className="pointer-events-none absolute -bottom-4 -right-4 h-20 w-20 text-slate-100 transition group-hover:text-blue-50"
+        strokeWidth={1.2}
+        aria-hidden
+      />
     </li>
   );
 }
@@ -288,7 +324,7 @@ export default function ProductView({ product, category, related, details, waNum
           <div className="mt-8 grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
             {/* ---- Gallery ---- */}
             <div>
-              <div className={`${CARD} relative aspect-square overflow-hidden`}>
+              <div className={`${CARD} relative aspect-[4/3] overflow-hidden`}>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={active}
@@ -298,7 +334,7 @@ export default function ProductView({ product, category, related, details, waNum
                     transition={{ duration: 0.2 }}
                     className="absolute inset-0"
                   >
-                    <Pic g={gallery[active]} pad="p-6" />
+                    <Pic g={gallery[active]} pad="p-0" />
                   </motion.div>
                 </AnimatePresence>
 
@@ -325,7 +361,7 @@ export default function ProductView({ product, category, related, details, waNum
                       active === i ? "border-[#1f5fd6]" : "border-slate-200 hover:border-slate-300"
                     }`}
                   >
-                    <Pic g={g} pad="p-1" />
+                    <Pic g={g} pad="p-0" />
                   </button>
                 ))}
               </div>
@@ -427,6 +463,40 @@ export default function ProductView({ product, category, related, details, waNum
                   <WhatsAppIcon className="h-5 w-5" />
                 </a>
               </div>
+
+              {/* Key specs at a glance */}
+              <dl className="mt-8 grid grid-cols-2 overflow-hidden rounded-2xl border border-slate-200/70 bg-white shadow-sm sm:grid-cols-4 sm:divide-x sm:divide-slate-100">
+                {[
+                  { icon: MoveVertical, label: "Height", value: specs.height },
+                  { icon: MoveHorizontal, label: "Length", value: specs.length },
+                  { icon: Box, label: "Depth", value: specs.depth },
+                  { icon: Layers, label: specs.shelfLabel, value: specs.shelves },
+                ].map(({ icon: Icon, label, value }) => (
+                  <div key={label} className="flex flex-col gap-1 border-b border-slate-100 px-4 py-3.5 sm:border-b-0">
+                    <dt className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-navy/50">
+                      <Icon className="h-3.5 w-3.5 text-[#1f5fd6]" />
+                      {label}
+                    </dt>
+                    <dd className="truncate text-sm font-bold text-navy">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              {/* Feature chips */}
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {features.map((f) => {
+                  const Icon = ICONS[f.icon] || Box;
+                  return (
+                    <li
+                      key={f.label}
+                      className="inline-flex items-center gap-2 rounded-full bg-orange-50 px-3.5 py-1.5 text-xs font-semibold text-orange-700"
+                    >
+                      <Icon className="h-3.5 w-3.5" strokeWidth={2} />
+                      {f.label}
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           </div>
         </div>
@@ -457,24 +527,56 @@ export default function ProductView({ product, category, related, details, waNum
 
       {/* ================= OVERVIEW ================= */}
       <Section id="overview" lead="Product" accent="Overview">
-        <div className="grid items-center gap-8 md:grid-cols-2">
-          <div className={`${CARD} relative mx-auto aspect-square w-full max-w-sm overflow-hidden md:max-w-none`}>
+        <div className="grid items-stretch gap-6 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
+          {/* Image fills the card edge-to-edge, no dead padding */}
+          <div className={`${CARD} relative min-h-[320px] overflow-hidden md:min-h-[420px]`}>
             <MediaSlot
               src={details.scene || product.image}
               alt={`${product.title} in store`}
-              className={`absolute inset-0 h-full w-full ${
-                details.scene ? "object-cover" : "object-contain p-6"
-              }`}
+              className="absolute inset-0 h-full w-full object-cover"
             />
+            <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-navy shadow-sm backdrop-blur">
+              {category.name}
+            </span>
           </div>
 
-          <div>
+          {/* Content column: top-aligned with the image, same height */}
+          <div className="flex flex-col gap-5">
             <p className="text-[15px] leading-relaxed text-navy/75">{details.overview}</p>
-            <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {features.map((f) => (
-                <Tile key={f.label} icon={f.icon} label={f.label} fallback={Box} />
+
+            {/* Quick facts strip from specs */}
+            <dl className="grid grid-cols-2 divide-slate-100 overflow-hidden rounded-2xl border border-slate-200/70 bg-white shadow-sm sm:grid-cols-4 sm:divide-x">
+              {[
+                { icon: MoveVertical, label: "Height", value: specs.height },
+                { icon: MoveHorizontal, label: "Length", value: specs.length },
+                { icon: Box, label: "Depth", value: specs.depth },
+                { icon: Layers, label: specs.shelfLabel, value: specs.shelves },
+              ].map(({ icon: Icon, label, value }) => (
+                <div key={label} className="flex flex-col gap-1 border-b border-slate-100 px-4 py-3.5 sm:border-b-0">
+                  <dt className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-navy/50">
+                    <Icon className="h-3.5 w-3.5 text-[#1f5fd6]" />
+                    {label}
+                  </dt>
+                  <dd className="truncate text-sm font-bold text-navy">{value}</dd>
+                </div>
               ))}
-            </ul>
+            </dl>
+
+            <div>
+              <h3 className="mb-3 text-sm font-semibold text-navy">Key Highlights</h3>
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {features.map((f, i) => (
+                  <FeatureItem
+                    key={f.label}
+                    icon={f.icon}
+                    label={f.label}
+                    index={i}
+                    fallback={Box}
+                    span={features.length % 2 === 1 && i === features.length - 1}
+                  />
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </Section>
@@ -485,9 +587,9 @@ export default function ProductView({ product, category, related, details, waNum
         lead="Applications"
         blurb="Perfect for a wide range of retail and commercial spaces."
       >
-        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
           {applications.map((a) => (
-            <Tile key={a.label} icon={a.icon} label={a.label} fallback={Store} />
+            <AppCard key={a.label} icon={a.icon} label={a.label} fallback={Store} />
           ))}
         </ul>
       </Section>
