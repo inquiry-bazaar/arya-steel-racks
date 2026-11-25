@@ -38,15 +38,19 @@ export default function ProductCard({ p }) {
         hover:shadow-[0_0_0_3px_rgba(255,122,0,0.25),0_18px_40px_rgba(255,122,0,0.25)]"
     >
       {/* product image */}
-      <Link href={`/${p.slug}`} className="relative block h-[240px] w-full shrink-0 p-3" aria-label={`View ${p.title}`}>
-        <div className="relative h-full w-full overflow-hidden rounded-[20px] bg-white">
-          <MediaSlot
-            src={p.image}
-            alt={p.title}
-            className="absolute inset-0 h-full w-full object-contain p-3 transition duration-500 group-hover:scale-105"
-          />
-        </div>
-      </Link>
+   <Link
+  href={`/${p.slug}`}
+  className="relative block h-[240px] w-full shrink-0"
+  aria-label={`View ${p.title}`}
+>
+  <div className="relative h-full w-full overflow-hidden rounded-t-[24px]">
+    <MediaSlot
+      src={p.image}
+      alt={p.title}
+      className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+    />
+  </div>
+</Link>
 
       {/* top-right corner accent: blue by default, orange on hover */}
       <span

@@ -321,7 +321,7 @@ export function getProductDetails(product, company = {}) {
       shelfLabel: cat.shelfLabel,
     },
     gallery,
-    view360: product.view360 || [],
+    // view360: product.view360 || [],
     scene: own.scene || over.scene || cat.scene || null,
     video: product.video || null,
     brochure: product.brochure || company.brochure || "/brochure.pdf",
