@@ -13,7 +13,7 @@ import { Quote, Star } from "lucide-react";
 import { testimonials } from "@/data/content";
 
 const SCROLL_PER_REVIEW = 90; 
-
+const LEAF = "28px 90px 28px 90px";
 const DEFAULT_ITEMS = testimonials;
 
 function Typewriter({ text }) {
@@ -48,7 +48,17 @@ function Typewriter({ text }) {
   );
 }
 
-/* ---------- Cracker burst around the guy ---------- */
+const PHOTO_MASK =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M38 0 H100 V100 H6 C30 78 0 32 38 0 Z' fill='black'/%3E%3C/svg%3E\")";
+
+const maskStyle = {
+  WebkitMaskImage: PHOTO_MASK,
+  maskImage: PHOTO_MASK,
+  WebkitMaskSize: "100% 100%",
+  maskSize: "100% 100%",
+  WebkitMaskRepeat: "no-repeat",
+  maskRepeat: "no-repeat",
+};
 
 const CONFETTI_COLORS = [
   "#f97316",
@@ -177,26 +187,43 @@ function ReviewCard({ item, index, active }) {
       className="glass-card absolute inset-0 flex flex-col justify-between overflow-hidden rounded-3xl bg-white p-6 shadow-xl sm:p-8"
       aria-hidden={depth !== 0}
     >
-      {/* ---- shaded project photo ---- */}
-      {item.image && (
-        <div
-          aria-hidden
-          className="pointer-events-none absolute bottom-0 right-0 h-[78%] w-[68%] opacity-70 sm:opacity-100"
-          style={{ WebkitMaskImage: fade, maskImage: fade }}
-        >
-          <motion.img
-            src={item.image}
-            alt=""
-            draggable={false}
-            initial={false}
-            animate={{ scale: depth === 0 ? 1 : 1.15 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="h-full w-full object-cover"
-          />
-          {/* brand colour tint so every photo matches the site */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-brand/40 via-brand/10 to-transparent mix-blend-multiply" />
-        </div>
-      )}
+{item.image && (
+  <div
+    aria-hidden
+    className="pointer-events-none absolute inset-y-0 right-0 hidden w-[46%] sm:block"
+  >
+    {/* orange stripe that follows the curve */}
+    <span
+      className="absolute inset-y-0 -left-4 right-0 bg-gradient-to-b from-brand-400 to-brand-600"
+      style={maskStyle}
+    />
+
+    {/* navy stripe between orange and photo */}
+    <span
+      className="absolute inset-y-0 -left-2 right-0 bg-[#0f1f4b]"
+      style={maskStyle}
+    />
+
+    {/* the photo */}
+    <div className="absolute inset-0" style={maskStyle}>
+      <motion.img
+        src={item.image}
+        alt=""
+        draggable={false}
+        initial={false}
+        animate={{ scale: depth === 0 ? 1 : 1.15 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        className="h-full w-full object-cover"
+      />
+      {/* duotone brand shade */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-navy/50 via-navy/5 to-brand/35 mix-blend-multiply" />
+      {/* soft fade on the curved edge */}
+      <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-transparent to-transparent" />
+      {/* bottom shade */}
+      <div className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-transparent" />
+    </div>
+  </div>
+)}
 
       {/* soft orange glow in the corner */}
       <div
@@ -204,10 +231,9 @@ function ReviewCard({ item, index, active }) {
         className="pointer-events-none absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-brand/20 blur-3xl"
       />
 
-      <Quote className="absolute right-6 top-6 z-10 h-16 w-16 text-brand/10" />
+{!item.image && <Quote className="absolute right-6 top-6 z-10 h-16 w-16 text-brand/10" />}
 
-      {/* ---- content (above the photo) ---- */}
-      <div className="relative z-10">
+<div className={`relative z-10 ${item.image ? "sm:pr-[42%]" : ""}`}>
         <div
           className="flex gap-1"
           aria-label={`${item.rating} out of 5 stars`}
@@ -226,7 +252,7 @@ function ReviewCard({ item, index, active }) {
         </p>
       </div>
 
-      <div className="relative z-10 mt-6 flex items-center gap-4 border-t border-black/5 pt-5">
+      <div className="relative z-10 mt-6 flex items-center gap-4 border-t border-black/5 pt-5 -ml-4">
         {/* avatar: offset orange shape behind a white-ringed photo */}
         <div className="relative shrink-0">
           <span className="absolute -bottom-1.5 -right-1.5 h-14 w-14 rounded-full bg-brand/30" />
@@ -352,7 +378,6 @@ export default function Testimonials({ items = DEFAULT_ITEMS }) {
               </div>
             </div>
 
-            {/* RIGHT: review cards appear one by one */}
             <div className="relative h-[40vh] min-h-[300px] w-full lg:h-[52vh] lg:min-h-[380px]">
               {items.map((item, i) => (
                 <ReviewCard

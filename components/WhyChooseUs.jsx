@@ -22,9 +22,6 @@ const SHAPE = "28px 120px 28px 120px";
 const EASE = [0.22, 1, 0.36, 1];
 const VIEW = { once: true, amount: 0.25 };
 
-/* ------------------------------------------------------------------ */
-/*  Animation variants (children inherit "hidden" -> "show" from parent) */
-/* ------------------------------------------------------------------ */
 const stagger = (gap = 0.12, delay = 0) => ({
   hidden: {},
   show: { transition: { staggerChildren: gap, delayChildren: delay } },
@@ -290,11 +287,7 @@ export default function WhyChooseUs() {
               <div className="h-16 w-16 rotate-45 rounded-2xl bg-brand/20" />
             </Float>
           </Parallax>
-          <Parallax mx={mx} my={my} depth={26} className="absolute left-[46%] top-[8%] hidden lg:block">
-            <Float dur={6} y={12} rotate={90}>
-              <Plus className="text-brand/60" />
-            </Float>
-          </Parallax>
+      
           <Parallax mx={mx} my={my} depth={-22} className="absolute bottom-[14%] left-[44%] hidden lg:block">
             <Float dur={8} y={14}>
               <div className="h-5 w-5 rounded-full border-2 border-navy/25" />
@@ -302,9 +295,7 @@ export default function WhyChooseUs() {
           </Parallax>
         </div>
 
-        {/* ================= CONTENT ================= */}
         <div className="section-pad relative grid items-center gap-16 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
-          {/* ---------- LEFT: layered collage ---------- */}
           <motion.div
             variants={stagger(0.13)}
             initial="hidden"
@@ -441,7 +432,6 @@ export default function WhyChooseUs() {
             </Parallax>
           </motion.div>
 
-          {/* ---------- RIGHT: content ---------- */}
           <motion.div variants={stagger(0.14, 0.15)} initial="hidden" whileInView="show" viewport={VIEW}>
             <motion.span variants={rise} className="eyebrow">
               <motion.span

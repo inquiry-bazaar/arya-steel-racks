@@ -5,7 +5,6 @@ import {
   AnimatePresence,
   MotionConfig,
   motion,
-  useAnimationControls,
   useMotionValueEvent,
   useScroll,
 } from "framer-motion";
@@ -13,7 +12,6 @@ import {
   ArrowRight,
   Briefcase,
   Globe,
-  Plus,
   ShieldCheck,
   TrendingUp,
 } from "lucide-react";
@@ -62,20 +60,6 @@ const pop = {
   },
 };
 
-const ARCH_FROM = {
-  opacity: 0.4,
-  scale: 0.9,
-  y: 16,
-  borderRadius: "30% 30% 40px 40px / 28% 28% 40px 40px",
-};
-
-const ARCH_TO = {
-  opacity: 1,
-  scale: 1,
-  y: 0,
-  borderRadius: "50% 50% 28px 28px / 44% 44% 28px 28px",
-};
-
 function useMediaQuery(query) {
   const [matches, setMatches] = useState(false);
   useEffect(() => {
@@ -114,41 +98,21 @@ function wavePath({ len, period, amp, mid, vertical = false, close = "" }) {
 }
 
 const H_CLOSE = "L2400 100 L0 100Z";
+const V_CLOSE = "L0 2400 L0 0Z";
+// Wave edges sit near the OUTER side of each band (the part that peeks out
+// from behind the card). Horizontal bands: fill below the wave. Vertical
+// bands: fill left of the wave.
 const WAVES = {
-  fillA: wavePath({
-    len: 2400,
-    period: 420,
-    amp: 16,
-    mid: 52,
-    close: H_CLOSE,
-  }),
-  fillB: wavePath({
-    len: 2400,
-    period: 580,
-    amp: 12,
-    mid: 64,
-    close: H_CLOSE,
-  }),
-  lineA: wavePath({ len: 2400, period: 320, amp: 12, mid: 38 }),
-  lineB: wavePath({ len: 2400, period: 420, amp: 16, mid: 58 }),
-  vFill: wavePath({
-    len: 2400,
-    period: 420,
-    amp: 9,
-    mid: 50,
-    vertical: true,
-    close: "L0 2400 L0 0Z",
-  }),
-  vLine: wavePath({
-    len: 2400,
-    period: 420,
-    amp: 9,
-    mid: 64,
-    vertical: true,
-  }),
+  fillA: wavePath({ len: 2400, period: 420, amp: 14, mid: 32, close: H_CLOSE }),
+  fillB: wavePath({ len: 2400, period: 580, amp: 11, mid: 42, close: H_CLOSE }),
+  line: wavePath({ len: 2400, period: 340, amp: 9, mid: 20 }),
+  vFillA: wavePath({ len: 2400, period: 420, amp: 12, mid: 70, vertical: true, close: V_CLOSE }),
+  vFillB: wavePath({ len: 2400, period: 560, amp: 9, mid: 60, vertical: true, close: V_CLOSE }),
+  vLine: wavePath({ len: 2400, period: 360, amp: 8, mid: 84, vertical: true }),
 };
 
 const WAVE_FILL = "#e6ebf8";
+const WAVE_FILL_2 = "#dfe5f5";
 const WAVE_LINE = "#cfd8ee";
 
 function HWave({ d, fill, stroke, dur, reverse = false, opacity = 1 }) {
@@ -193,94 +157,58 @@ function VWave({ d, fill, stroke, dur, opacity = 1 }) {
   );
 }
 
-function EdgeDecor({ progress }) {
+function EdgeDecor() {
+  const hBand = "absolute inset-x-0 h-8 overflow-hidden md:h-12 lg:h-14";
+  const vBand = "absolute inset-y-0 w-8 overflow-hidden md:w-12 lg:w-14";
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute -inset-3 z-0 overflow-hidden rounded-[2.5rem] md:-inset-5 md:rounded-[3rem] lg:-inset-6"
+    >
+      {/* one continuous surface under the whole card, so no seam shows */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#f6f8fd] to-[#eef2fb]" />
+      <div className="absolute inset-0 opacity-60">
+      <div className="absolute -left-24 -top-24 h-64 w-64 rounded-full bg-[#dfe7f9]/70 blur-[70px]" />
+      <div className="absolute -bottom-28 -right-24 h-64 w-64 rounded-full bg-[#dfe7f9]/70 blur-[70px]" />
+
+      {/* top: wavy edge faces outward (up) */}
+      <div className={`${hBand} top-0`}>
+        <HWave d={WAVES.fillB} fill={WAVE_FILL} stroke="none" dur={86} />
+        <HWave d={WAVES.fillA} fill={WAVE_FILL_2} stroke="none" dur={58} reverse />
+        <HWave d={WAVES.line} fill="none" stroke={WAVE_LINE} dur={64} />
+      </div>
+
+      {/* bottom: rotated so the wavy edge faces outward (down) */}
+      <div className={`${hBand} bottom-0 rotate-180`}>
+        <HWave d={WAVES.fillB} fill={WAVE_FILL} stroke="none" dur={78} />
+        <HWave d={WAVES.fillA} fill={WAVE_FILL_2} stroke="none" dur={54} reverse />
+        <HWave d={WAVES.line} fill="none" stroke={WAVE_LINE} dur={70} />
+      </div>
+
+      {/* left: mirrored so the wavy edge faces outward (left) */}
+      <div className={`${vBand} left-0 -scale-x-100`}>
+        <VWave d={WAVES.vFillB} fill={WAVE_FILL} stroke="none" dur={90} />
+        <VWave d={WAVES.vFillA} fill={WAVE_FILL_2} stroke="none" dur={72} />
+        <VWave d={WAVES.vLine} fill="none" stroke={WAVE_LINE} dur={68} />
+      </div>
+
+      {/* right */}
+      <div className={`${vBand} right-0`}>
+        <VWave d={WAVES.vFillB} fill={WAVE_FILL} stroke="none" dur={84} />
+        <VWave d={WAVES.vFillA} fill={WAVE_FILL_2} stroke="none" dur={66} />
+        <VWave d={WAVES.vLine} fill="none" stroke={WAVE_LINE} dur={76} />
+      </div>
+      </div>
+    </div>
+  );
+}
+
+function ProgressLine({ progress }) {
   return (
     <div
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[inherit]"
     >
-      <div className="absolute -left-28 -top-28 h-80 w-80 rounded-full bg-[#dfe7f9]/70 blur-[80px]" />
-      <div className="absolute -bottom-32 -right-28 h-80 w-80 rounded-full bg-[#dfe7f9]/70 blur-[80px]" />
-
-      <div className="absolute inset-x-0 bottom-0 h-[72px] overflow-hidden md:h-24">
-        <HWave
-          d={WAVES.fillB}
-          fill={WAVE_FILL}
-          stroke="none"
-          dur={78}
-          opacity={0.75}
-        />
-        <HWave
-          d={WAVES.fillA}
-          fill="#dfe5f5"
-          stroke="none"
-          dur={54}
-          reverse
-          opacity={0.65}
-        />
-        <HWave d={WAVES.lineA} fill="none" stroke={WAVE_LINE} dur={64} />
-      </div>
-
-      <div className="absolute inset-x-0 top-0 h-14 rotate-180 overflow-hidden md:h-[72px]">
-        <HWave
-          d={WAVES.fillB}
-          fill={WAVE_FILL}
-          stroke="none"
-          dur={86}
-          opacity={0.55}
-        />
-        <HWave
-          d={WAVES.lineB}
-          fill="none"
-          stroke={WAVE_LINE}
-          dur={58}
-          reverse
-        />
-      </div>
-
-      <div className="absolute inset-y-0 left-0 w-11 overflow-hidden md:w-14">
-        <VWave
-          d={WAVES.vFill}
-          fill={WAVE_FILL}
-          stroke="none"
-          dur={80}
-          opacity={0.65}
-        />
-        <VWave d={WAVES.vLine} fill="none" stroke={WAVE_LINE} dur={68} />
-      </div>
-
-      <div className="absolute inset-y-0 right-0 w-11 -scale-x-100 overflow-hidden md:w-14">
-        <VWave
-          d={WAVES.vFill}
-          fill={WAVE_FILL}
-          stroke="none"
-          dur={90}
-          opacity={0.65}
-        />
-        <VWave d={WAVES.vLine} fill="none" stroke={WAVE_LINE} dur={72} />
-      </div>
-
-      <Plus
-        size={16}
-        strokeWidth={1.5}
-        className="absolute left-4 top-4 text-[#b8c4e0] md:left-5 md:top-5"
-      />
-      <Plus
-        size={16}
-        strokeWidth={1.5}
-        className="absolute right-4 top-4 text-[#b8c4e0] md:right-5 md:top-5"
-      />
-      <Plus
-        size={16}
-        strokeWidth={1.5}
-        className="absolute bottom-4 left-4 text-[#b8c4e0] md:bottom-5 md:left-5"
-      />
-      <Plus
-        size={16}
-        strokeWidth={1.5}
-        className="absolute bottom-4 right-4 text-[#b8c4e0] md:bottom-5 md:right-5"
-      />
-
       <motion.span
         className="absolute inset-x-0 bottom-0 block h-[2.5px] origin-left bg-gradient-to-r from-[#9fb0dd]/90 via-[#8aa0d4]/80 to-[#9fb0dd]/90"
         style={{ scaleX: progress }}
@@ -403,22 +331,34 @@ function ListItem({ item, index, active, total, sizes, onSelect }) {
 
 function IndustryImage({ src, alt, number }) {
   const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    setFailed(false);
+  }, [src]);
+
   if (!src || failed) {
     return (
-      <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-[#dbe3f6] via-[#e8ecf7] to-white">
+      <div className="absolute inset-[7%] flex items-center justify-center">
         <span className="text-7xl font-black text-[#0f2557]/15">
           {pad(number)}
         </span>
       </div>
     );
   }
+
   return (
-    <img
-      src={src}
-      alt={alt}
-      onError={() => setFailed(true)}
-      className="h-full w-full object-cover"
-    />
+    <div className="absolute inset-[7%] flex items-center justify-center">
+      <motion.img
+        src={src}
+        alt={alt}
+        onError={() => setFailed(true)}
+        className="block h-full w-full object-contain object-center"
+        draggable={false}
+        initial={false}
+        animate={{ scale: 1, x: 0, y: 0, rotate: 0 }}
+        transition={{ duration: 0.35, ease: EASE_OUT }}
+      />
+    </div>
   );
 }
 
@@ -435,7 +375,6 @@ export default function Industries({
   const N = industries.length;
   const [active, setActive] = useState(0);
   const trackRef = useRef(null);
-  const archControls = useAnimationControls();
   const small = useMediaQuery("(max-width: 767px)");
   const scale = useViewportScale();
 
@@ -455,14 +394,6 @@ export default function Industries({
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     setActive(Math.min(N - 1, Math.max(0, Math.floor(v * N))));
   });
-
-  useEffect(() => {
-    archControls.set(ARCH_FROM);
-    archControls.start({
-      ...ARCH_TO,
-      transition: { duration: 0.75, delay: 0.1, ease: EASE_OUT },
-    });
-  }, [active, archControls]);
 
   const goTo = (i) => {
     const el = trackRef.current;
@@ -500,8 +431,10 @@ export default function Industries({
             aria-label="Industries"
           >
             <div className="sticky top-0 flex h-screen items-start py-3 md:items-center md:py-6">
-              <div className="glass-card relative isolate w-full px-4 py-5 md:px-16 md:pb-12 md:pt-12 lg:px-24">
-                <EdgeDecor progress={scrollYProgress} />
+              <div className="relative w-full">
+                <EdgeDecor />
+                <div className="glass-card !border-0 !bg-transparent !shadow-none !backdrop-blur-none relative isolate z-[1] w-full px-4 py-5 md:px-16 md:pb-12 md:pt-12 lg:px-24">
+                  <ProgressLine progress={scrollYProgress} />
 
 <div className="relative z-[1] grid grid-cols-1 items-start gap-8 md:grid-cols-[minmax(0,460px)_minmax(0,600px)] md:items-center md:justify-center md:gap-x-24 lg:gap-x-32 xl:gap-x-36 py-18">
                   <ul className="min-w-0 pl-[30px] md:pl-10">
@@ -518,7 +451,41 @@ export default function Industries({
                     ))}
                   </ul>
 
-                  <div className="relative mx-auto aspect-[400/420] w-full min-w-0 max-w-[min(248px,30vh)] md:max-w-[min(640px,60vh)]">
+<div className="relative mx-auto aspect-[3/2] w-full min-w-0 max-w-[min(420px,90vw)] md:max-w-[min(720px,65vw)] overflow-visible">
+{/* BACKDROP ART: centered independently so Framer Motion transforms
+    never conflict with Tailwind translate utilities. */}
+<motion.div
+  aria-hidden="true"
+  className="
+    pointer-events-none
+    absolute
+    inset-[-14%]
+    z-0
+    flex
+    items-center
+    justify-center
+    overflow-visible
+  "
+  initial={{ opacity: 0, scale: 0.92 }}
+  animate={{ opacity: 0.85, scale: 1 }}
+  transition={{
+    duration: 1.2,
+    ease: [0.16, 1, 0.3, 1],
+  }}
+>
+  <img
+    src="/industry-art-backdrop.png"
+    alt=""
+    className="
+      h-full
+      w-full
+      max-w-none
+      object-contain
+      object-center
+      opacity-90
+    "
+  />
+</motion.div>
                     <AnimatePresence mode="wait" initial={false}>
                       <motion.span
                         key={active}
@@ -573,46 +540,27 @@ export default function Industries({
                       />
                     </svg>
 
-                    <motion.div
-                      animate={archControls}
-                      className="absolute bottom-0 left-[12%] right-[4%] top-[10%] overflow-hidden border-4 border-white/80 bg-[#e8ecf7] shadow-[0_30px_60px_-30px_rgba(15,37,87,0.45)]"
-                    >
-                      <AnimatePresence>
-                        <motion.div
-                          key={active}
-                          className="absolute inset-0"
-                          initial={{ clipPath: "inset(100% 0% 0% 0%)" }}
-                          animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
-                          exit={{
-                            opacity: 0,
-                            transition: { duration: 0.35 },
-                          }}
-                          transition={{
-                            duration: 0.8,
-                            delay: 0.3,
-                            ease: EASE_OUT,
-                          }}
-                        >
-                          <motion.div
-                            className="h-full w-full"
-                            initial={{ scale: 1.3 }}
-                            animate={{ scale: 1 }}
-                            transition={{
-                              duration: 1.2,
-                              delay: 0.3,
-                              ease: EASE_OUT,
-                            }}
-                          >
-                            <IndustryImage
-                              src={srcOf(current.image)}
-                              alt={current.name}
-                              number={active + 1}
-                            />
-                          </motion.div>
-                        </motion.div>
-                      </AnimatePresence>
-                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#0f2557]/20 to-transparent" />
-                    </motion.div>
+<div className="absolute inset-0 z-[2] overflow-visible">
+  <AnimatePresence mode="wait" initial={false}>
+    <motion.div
+      key={active}
+      className="absolute inset-0 overflow-visible"
+      initial={{ opacity: 0, y: 18, scale: 1 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -12, scale: 1 }}
+      transition={{
+        duration: 0.75,
+        ease: EASE_OUT,
+      }}
+    >
+      <IndustryImage
+        src={srcOf(current.image)}
+        alt={current.name}
+        number={active + 1}
+      />
+    </motion.div>
+  </AnimatePresence>
+</div>
 
                     <AnimatePresence>
                       <motion.div
@@ -655,6 +603,7 @@ export default function Industries({
                   <span className="text-[#0f2557]">{pad(active + 1)}</span> /{" "}
                   {pad(N)}
                 </p>
+              </div>
               </div>
             </div>
           </div>

@@ -1,5 +1,7 @@
 import { catalogue } from "./products";
 
+
+
 export const company = {
   name: "Arya Display Rack",
   tagline: "Manufacturer of Supermarket Display Racks & Shopping Trolleys",
@@ -72,12 +74,12 @@ export const steps = [
 const count = (cat) => catalogue.filter((p) => p.category === cat).length;
 
 export const industries = [
-  { name: "Supermarkets & Grocery", image: "/images/products/gondola-display-rack.jpg", desc: "Gondola, wall and centre racks for every aisle.", cat: "Supermarket & Grocery" },
-  { name: "Garment & Apparel", image: "/images/products/garment-display-rack.jpg", desc: "Hanging stands, saree racks and nesting tables.", cat: "Garment & Apparel" },
-  { name: "Footwear, Beauty & Pharmacy", image: "/images/products/pharmacy-medical-store-rack.png", desc: "Shoe, cosmetic and medicine racks.", cat: "Footwear, Beauty & Pharmacy" },
-  { name: "Electronics, Books & Gifts", image: "/images/products/book-rack-library-rack.jpg", desc: "Display racks for electronics, books and gifts.", cat: "Electronics, Books & Gifts" },
-  { name: "Fixtures & Accessories", image: "/images/products/peg-hooks-pegboard-and-brackets.jpeg", desc: "Slatwall, pegboards and custom branded stands.", cat: "Fixtures & Accessories" },
-  { name: "Counters, Trolleys & Baskets", image: "/images/products/cash-checkout-counter.jpg", desc: "Checkout counters, trolleys and baskets.", cat: "Counters, Trolleys & Baskets" },
+  { name: "Supermarkets & Grocery", image: "/images/industries/supermarket_ind.png", desc: "Gondola, wall and centre racks for every aisle.", cat: "Supermarket & Grocery" },
+  { name: "Garment & Apparel", image: "/images/industries/garments.png", desc: "Hanging stands, saree racks and nesting tables.", cat: "Garment & Apparel" },
+  { name: "Footwear, Beauty & Pharmacy", image: "/images/industries/pharmacy-medical-store-rack.png", desc: "Shoe, cosmetic and medicine racks.", cat: "Footwear, Beauty & Pharmacy" },
+  { name: "Electronics, Books & Gifts", image: "/images/industries/electronics.png", desc: "Display racks for electronics, books and gifts.", cat: "Electronics, Books & Gifts" },
+  { name: "Fixtures & Accessories", image: "/images/industries/peg.png", desc: "Slatwall, pegboards and custom branded stands.", cat: "Fixtures & Accessories" },
+  { name: "Counters, Trolleys & Baskets", image: "/images/industries/cash-checkout-counter.png", desc: "Checkout counters, trolleys and baskets.", cat: "Counters, Trolleys & Baskets" },
 ].map(({ cat, ...i }) => ({
   ...i,
   stats: [
@@ -94,6 +96,7 @@ export const testimonials = [
     project: "Supermarket Display Rack",
     rating: 5,
     gif: "/testimonials/guy-1.gif",
+    image: "https://unsplash.com/photos/2Vl1JZFmtOw/download?force=true&w=900",
     review: "Thank you Arya Display Rack, good behaviour and best material.",
     say: "Vineet from New Delhi gave our Supermarket Display Rack five stars and said: good behaviour and best material. Thank you, {name}!",
   },
@@ -103,6 +106,7 @@ export const testimonials = [
     project: "Supermarket Display Rack",
     rating: 5,
     gif: "/testimonials/guy-2.gif",
+    image: "https://unsplash.com/photos/EJNR0CJMaU8/download?force=true&w=900",
     review: "Rated 5 out of 5 for the Supermarket Display Rack.",
     say: "Sanjib from Tripura rated our Supermarket Display Rack 5 out of 5. Thank you, {name}!",
   },
@@ -112,6 +116,7 @@ export const testimonials = [
     project: "Grocery Store Rack",
     rating: 5,
     gif: "/testimonials/guy-3.gif",
+    image: "https://unsplash.com/photos/ezeC8-clZSs/download?force=true&w=900",
     review: "Rated 5 out of 5 for the Grocery Store Rack.",
     say: "Sudip from West Bengal rated our Grocery Store Rack 5 out of 5. Thank you, {name}!",
   },
@@ -121,6 +126,7 @@ export const testimonials = [
     project: "Wall Display Racks",
     rating: 5,
     gif: "/testimonials/guy-3.gif",
+    image: "https://unsplash.com/photos/Y-jRC9OF2ig/download?force=true&w=900",
     review: "Rated 5 out of 5 for the Wall Display Racks.",
     say: "Santosh from Maharashtra rated our Wall Display Racks 5 out of 5. Thank you, {name}!",
   },
