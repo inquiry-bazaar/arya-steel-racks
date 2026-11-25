@@ -345,7 +345,7 @@ export default function Process() {
   return (
     <section id="process" className="bg-soft relative overflow-x-clip">
       {/* full-width sticky header */}
-      <div className="sticky top-0 z-30 w-full border-b border-navy/5 bg-soft backdrop-blur-md pt-20 pb-10">
+      <div className="sticky top-0 z-30 w-full border-b border-navy/5 bg-soft backdrop-blur-md pt-20 pb-6">
         <div className="section-pad mx-auto w-full max-w-[1400px] py-5">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-xl">
