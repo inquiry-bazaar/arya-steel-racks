@@ -2,207 +2,493 @@
 
 import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import {
+  ArrowRight,
+  ChevronLeft,
+  ChevronRight,
+  Lightbulb,
+  Maximize,
+  MoreVertical,
+  Play,
+  PlayCircle,
+  Settings,
+  Store,
+} from "lucide-react";
 
 /* ------------------------------------------------------------------
    EDIT THIS: paste normal YouTube links (watch, youtu.be or /shorts/).
-   type: "vlog" goes on the top shelf (landscape), "short" on the lower
-   shelf (portrait). Titles show over the thumbnail.
+   The first video opens as the big player. duration is shown as a label
+   (YouTube does not give it to us without an API key).
 ------------------------------------------------------------------ */
 const CHANNEL_URL = "https://www.youtube.com/@yourchannel";
 
-const VIDEOS = [
-  { type: "vlog", title: "Inside our rack factory", url: "https://www.youtube.com/watch?v=VIDEO_ID_1" },
-  { type: "vlog", title: "From steel sheet to powder coated rack", url: "https://www.youtube.com/watch?v=VIDEO_ID_2" },
-  { type: "short", title: "Punching in 30 seconds", url: "https://www.youtube.com/shorts/VIDEO_ID_3" },
-  { type: "short", title: "Assembling a rack", url: "https://www.youtube.com/shorts/VIDEO_ID_4" },
-  { type: "short", title: "Load test", url: "https://www.youtube.com/shorts/VIDEO_ID_5" },
-  { type: "short", title: "Delivery day", url: "https://www.youtube.com/shorts/VIDEO_ID_6" },
+const RAW_VIDEOS = [
+  { title: "Heavy Duty Display Rack Installation", duration: "5:42", type: "vlog", url: "https://www.youtube.com/watch?v=VIDEO_ID_1" },
+  { title: "Gondola rack setup in 45 seconds", duration: "0:45", type: "short", url: "https://www.youtube.com/shorts/VIDEO_ID_2" },
+  { title: "Supermarket aisle layout walkthrough", duration: "2:36", type: "vlog", url: "https://www.youtube.com/watch?v=VIDEO_ID_3" },
+  { title: "Pharmacy rack client setup", duration: "3:18", type: "vlog", url: "https://www.youtube.com/watch?v=VIDEO_ID_4" },
+  { title: "Quick load test on a shelf", duration: "0:59", type: "short", url: "https://www.youtube.com/shorts/VIDEO_ID_5" },
+  { title: "Inside our powder coating plant", duration: "4:12", type: "vlog", url: "https://www.youtube.com/watch?v=VIDEO_ID_6" },
+  { title: "Wall rack assembly tips", duration: "1:05", type: "short", url: "https://www.youtube.com/shorts/VIDEO_ID_7" },
+  { title: "Cash counter and billing rack ideas", duration: "3:50", type: "vlog", url: "https://www.youtube.com/watch?v=VIDEO_ID_8" },
+  { title: "Packing and dispatch day", duration: "0:38", type: "short", url: "https://www.youtube.com/shorts/VIDEO_ID_9" },
 ];
 
-const SHELVES = [
-  { key: "vlog", label: "Factory vlogs" },
-  { key: "short", label: "Quick shorts" },
+const FEATURES = [
+  { icon: PlayCircle, label: "Product Demonstrations" },
+  { icon: Settings, label: "Installation & Setup" },
+  { icon: Store, label: "Real Store Setups" },
+  { icon: Lightbulb, label: "Expert Tips & Guides" },
 ];
+
+const PER_PAGE = 4;
+const THUMB_TILT = [-3, -1.2, 0.8, 2.5];
+const BLUE = "#1f4fd8";
+const NAVY = "#14214f";
 
 function getId(input) {
   const m = input.match(/(?:v=|youtu\.be\/|shorts\/|embed\/)([\w-]{6,})/);
   return m ? m[1] : input.trim();
 }
 
-/* ---------- One video sitting on a shelf ---------- */
+const VIDEOS = RAW_VIDEOS.map((v) => {
+  const id = getId(v.url);
+  return { ...v, id, thumb: `https://i.ytimg.com/vi/${id}/hqdefault.jpg` };
+});
 
-function VideoCard({ video, index, activeId, setActiveId, reduce }) {
-  const id = getId(video.url);
-  const playing = activeId === id;
-  const short = video.type === "short";
-  const [broken, setBroken] = useState(false);
+/* ---------- Small pieces ---------- */
 
+function YtMark({ className = "" }) {
   return (
-    <motion.div
-      initial={reduce ? false : { opacity: 0, y: -60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ type: "spring", stiffness: 110, damping: 15, delay: index * 0.12 }}
-      className={`relative shrink-0 snap-center ${
-        short ? "w-[170px] sm:w-[190px]" : "w-[290px] sm:w-[400px]"
-      }`}
+    <svg viewBox="0 0 46 32" className={className} aria-hidden>
+      <rect width="46" height="32" rx="9" fill="#ff0000" />
+      <path d="M19 9.5 31 16 19 22.5z" fill="#fff" />
+    </svg>
+  );
+}
+
+function YtMarkWhite({ className = "" }) {
+  return (
+    <svg viewBox="0 0 46 32" className={className} aria-hidden>
+      <rect width="46" height="32" rx="9" fill="#fff" />
+      <path d="M19 9.5 31 16 19 22.5z" fill="#e11d1d" />
+    </svg>
+  );
+}
+
+/* Warehouse rack illustration, used until the real YouTube thumbnail loads */
+function RackArt() {
+  const levels = [112, 192, 272];
+  const xs = [72, 110, 148, 190, 228, 270, 312, 350, 392, 430, 472, 510, 548, 586];
+  return (
+    <svg
+      viewBox="0 0 640 360"
+      preserveAspectRatio="xMidYMid slice"
+      className="absolute inset-0 h-full w-full"
+      aria-hidden
     >
-      <div
-        className={`relative overflow-hidden rounded-t-2xl bg-[#0f1f4b] shadow-xl ${
-          short ? "aspect-[9/16]" : "aspect-video"
-        }`}
-      >
-        {playing ? (
-          <iframe
-            className="absolute inset-0 h-full w-full"
-            src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1`}
-            title={video.title}
-            allow="autoplay; encrypted-media; picture-in-picture"
-            allowFullScreen
-          />
-        ) : (
+      <defs>
+        <linearGradient id="rk-bg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#e4eaf6" />
+          <stop offset="1" stopColor="#aab5ca" />
+        </linearGradient>
+      </defs>
+      <rect width="640" height="360" fill="url(#rk-bg)" />
+      <rect y="300" width="640" height="60" fill="#8f99ad" />
+      {[60, 200, 340, 480, 620].map((x) => (
+        <rect key={x} x={x - 6} y="30" width="12" height="300" fill="#1d4ed8" />
+      ))}
+      {levels.map((y) => (
+        <g key={y}>
+          {xs.map((x, i) => (
+            <rect
+              key={x}
+              x={x}
+              y={y - 36 + (i % 3) * 3}
+              width={30 + (i % 2) * 8}
+              height={36 - (i % 3) * 3}
+              fill="#cfa877"
+              stroke="#a67f4e"
+              strokeWidth="1.5"
+            />
+          ))}
+          <rect x="54" y={y} width="572" height="9" fill="#f97316" />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+function Media({ video }) {
+  const [broken, setBroken] = useState(false);
+  return (
+    <>
+      <RackArt />
+      {!broken && (
+        <img
+          src={video.thumb}
+          alt=""
+          loading="lazy"
+          onError={() => setBroken(true)}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      )}
+    </>
+  );
+}
+
+/* ---------- Backdrop shapes (desktop) ---------- */
+
+function Backdrop() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 1672 941"
+      preserveAspectRatio="none"
+      className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
+    >
+      <defs>
+        <linearGradient id="vb-blue" x1="0.2" y1="1" x2="0.95" y2="0.1">
+          <stop offset="0" stopColor="#1d4fc2" />
+          <stop offset="0.5" stopColor="#2a62dc" />
+          <stop offset="0.8" stopColor="#4a7be8" />
+          <stop offset="1" stopColor="#a9c4f5" />
+        </linearGradient>
+        <linearGradient id="vb-orange" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#ffb02e" />
+          <stop offset="1" stopColor="#f26a0b" />
+        </linearGradient>
+      </defs>
+
+      {/* soft light wave at the bottom */}
+      <path d="M470 941 C640 895 900 912 1130 941 Z" fill="#e6eefd" />
+
+      {/* big blue shape: top-right wedge + lower blob */}
+      <path
+        d="M1195 0 H1672 V560 C1672 650 1640 720 1590 780 C1520 865 1380 895 1230 885 C1040 872 800 890 650 868 C545 852 505 795 545 745 C590 690 650 640 720 595 L900 330 Q1060 120 1195 0 Z"
+        fill="url(#vb-blue)"
+      />
+      {/* inner highlight on the lower blob */}
+      <path
+        d="M575 770 C610 700 665 655 735 612 L1560 600 C1590 660 1560 740 1500 800 C1420 860 1300 872 1200 862 C1000 850 800 868 680 850 C600 838 560 805 575 770 Z"
+        fill="#fff"
+        opacity="0.05"
+      />
+
+      {/* bottom corner swooshes */}
+      <path d="M0 868 C110 872 240 905 330 941 H0 Z" fill="url(#vb-orange)" />
+      <path d="M0 905 C90 910 170 925 235 941 H0 Z" fill="#ffc15a" opacity="0.8" />
+      <path d="M1672 798 C1610 880 1505 925 1385 941 H1672 Z" fill="url(#vb-orange)" />
+    </svg>
+  );
+}
+
+function RackLines() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 320 280"
+      fill="none"
+      stroke="#6f8bd0"
+      strokeOpacity="0.35"
+      strokeWidth="1.3"
+      className="pointer-events-none absolute left-0 top-0 hidden w-[17%] lg:block"
+    >
+      <path d="M10 270V120M70 270V92M130 258V62M200 244V42M262 232V28" />
+      <path d="M10 200 70 180 130 160 200 140 262 126M10 150 70 130 130 112 200 95 262 82M10 108 70 92 130 76 200 62 262 50" />
+      <path d="M10 270 70 200M70 270 10 200M70 180 130 258M130 180 70 258M130 160 200 244M200 160 130 244M200 140 262 232M262 140 200 232" />
+      <path d="M10 120 70 92 130 62 200 42 262 28M10 270 70 270 130 258 200 244 262 232" />
+    </svg>
+  );
+}
+
+/* ---------- Main player ---------- */
+
+function MainCard({ video, playing, onPlay }) {
+  return (
+    <div className="relative aspect-video h-full w-full overflow-hidden rounded-[1.6rem] border-[5px] border-white bg-[#0f1f4b] shadow-[0_34px_60px_-18px_rgba(15,40,120,0.6)] lg:aspect-auto lg:rounded-[3cqw] lg:border-[length:0.5cqw]">
+      {playing ? (
+        <iframe
+          className="absolute inset-0 h-full w-full"
+          src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0&playsinline=1`}
+          title={video.title}
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowFullScreen
+        />
+      ) : (
+        <>
+          <Media video={video} />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-black/35" />
+
           <button
             type="button"
-            onClick={() => setActiveId(id)}
+            onClick={onPlay}
             aria-label={`Play ${video.title}`}
-            className="group absolute inset-0 block h-full w-full text-left focus-visible:outline focus-visible:outline-4 focus-visible:outline-brand"
-          >
-            {broken ? (
-              <div className="absolute inset-0 bg-gradient-to-br from-brand/40 via-brand/15 to-transparent" />
-            ) : (
-              <img
-                src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`}
-                alt=""
-                loading="lazy"
-                onError={() => setBroken(true)}
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+            className="absolute inset-0 z-10 focus-visible:outline focus-visible:outline-4 focus-visible:outline-white"
+          />
 
-            <span className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-brand text-white shadow-orange transition-transform duration-300 group-hover:scale-110">
-              <Play className="ml-0.5 h-6 w-6 fill-current" />
+          <div className="pointer-events-none absolute inset-0 z-[5]">
+            {/* YouTube logo */}
+            <div className="absolute left-[5%] top-[8%] flex items-center gap-1.5 lg:gap-[0.5cqw]">
+              <YtMark className="w-8 lg:w-[2.8cqw]" />
+              <span className="text-lg font-extrabold tracking-tighter text-white lg:text-[length:2cqw]">
+                YouTube
+              </span>
+            </div>
+
+            <MoreVertical className="absolute right-[3.5%] top-[7%] h-5 w-5 text-white lg:h-[1.8cqw] lg:w-[1.8cqw]" />
+
+            {/* centre play */}
+            <span className="absolute left-1/2 top-[46%] flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-[3px] border-white bg-black/15 lg:h-[6.3cqw] lg:w-[6.3cqw] lg:border-[length:0.5cqw]">
+              <Play className="ml-0.5 h-6 w-6 fill-white text-white lg:h-[2.8cqw] lg:w-[2.8cqw]" />
             </span>
 
-            <span className="absolute inset-x-0 bottom-0 p-4 text-sm font-bold leading-snug text-white sm:text-base">
+            {/* title */}
+            <h3 className="absolute bottom-[16%] left-[4.5%] max-w-[70%] text-lg font-extrabold leading-[1.12] text-white drop-shadow lg:max-w-[42%] lg:text-[length:2cqw]">
               {video.title}
-            </span>
-          </button>
-        )}
-      </div>
-      {/* contact shadow where the video touches the shelf */}
-      <span
-        aria-hidden
-        className="absolute -bottom-1 inset-x-4 h-2 rounded-full bg-black/30 blur-md"
-      />
-    </motion.div>
+            </h3>
+
+            {/* progress row */}
+            <div className="absolute bottom-[4.5%] left-[4.5%] right-[3.5%] flex items-center gap-3 lg:gap-[1cqw]">
+              <div className="relative h-1 flex-1 rounded-full bg-white/35 lg:h-[0.4cqw]">
+                <span className="absolute inset-y-0 left-0 w-[35%] rounded-full bg-[#ff1a1a]" />
+                <span className="absolute left-[35%] top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white shadow lg:h-[1.2cqw] lg:w-[1.2cqw]" />
+              </div>
+              <span className="rounded-md bg-black/60 px-2 py-0.5 text-xs font-semibold text-white lg:px-[0.7cqw] lg:py-[0.1cqw] lg:text-[length:1.3cqw]">
+                {video.duration}
+              </span>
+              <Maximize className="h-4 w-4 text-white lg:h-[1.5cqw] lg:w-[1.5cqw]" />
+            </div>
+          </div>
+        </>
+      )}
+    </div>
   );
 }
 
-/* ---------- Shelf beam with a label plate ---------- */
+/* ---------- Thumbnail ---------- */
 
-function Beam({ label, count, reduce }) {
+function Thumb({ video, index, onSelect }) {
+  const short = video.type === "short";
   return (
-    <motion.div
-      initial={reduce ? false : { scaleX: 0 }}
-      whileInView={{ scaleX: 1 }}
-      viewport={{ once: true, amount: 0.8 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      style={{ originX: 0 }}
-      className="relative z-10 -mx-4 h-7 bg-gradient-to-b from-[#1d3070] to-[#0f1f4b] shadow-[0_14px_22px_-10px_rgba(15,31,75,0.55)] lg:-mx-8"
+    <button
+      type="button"
+      onClick={onSelect}
+      title={video.title}
+      aria-label={`Play ${video.title}`}
+      style={{ "--r": `${THUMB_TILT[index % THUMB_TILT.length]}deg` }}
+      className="group relative aspect-[4/3] w-[44%] shrink-0 snap-start overflow-hidden rounded-[1.1rem] border-[4px] border-white bg-[#0f1f4b] shadow-[0_16px_28px_-10px_rgba(10,30,100,0.6)] transition-transform duration-300 hover:-translate-y-1 focus-visible:outline focus-visible:outline-4 focus-visible:outline-orange-400 lg:w-auto lg:rotate-[var(--r)] lg:rounded-[1.4cqw] lg:border-[length:0.32cqw]"
     >
-      <span className="absolute inset-x-0 top-0 h-[3px] bg-brand" />
-      <span className="absolute left-8 top-1/2 flex -translate-y-[40%] items-center gap-2 rounded bg-white px-3 py-0.5 text-xs font-bold text-[#0f1f4b] shadow lg:left-14">
-        {label}
-        <span className="rounded-sm bg-brand px-1.5 text-white">{count}</span>
+      <Media video={video} />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
+
+      {short && (
+        <span className="absolute left-[6%] top-[6%] flex items-center gap-1 rounded-full bg-black/70 px-2 py-0.5 text-[10px] font-bold text-white lg:gap-[0.3cqw] lg:px-[0.7cqw] lg:text-[length:1.05cqw]">
+          <span className="flex h-3 w-3 items-center justify-center rounded-[3px] bg-[#ff0000] lg:h-[1.1cqw] lg:w-[1.1cqw]">
+            <Play className="h-2 w-2 fill-white text-white lg:h-[0.6cqw] lg:w-[0.6cqw]" />
+          </span>
+          Shorts
+        </span>
+      )}
+
+      <span className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-white bg-black/20 transition-transform duration-300 group-hover:scale-110 lg:h-[3.2cqw] lg:w-[3.2cqw] lg:border-[length:0.22cqw]">
+        <Play className="ml-0.5 h-4 w-4 fill-white text-white lg:h-[1.4cqw] lg:w-[1.4cqw]" />
       </span>
-    </motion.div>
-  );
-}
 
-/* ---------- Rack uprights with punched holes ---------- */
-
-function Upright({ side }) {
-  return (
-    <div
-      aria-hidden
-      className={`pointer-events-none absolute inset-y-0 w-3 lg:w-5 ${side === "left" ? "left-0" : "right-0"}`}
-      style={{
-        backgroundColor: "#0f1f4b",
-        backgroundImage:
-          "radial-gradient(circle at center, rgba(255,255,255,0.55) 2px, transparent 2.5px)",
-        backgroundSize: "100% 26px",
-        backgroundPosition: "center 8px",
-        boxShadow: "inset -2px 0 0 rgba(255,255,255,0.08)",
-      }}
-    />
+      <span className="absolute bottom-[6%] right-[6%] rounded-md bg-black/70 px-1.5 text-[10px] font-semibold text-white lg:px-[0.6cqw] lg:text-[length:1cqw]">
+        {video.duration}
+      </span>
+    </button>
   );
 }
 
 /* ---------- Section ---------- */
 
-export default function VideoShelf() {
-  const [activeId, setActiveId] = useState(null);
+export default function VideoVlogs() {
   const reduce = useReducedMotion();
+  const [active, setActive] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [page, setPage] = useState(0);
 
-  let cardIndex = 0;
+  const others = VIDEOS.map((v, i) => ({ v, i })).filter((o) => o.i !== active);
+  const pages = Math.max(1, Math.ceil(others.length / PER_PAGE));
+  const safePage = Math.min(page, pages - 1);
+  const visible = others.slice(safePage * PER_PAGE, safePage * PER_PAGE + PER_PAGE);
+  const go = (d) => setPage((safePage + d + pages) % pages);
+
+  const select = (i) => {
+    setActive(i);
+    setPlaying(true);
+  };
+
+  const circleBtn =
+    "flex h-11 w-11 items-center justify-center rounded-full bg-white text-[#1f4fd8] shadow-[0_10px_22px_-6px_rgba(20,50,140,0.45)] transition-transform hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1f4fd8] lg:h-[3cqw] lg:w-[3cqw]";
 
   return (
-    <section id="videos" className="bg-soft relative overflow-x-clip py-20 lg:py-28">
-      <div className="section-pad mx-auto w-full max-w-[1400px]">
-        <div className="mb-12 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-xl">
-            <span className="eyebrow">
-              <span className="h-[2px] w-5 bg-brand" /> Watch Us Work
+    <section id="videos" className="relative w-full overflow-hidden bg-[#f5f8ff]">
+      <div
+        className="relative mx-auto w-full max-w-[1920px] pb-10 lg:aspect-[1672/790] lg:pb-0"
+        style={{ containerType: "inline-size" }}
+      >
+        <Backdrop />
+        <RackLines />
+
+        {/* ---------------- LEFT ---------------- */}
+        <div className="relative z-10 space-y-5 px-6 pt-10 lg:contents lg:space-y-0">
+          {/* badge */}
+          <div className="flex items-center gap-3 lg:absolute lg:left-[6.4%] lg:top-[12.2%] lg:z-10 lg:gap-[0.7cqw]">
+            <YtMark className="w-11 drop-shadow lg:w-[2.75cqw]" />
+            <span className="text-lg font-semibold lg:text-[length:1.5cqw]" style={{ color: NAVY }}>
+              Our YouTube Vlogs
             </span>
-            <h2 className="mt-3 text-3xl font-extrabold leading-[1.15] tracking-tight lg:text-4xl">
-              See how every rack is made, loaded and delivered
-            </h2>
-            <p className="mt-3 text-base leading-relaxed opacity-75">
-              Factory walkthroughs and quick shorts from our own unit. Tap any video to play it right here.
-            </p>
           </div>
+
+          {/* heading */}
+          <h2
+            className="text-[30px] font-extrabold leading-[1.14] tracking-tight sm:text-4xl lg:absolute lg:left-[6.2%] lg:top-[19.2%] lg:z-10 lg:text-[length:3.3cqw]"
+            style={{ color: NAVY }}
+          >
+            <span className="lg:whitespace-nowrap">Watch, Learn &amp; Explore</span>
+            <br />
+            <span className="lg:whitespace-nowrap">
+              with Our{" "}
+              <span className="relative inline-block" style={{ color: BLUE }}>
+                Video Vlogs
+                <svg
+                  aria-hidden
+                  viewBox="0 0 200 20"
+                  className="absolute -bottom-[0.3em] left-0 w-full lg:-bottom-[0.28em]"
+                  fill="none"
+                >
+                  <path d="M3 13 Q100 22 197 5" stroke="#f58a0c" strokeWidth="5" strokeLinecap="round" />
+                </svg>
+              </span>
+            </span>
+          </h2>
+
+          {/* sub copy */}
+          <p className="max-w-md text-base leading-relaxed text-[#6b7290] lg:absolute lg:left-[6.2%] lg:top-[37.2%] lg:z-10 lg:w-[36%] lg:max-w-none lg:text-[length:1.43cqw] lg:leading-[1.38]">
+            Product demos, installations, client setups and expert tips — all in one place.
+          </p>
+
+          {/* orange swoosh above list */}
+          <svg
+            aria-hidden
+            viewBox="0 0 104 30"
+            fill="none"
+            className="hidden lg:absolute lg:left-[5.7%] lg:top-[46.8%] lg:block lg:w-[6.4%]"
+          >
+            <path d="M3 27 Q10 8 101 4" stroke="#f58a0c" strokeWidth="4" strokeLinecap="round" />
+          </svg>
+
+          {/* feature list */}
+          <ul className="space-y-3 pt-2 lg:absolute lg:left-[6.3%] lg:top-[50.6%] lg:z-10 lg:space-y-[0.2cqw] lg:pt-0">
+            {FEATURES.map(({ icon: Icon, label }) => (
+              <li key={label} className="flex items-center gap-4 lg:gap-[1.2cqw]">
+                <span className="flex h-12 w-14 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_10px_22px_-10px_rgba(31,79,216,0.5)] lg:h-[3.75cqw] lg:w-[4.4cqw]">
+                  <Icon className="h-6 w-6 text-[#1f4fd8] lg:h-[1.9cqw] lg:w-[1.9cqw]" strokeWidth={2} />
+                </span>
+                <span
+                  className="text-base font-bold lg:text-[length:1.27cqw]"
+                  style={{ color: NAVY }}
+                >
+                  {label}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          {/* subscribe */}
           <a
             href={CHANNEL_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-navy !py-3 self-start lg:self-auto"
+            className="inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-b from-[#f02a1d] to-[#d4130c] px-7 py-4 text-base font-bold text-white shadow-[0_16px_28px_-10px_rgba(225,20,10,0.65)] transition-transform hover:-translate-y-0.5 lg:absolute lg:left-[6.3%] lg:top-[88.3%] lg:z-10 lg:h-[3.8cqw] lg:w-[21.8%] lg:gap-[0.9cqw] lg:px-0 lg:py-0 lg:text-[length:1.27cqw]"
           >
-            Visit our channel <ArrowRight className="h-4 w-4" />
+            <YtMarkWhite className="w-9 lg:w-[2.7cqw]" />
+            Subscribe on YouTube
+            <ArrowRight className="h-5 w-5 lg:h-[1.4cqw] lg:w-[1.4cqw]" />
           </a>
         </div>
 
-        {/* the rack */}
-        <div className="relative mx-auto max-w-[1240px] px-4 pb-6 lg:px-8">
-          <Upright side="left" />
-          <Upright side="right" />
+        {/* ---------------- RIGHT ---------------- */}
+        <div className="relative z-10 mx-4 mt-8 rounded-[2rem] bg-gradient-to-br from-[#1e4fc5] to-[#2d66e0] p-4 lg:contents">
+          {/* orange block peeking behind the player */}
+          <div
+            aria-hidden
+            className="hidden lg:absolute lg:left-[42.8%] lg:top-[5.2%] lg:block lg:h-[10.5cqw] lg:w-[13.5%] lg:-rotate-[7deg] lg:rounded-[2.4cqw] lg:bg-gradient-to-br lg:from-[#ffa21f] lg:to-[#f47a0a]"
+          />
 
-          {SHELVES.map((shelf) => {
-            const items = VIDEOS.filter((v) => v.type === shelf.key);
-            if (!items.length) return null;
-            return (
-              <div key={shelf.key} className="relative">
-                <div className="flex snap-x items-end gap-5 overflow-x-auto px-2 pb-0 pt-16 [scrollbar-width:none] [&>*:first-child]:ml-auto [&>*:last-child]:mr-auto [&::-webkit-scrollbar]:hidden">
-                  {items.map((v) => (
-                    <VideoCard
-                      key={v.url}
-                      video={v}
-                      index={cardIndex++}
-                      activeId={activeId}
-                      setActiveId={setActiveId}
-                      reduce={reduce}
-                    />
-                  ))}
-                </div>
-                <Beam label={shelf.label} count={String(items.length).padStart(2, "0")} reduce={reduce} />
+          {/* player */}
+          <div className="lg:absolute lg:left-[43.8%] lg:top-[7.1%] lg:z-10 lg:h-[26cqw] lg:w-[46%] lg:[transform:perspective(1700px)_rotateZ(-3deg)_rotateY(-7deg)]">
+            <motion.div
+              initial={reduce ? false : { opacity: 0, y: 40, scale: 0.96 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="h-full w-full"
+            >
+              <MainCard
+                key={VIDEOS[active].id}
+                video={VIDEOS[active]}
+                playing={playing}
+                onPlay={() => setPlaying(true)}
+              />
+            </motion.div>
+          </div>
+
+          {/* thumbnail strip */}
+          <motion.div
+            key={safePage + "-" + active}
+            initial={reduce ? false : { opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.45, ease: "easeOut" }}
+            className="mt-4 flex snap-x gap-3 overflow-x-auto pb-3 [scrollbar-width:none] lg:absolute lg:left-[38.2%] lg:top-[65.8%] lg:z-10 lg:mt-0 lg:grid lg:w-[52.2%] lg:grid-cols-4 lg:gap-[0.84cqw] lg:overflow-visible lg:pb-0 [&::-webkit-scrollbar]:hidden"
+          >
+            {visible.map(({ v, i }, k) => (
+              <Thumb key={v.id + i} video={v} index={k} onSelect={() => select(i)} />
+            ))}
+          </motion.div>
+
+          {/* arrows + dots */}
+          {pages > 1 && (
+            <div className="mt-2 flex items-center justify-center gap-5 lg:contents">
+              <button
+                type="button"
+                onClick={() => go(-1)}
+                aria-label="Previous videos"
+                className={`${circleBtn} lg:absolute lg:left-[34.5%] lg:top-[72.5%] lg:z-20`}
+              >
+                <ChevronLeft className="h-5 w-5 lg:h-[1.6cqw] lg:w-[1.6cqw]" />
+              </button>
+
+              <div className="flex items-center gap-2 lg:absolute lg:left-[63.1%] lg:top-[90.5%] lg:z-20 lg:-translate-x-1/2 lg:gap-[0.8cqw]">
+                {Array.from({ length: pages }).map((_, p) => (
+                  <button
+                    key={p}
+                    type="button"
+                    onClick={() => setPage(p)}
+                    aria-label={`Page ${p + 1}`}
+                    aria-current={p === safePage}
+                    className={`rounded-full transition-all ${
+                      p === safePage
+                        ? "h-3 w-3 bg-[#ff8a0c] lg:h-[1.15cqw] lg:w-[1.15cqw]"
+                        : "h-2.5 w-2.5 bg-[#a9c4f5] hover:bg-white lg:h-[0.85cqw] lg:w-[0.85cqw]"
+                    }`}
+                  />
+                ))}
               </div>
-            );
-          })}
 
-          {/* feet */}
-          <div aria-hidden className="absolute -bottom-0 left-0 h-3 w-6 rounded-b bg-[#0f1f4b] lg:w-9" />
-          <div aria-hidden className="absolute -bottom-0 right-0 h-3 w-6 rounded-b bg-[#0f1f4b] lg:w-9" />
+              <button
+                type="button"
+                onClick={() => go(1)}
+                aria-label="Next videos"
+                className={`${circleBtn} lg:absolute lg:left-[91.1%] lg:top-[75.1%] lg:z-20`}
+              >
+                <ChevronRight className="h-5 w-5 lg:h-[1.6cqw] lg:w-[1.6cqw]" />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>
