@@ -612,7 +612,7 @@ const closeQuote = useCallback(() => {
       </Section>
 
       {/* ================= GALLERY ================= */}
-      <Section
+      {/* <Section
         id="gallery"
         lead="Product"
         accent="Gallery"
@@ -631,7 +631,7 @@ const closeQuote = useCallback(() => {
             </button>
           ))}
         </div>
-      </Section>
+      </Section> */}
 
       {/* ================= SPECIFICATIONS ================= */}
       <Section
