@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, MotionConfig, motion, useInView } from "framer-motion";
 import {
   ArrowRight,
@@ -12,6 +12,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { industries as INDUSTRIES } from "@/data/content";
+import QuoteModal from "./QuoteModal";
 
 const STAT_ICONS = {
   briefcase: Briefcase,
@@ -32,17 +33,6 @@ const PERSPECTIVE = 1600;
 
 const EASE_OUT = [0.16, 1, 0.3, 1];
 
-/* ---------- glass-cube reveal (corner cards only) ----------
-   The four corner cards are covered by a wall of small mirror-glass cubes.
-   1. Cubes come from BEHIND the screen (deep in z, small, tumbling) and
-      lock together into a wall. No sideways sliding.
-   2. The card fades in underneath, visible through the glass.
-   3. Cubes flip away in a diagonal wave.
-   4. When the animation ends the whole cube layer is removed from the DOM,
-      so not a single cube is left on the page.
-   The other cards simply rise out of the background (also from depth). */
-
-// Glass: translucent white, blurred backdrop, bright rim, soft shadow
 const GLASS =
   "relative h-full w-full overflow-hidden rounded-[8px] border border-white/70 " +
   "bg-gradient-to-br from-white/60 via-white/15 to-white/5 backdrop-blur-[2px] " +
@@ -178,19 +168,10 @@ function CubeField({ show, delay, seed, size }) {
   );
 }
 
-/**
- * One bento card.
- * `step`  : order the cards start (0 = first).
- * `cubes` : true on the four corner cards. They get the glass-cube reveal.
- *           Other cards rise out of the background instead (from depth, no sliding).
- * `seed`  : changes the random scatter of the cubes.
- * `size`  : cube size in px.
- * The outer div never moves, so scroll detection stays reliable.
- */
+
 function Tile({ step, seed = 1, size = 44, cubes = false, gridInView, desktop, className = "", children }) {
   const ref = useRef(null);
   const selfInView = useInView(ref, { once: true, amount: 0.2 });
-  // Desktop: the whole grid plays as one wave. Mobile: each card on scroll.
   const show = desktop ? gridInView : selfInView;
   const delay = desktop ? step * STAGGER : 0;
 
@@ -203,8 +184,6 @@ function Tile({ step, seed = 1, size = 44, cubes = false, gridInView, desktop, c
     return () => clearTimeout(t);
   }, [cubes, show, delay]);
 
-  // cube tiles: the card fades in under the glass wall
-  // other tiles: the card itself rises from behind
   const hiddenCard = cubes
     ? { opacity: 0 }
     : { opacity: 0, scale: 0.8, z: -400, rotateX: 14 };
@@ -349,13 +328,7 @@ const label = "text-[0.65rem] font-semibold uppercase tracking-[0.18em] opacity-
 const heading = "text-xl font-bold uppercase leading-tight xl:text-2xl";
 const body = "text-[0.8rem] leading-relaxed opacity-75";
 
-/**
- * Category deck (the dark card).
- * - Prev / next buttons step through the store types in order.
- * - A progress line shows how far through the list you are.
- * - The category chips share ONE highlight that glides from chip to chip.
- * - Left / right arrow keys work while the card has focus.
- */
+
 function CategoryDeck({ industries, active, onSelect }) {
   const N = industries.length;
   const current = industries[active];
@@ -460,6 +433,14 @@ export default function Industries({
   const gridRef = useRef(null);
   const gridInView = useInView(gridRef, { once: true, amount: 0.25 });
   const desktop = useMediaQuery("(min-width: 1024px)");
+  const [quoteOpen, setQuoteOpen] = useState(false);
+  const openQuote = () => {
+    setMega(false);
+    setMenuOpen(false);
+    setQuoteOpen(true);
+  };
+
+  const closeQuote = useCallback(() => setQuoteOpen(false), []);
 
   const N = industries.length;
   if (!N) return null;
@@ -550,10 +531,14 @@ export default function Industries({
                     <p className={body}>
                       Every rack is shaped to hold, show and sell your products.
                     </p>
-                    <a href={CTA_HREF} className={`${label} group inline-flex items-center gap-2 !opacity-100`}>
-                      Get a quote
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                    </a>
+                    <button
+                               type="button"
+                               onClick={openQuote}
+                               className="btn-orange !py-3"
+                             >
+                               Get a Quote
+                               <ArrowRight className="h-4 w-4" />
+                             </button>
                   </div>
                 </Tile>
               </div>
@@ -578,6 +563,7 @@ export default function Industries({
           </div>
         </div>
       </section>
+       <QuoteModal open={quoteOpen} onClose={closeQuote} />
     </MotionConfig>
   );
 }
