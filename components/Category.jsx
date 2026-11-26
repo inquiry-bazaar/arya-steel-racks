@@ -1,21 +1,33 @@
 import Link from "next/link";
 import ProductCard from "@/components/ProductCard";
 import { catalogue, categoryList } from "@/data/products";
+import BgHeader from "./BgHeader";
 
 export default function Category({ category }) {
   const items = catalogue.filter((p) => p.category === category.name);
 
   return (
     <main>
-      <section className="bg-soft pb-16 pt-28">
+      <section className="bg-soft pb-16">
+            <BgHeader
+         title={category.name}
+         eyebrow="Need a bulk Order for this product"
+         accent="#f97316"
+         text="Display racks, counters, trolleys and baskets built for supermarkets, garment stores and retail shops. Pick a category or scroll through everything."
+         backgroundImage="/products_hero.webp"
+         breadcrumbs={[
+           { label: "Home", href: "/" },
+           { label: category.name , href : category.slug },
+         ]}
+       />
         <div className="section-pad">
-          <nav className="flex flex-wrap items-center gap-2 text-[13px] text-navy/60">
+          {/* <nav className="flex flex-wrap items-center gap-2 text-[13px] text-navy/60">
             <Link href="/" className="hover:text-brand">Home</Link>
             <span>/</span>
             <Link href="/products" className="hover:text-brand">Products</Link>
             <span>/</span>
             <span className="font-semibold text-navy">{category.name}</span>
-          </nav>
+          </nav> */}
           <h1 className="mt-4 text-[34px] font-extrabold tracking-tight sm:text-[40px]">
             <span className="text-brand">{category.name}</span>
           </h1>

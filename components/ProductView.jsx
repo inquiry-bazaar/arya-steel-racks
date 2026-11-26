@@ -43,6 +43,7 @@ import {
 import MediaSlot from "./MediaSlot";
 import VideoModal from "./VideoModal";
 import WhatsAppIcon from "./WhatsAppIcon";
+import BgHeader from "./BgHeader";
 
 const BLUE = "#1f5fd6";
 const CARD = "rounded-2xl border border-slate-200/70 bg-white shadow-sm";
@@ -261,7 +262,6 @@ function SideView({ shelves, depth }) {
   );
 }
 
-/* ---------------- main view ---------------- */
 
 export default function ProductView({ product, category, related, details, waNumber }) {
   const { sizes, colors, features, applications, specs, gallery, faqs } = details;
@@ -308,10 +308,21 @@ export default function ProductView({ product, category, related, details, waNum
 
   return (
     <div className="bg-soft pb-16">
-      {/* ================= HERO ================= */}
+       <BgHeader
+  title={product.title}
+  eyebrow="Need a bulk Order for this product"
+  accent="#f97316"
+  text="Display racks, counters, trolleys and baskets built for supermarkets, garment stores and retail shops. Pick a category or scroll through everything."
+  backgroundImage="/products_hero.webp"
+  breadcrumbs={[
+    { label: "Home", href: "/" },
+    { label: category.name , href : category.slug },
+    { label: product.title },     
+  ]}
+/>
       <section className="pb-10 pt-24">
         <div className="section-pad">
-          <nav className="flex flex-wrap items-center gap-1.5 text-sm text-navy/60">
+          {/* <nav className="flex flex-wrap items-center gap-1.5 text-sm text-navy/60">
             <Link href="/" className="hover:text-brand">Home</Link>
             <ChevronRight className="h-3.5 w-3.5" />
             <Link href="/products" className="hover:text-brand">Display Racks</Link>
@@ -319,7 +330,7 @@ export default function ProductView({ product, category, related, details, waNum
             <Link href={`/${category.slug}`} className="hover:text-brand">{category.name}</Link>
             <ChevronRight className="h-3.5 w-3.5" />
             <span className="font-semibold text-navy">{product.title}</span>
-          </nav>
+          </nav> */}
 
           <div className="mt-8 grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
             {/* ---- Gallery ---- */}
@@ -525,7 +536,6 @@ export default function ProductView({ product, category, related, details, waNum
         </div>
       </div>
 
-      {/* ================= OVERVIEW ================= */}
       <Section id="overview" lead="Product" accent="Overview">
         <div className="grid items-stretch gap-6 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
           {/* Image fills the card edge-to-edge, no dead padding */}
