@@ -281,7 +281,7 @@ export default function VideoVlogs() {
     "flex h-11 w-11 items-center justify-center rounded-full bg-white text-[#1f4fd8] shadow-[0_10px_22px_-6px_rgba(20,50,140,0.45)] transition-transform hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#1f4fd8] lg:h-[3cqw] lg:w-[3cqw]";
 
   return (
-    <section id="videos" className="relative w-full overflow-hidden bg-[#f5f8ff]">
+    <section id="videos" className="relative w-full overflow-hidden bg-[#f5f8ff] py-10">
       <div
         className="relative mx-auto w-full max-w-[1920px] pb-10 lg:aspect-[1672/790] lg:pb-0"
         style={{ containerType: "inline-size" }}
