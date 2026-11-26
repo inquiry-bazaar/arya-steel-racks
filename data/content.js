@@ -85,10 +85,10 @@ export const steps = [
 const count = (cat) => catalogue.filter((p) => p.category === cat).length;
 
 export const industries = [
-  { name: "Supermarkets & Grocery", image: "/images/industries/supermarket_ind.png", desc: "Gondola, wall and centre racks for every aisle.", cat: "Supermarket & Grocery" },
-  { name: "Garment & Apparel", image: "/images/industries/garments.png", desc: "Hanging stands, saree racks and nesting tables.", cat: "Garment & Apparel" },
-  { name: "Footwear, Beauty & Pharmacy", image: "/images/industries/pharmacy-medical-store-rack.png", desc: "Shoe, cosmetic and medicine racks.", cat: "Footwear, Beauty & Pharmacy" },
-  { name: "Electronics, Books & Gifts", image: "/images/industries/electronics.png", desc: "Display racks for electronics, books and gifts.", cat: "Electronics, Books & Gifts" },
+  { name: "Supermarkets & Grocery", image: "/images/industries/store_display_racks.webp", desc: "Gondola, wall and centre racks for every aisle.", cat: "Supermarket & Grocery" },
+  { name: "Garment & Apparel", image: "/images/industries/garments_o.png", desc: "Hanging stands, saree racks and nesting tables.", cat: "Garment & Apparel" },
+  { name: "Footwear, Beauty & Pharmacy", image: "/images/industries/multi.png", desc: "Shoe, cosmetic and medicine racks.", cat: "Footwear, Beauty & Pharmacy" },
+  { name: "Electronics, Books & Gifts", image: "/images/industries/elec.png", desc: "Display racks for electronics, books and gifts.", cat: "Electronics, Books & Gifts" },
   { name: "Fixtures & Accessories", image: "/images/industries/peg.png", desc: "Slatwall, pegboards and custom branded stands.", cat: "Fixtures & Accessories" },
   { name: "Counters, Trolleys & Baskets", image: "/images/industries/cash-checkout-counter.png", desc: "Checkout counters, trolleys and baskets.", cat: "Counters, Trolleys & Baskets" },
 ].map(({ cat, ...i }) => ({
@@ -105,9 +105,9 @@ export const testimonials = [
     name: "Vineet Mishra",
     place: "New Delhi",
     project: "Supermarket Display Rack",
-    rating: 5,
+    rating: 5, 
     gif: "/testimonials/guy-1.gif",
-    image: "https://unsplash.com/photos/2Vl1JZFmtOw/download?force=true&w=900",
+    image: "/images/industries/store_display_racks.webp",
     review: "Thank you Arya Display Rack, good behaviour and best material.",
     say: "Vineet from New Delhi gave our Supermarket Display Rack five stars and said: good behaviour and best material. Thank you, {name}!",
   },
@@ -137,7 +137,7 @@ export const testimonials = [
     project: "Wall Display Racks",
     rating: 5,
     gif: "/testimonials/guy-3.gif",
-    image: "https://unsplash.com/photos/Y-jRC9OF2ig/download?force=true&w=900",
+    image: "/images/products/wall-mounted-garment-rack.jpeg",
     review: "Rated 5 out of 5 for the Wall Display Racks.",
     say: "Santosh from Maharashtra rated our Wall Display Racks 5 out of 5. Thank you, {name}!",
   },

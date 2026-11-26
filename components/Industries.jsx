@@ -249,7 +249,7 @@ function Picture({ item, className = "" }) {
       draggable={false}
       onError={() => setFailedSrc(src)}
       className={`h-full w-full transition-transform duration-700 ease-out group-hover:scale-105 ${
-        fit === "cover" ? "object-cover" : "object-contain p-4"
+        fit === "cover" ? "object-cover" : "object-cover"
       } ${className}`}
     />
   );
@@ -304,7 +304,7 @@ function HeroCard({ item, dir }) {
           transition={{ duration: 0.6, ease: EASE_OUT }}
           className="absolute inset-0"
         >
-          <div className={cover ? "absolute inset-0" : "absolute inset-x-[4%] bottom-[30%] top-[3%]"}>
+          <div className={cover ? "absolute inset-0" : ""}>
             <Picture item={item} />
           </div>
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
@@ -559,7 +559,6 @@ const openQuote = () => setQuoteOpen(true);
                 <CategoryDeck industries={industries} active={active} onSelect={select} />
               </Tile>
 
-              {/* CORNER: bottom-right */}
               <Tile {...reveal} cubes step={2} seed={8} className="order-7 h-40 sm:h-52 lg:order-none lg:h-auto">
                 {imageCard(3)}
               </Tile>
