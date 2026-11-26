@@ -338,7 +338,7 @@ export default function VideoVlogs() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-b from-[#f02a1d] to-[#d4130c] px-7 py-4 text-base font-bold text-white shadow-[0_16px_28px_-10px_rgba(225,20,10,0.65)] transition-transform hover:-translate-y-0.5 lg:absolute lg:left-[6.3%] lg:top-[88.3%] lg:z-10 lg:h-[3.8cqw] lg:w-[21.8%] lg:gap-[0.9cqw] lg:px-0 lg:py-0 lg:text-[length:1.27cqw]"
-            style={{ marginTop: "12px" }}
+            style={{ marginTop: "22px" }}
           >
             <YtMarkWhite className="w-9 lg:w-[2.7cqw]" />
             Subscribe on YouTube
