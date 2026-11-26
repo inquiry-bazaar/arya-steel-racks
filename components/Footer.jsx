@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { navLinks } from "@/data/content";
+import { Logo } from "./Navbar";
 
 const categoryList = [
   { name: "Supermarket & Grocery", href: "/supermarket-and-grocery" },
@@ -82,11 +83,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
             {/* About */}
             <div className="max-w-[380px]">
-              <img
-                src="/logo-10%20(2).webp"
-                alt="Ryka Restroom Cubicles"
-                className="w-full max-w-[220px] h-auto mb-5"
-              />
+             <Logo/>
               <p className="text-[15px] leading-[29px] text-slate-200">
                 Ryka Restroom Cubicles combine visual appeal with everyday
                 functionality. Team Interior Solutions offers guaranteed
