@@ -394,11 +394,11 @@ const closeQuote = useCallback(() => {
                 {category.name}
               </span>
 
-              <h1 className="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+              <h1 className="mt-4 text-4xl font-bold tracking-tight text-navy sm:text-4xl">
                 {words.join(" ")} <span style={{ color: BLUE }}>{last}</span>
               </h1>
 
-              <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-navy/75">
+              <p className="mt-4 max-w-full text-[20px] leading-relaxed text-navy/75">
                 {product.desc}
               </p>
 
@@ -502,7 +502,7 @@ const closeQuote = useCallback(() => {
               </dl>
 
               {/* Feature chips */}
-              <ul className="mt-4 flex flex-wrap gap-2">
+              {/* <ul className="mt-4 flex flex-wrap gap-2">
                 {features.map((f) => {
                   const Icon = ICONS[f.icon] || Box;
                   return (
@@ -515,13 +515,12 @@ const closeQuote = useCallback(() => {
                     </li>
                   );
                 })}
-              </ul>
+              </ul> */}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ================= TAB BAR ================= */}
       <div className="sticky top-20 z-30 border-y border-slate-200/70 bg-white/90 py-2.5 backdrop-blur">
         <div className="section-pad">
           <div className="flex gap-1 overflow-x-auto">
@@ -563,7 +562,7 @@ const closeQuote = useCallback(() => {
             <p className="text-[15px] leading-relaxed text-navy/75">{details.overview}</p>
 
             {/* Quick facts strip from specs */}
-            <dl className="grid grid-cols-2 divide-slate-100 overflow-hidden rounded-2xl border border-slate-200/70 bg-white shadow-sm sm:grid-cols-4 sm:divide-x">
+            {/* <dl className="grid grid-cols-2 divide-slate-100 overflow-hidden rounded-2xl border border-slate-200/70 bg-white shadow-sm sm:grid-cols-4 sm:divide-x">
               {[
                 { icon: MoveVertical, label: "Height", value: specs.height },
                 { icon: MoveHorizontal, label: "Length", value: specs.length },
@@ -578,11 +577,11 @@ const closeQuote = useCallback(() => {
                   <dd className="truncate text-sm font-bold text-navy">{value}</dd>
                 </div>
               ))}
-            </dl>
+            </dl> */}
 
             <div>
-              <h3 className="mb-3 text-sm font-semibold text-navy">Key Highlights</h3>
-              <ul className="grid gap-3 sm:grid-cols-2">
+              <h3 className="mb-4 text-lg font-semibold text-navy">Key Highlights</h3>
+              <ul className="grid gap-4 sm:grid-cols-2 [&>li]:p-5 [&>li_*]:text-base [&>li_svg]:h-6 [&>li_svg]:w-6">
                 {features.map((f, i) => (
                   <FeatureItem
                     key={f.label}
