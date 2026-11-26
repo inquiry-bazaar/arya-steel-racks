@@ -19,8 +19,8 @@ import TopBar from "./TopBar";
 import QuoteModal from "./QuoteModal";
 import { FaWhatsapp } from "react-icons/fa";
 
-// Country code + number, digits only (no +, spaces or dashes)
-const WHATSAPP_NUMBER = "91XXXXXXXXXX"; // replace with your number
+
+const WHATSAPP_NUMBER = "+918587901795"; 
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
   "Hello Arya Display Rack, I would like to know more about your products."
 )}`;

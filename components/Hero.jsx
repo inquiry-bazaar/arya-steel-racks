@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Play, ShieldCheck, Users } from "lucide-react";
 import MediaSlot from "./MediaSlot";
-import VideoModal from "./VideoModal";
 import { media } from "@/data/content";
+import QuoteModal from "./QuoteModal";
 
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } } };
 const fadeUp = {
@@ -20,7 +20,14 @@ const SLANT = "polygon(33% 0, 100% 0, 100% 100%, 0 100%)";
 const SWOOSH = "polygon(40.5% 0, 27% 0, 0 92%, 0 103%)";
 
 export default function Hero() {
-  const [videoOpen, setVideoOpen] = useState(false);
+  const [quoteOpen, setQuoteOpen] = useState(false);
+  const openQuote = () => {
+    setMega(false);
+    setMenuOpen(false);
+    setQuoteOpen(true);
+  };
+
+  const closeQuote = useCallback(() => setQuoteOpen(false), []);
 
   return (
     <section
@@ -92,16 +99,17 @@ export default function Hero() {
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-9 flex flex-wrap items-center gap-6">
-            <a href="/products" className="btn-orange">
+            <a href="/products" className="btn-navy">
               Explore Our Products <ArrowRight className="h-4 w-4" />
             </a>
-            <button onClick={() => setVideoOpen(true)} className="group flex items-center gap-3 text-[14px] font-semibold">
-              <span className="relative flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-glass transition group-hover:scale-110">
-                <span className="absolute inset-0 animate-ping rounded-full bg-brand/20" />
-                <Play className="relative h-4 w-4 fill-navy" />
-              </span>
-              Watch Video
-            </button>
+ <button
+            type="button"
+            onClick={openQuote}
+            className="btn-orange !py-3"
+          >
+            Get a Quote
+            <ArrowRight className="h-4 w-4" />
+          </button>
           </motion.div>
         </motion.div>
       </div>
@@ -142,7 +150,7 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      <VideoModal open={videoOpen} onClose={() => setVideoOpen(false)} src={media.heroVideo} />
+     <QuoteModal open={quoteOpen} onClose={closeQuote} />
     </section>
   );
 }
