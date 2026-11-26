@@ -16,10 +16,11 @@ import {
 import { navLinks } from "@/data/content";
 import { catalogue, categoryList } from "@/data/products";
 import MediaSlot from "./MediaSlot";
+import TopBar from "./TopBar";
 
 export function Logo() {
   return (
-    <Link href="/" className="flex flex-col leading-none">
+    <Link href="/" className="flex flex-col leading-none p-6">
       <span className="flex items-center text-[26px] font-extrabold tracking-tight text-navy">
         Arya <span className="ml-1.5 text-brand">Display Rack</span>
 
@@ -52,9 +53,6 @@ export default function Navbar() {
     categoryList[0]?.slug || ""
   );
 
-  // ----------------------------------------
-  // Product route detection
-  // ----------------------------------------
 
   const isProductRoute = useMemo(() => {
     if (
@@ -79,17 +77,10 @@ export default function Navbar() {
     return isCategoryPage || isProductDetailPage;
   }, [pathname]);
 
-  // ----------------------------------------
-  // Active navigation link
-  // ----------------------------------------
-
   const isActive = (link) => {
     if (link.href === "/") {
       return pathname === "/";
     }
-
-    // Products dropdown stays active only
-    // on actual product/category routes.
     if (link.dropdown) {
       return (
         pathname === link.href ||
@@ -103,9 +94,6 @@ export default function Navbar() {
     );
   };
 
-  // ----------------------------------------
-  // Active category detection
-  // ----------------------------------------
 
   const isCategoryActive = (slug) => {
     return (
@@ -114,8 +102,6 @@ export default function Navbar() {
     );
   };
 
-  // Find category from current route.
-  // Also supports individual product detail pages.
   useEffect(() => {
     const matchedCategory = categoryList.find((category) =>
       isCategoryActive(category.slug)
@@ -143,9 +129,6 @@ export default function Navbar() {
     }
   }, [pathname]);
 
-  // ----------------------------------------
-  // Scroll behavior
-  // ----------------------------------------
 
   useEffect(() => {
     const onScroll = () => {
@@ -163,19 +146,12 @@ export default function Navbar() {
       window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // ----------------------------------------
-  // Close menus on route change
-  // ----------------------------------------
-
   useEffect(() => {
     setMega(false);
     setMenuOpen(false);
     setMobileProducts(false);
   }, [pathname]);
 
-  // ----------------------------------------
-  // Close mega menu on outside click
-  // ----------------------------------------
 
   useEffect(() => {
     if (!mega) return;
@@ -192,9 +168,6 @@ export default function Navbar() {
       document.removeEventListener("click", onClick);
   }, [mega]);
 
-  // ----------------------------------------
-  // Products for selected category
-  // ----------------------------------------
 
   const catProducts = useMemo(() => {
     const name = categoryList.find(
@@ -222,10 +195,19 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
+
+       <div
+        className={`grid transition-all duration-300 ${
+          scrolled ? "invisible grid-rows-[0fr]" : "visible grid-rows-[1fr]"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <TopBar />
+        </div>
+      </div>
       <div className="section-pad flex h-[84px] items-center justify-between">
         <Logo />
 
-        {/* ================= DESKTOP NAV ================= */}
 
         <nav className="hidden items-center gap-8 lg:flex">
           {navLinks.map((link) => {
@@ -271,7 +253,7 @@ export default function Navbar() {
         {/* Quote Button */}
 
         <Link
-          href="/#contact"
+          href="/contact"
           className="btn-orange hidden !py-3 lg:inline-flex"
         >
           Get a Quote
@@ -290,7 +272,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* ================= PRODUCT MEGA MENU ================= */}
 
       {mega && (
         <div className="absolute inset-x-0 top-full hidden px-4 pb-4 lg:block">
@@ -375,7 +356,6 @@ export default function Navbar() {
               </ul>
             </div>
 
-            {/* Products of Active Category */}
 
             <div className="flex min-h-0 flex-col">
               <div className="mb-3 flex items-center justify-between">
@@ -438,7 +418,6 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* ================= MOBILE MENU ================= */}
 
       {menuOpen && (
         <div className="max-h-[80vh] overflow-y-auto border-t bg-white px-6 pb-6 pt-3 lg:hidden">

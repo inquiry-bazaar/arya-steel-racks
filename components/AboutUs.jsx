@@ -5,7 +5,7 @@ import { animate, motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 
 const IMAGES = {
-  main: "/double_sided_racks.webp",
+  main: "/images/products/supermarket-display-rack_o.png",
   side: "/departmental_racks.webp",
 };
 

@@ -28,7 +28,18 @@ export const company = {
   ],
   qualityTests: ["Rust resistance", "Finishing", "Strength", "Smoothness"],
 };
-
+export const contact = {
+  name: "Arya Display Rack",
+  tagline: "Manufacturer of Supermarket Display Racks & Shopping Trolleys",
+  established: 2021,
+  nature: "Manufacturer, Factory / Wholesale",
+  ceo: "Sandeep Kumar",
+  address: "Ground Floor, Plot No-42, Block-B, Maharani Enclave, Hastsal, New Delhi - 110059, Delhi, India",
+  phone: "+91 7942647738",
+  phoneHref: "+917942647738",
+  email: "rvpariwar@yahoo.com",
+  gst: "07BTWPM5031P1ZV",
+};
 export const media = {
   heroImage: "/hero.webp",
   heroVideo: "/bg_main_enhanced_.mp4",

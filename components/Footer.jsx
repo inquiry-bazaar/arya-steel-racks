@@ -61,7 +61,7 @@ export default function Footer() {
   };
 
   return (
-<footer className="relative bg-[#1e4080] text-white overflow-hidden">
+<footer className="relative bg-gray-500 text-white overflow-hidden">
       {/* Main Footer */}
       <div className="relative">
         {/* Background Watermark (decorative) */}
@@ -84,7 +84,7 @@ export default function Footer() {
             {/* About */}
             <div className="max-w-[380px]">
              <Logo/>
-              <p className="text-[15px] leading-[29px] text-slate-200">
+              <p className="text-[15px] leading-[29px] text-slate-200 pl-2 pt-2">
                 Ryka Restroom Cubicles combine visual appeal with everyday
                 functionality. Team Interior Solutions offers guaranteed
                 customer satisfaction.

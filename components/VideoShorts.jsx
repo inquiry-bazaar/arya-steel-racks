@@ -15,10 +15,10 @@ import {
   Store,
 } from "lucide-react";
 
-const CHANNEL_URL = "https://www.youtube.com/@yourchannel";
+const CHANNEL_URL = "https://www.youtube.com/@aryaindustry1074";
 
 const RAW_VIDEOS = [
-  { title: "Heavy Duty Display Rack Installation", duration: "5:42", type: "vlog", url: "https://youtube.com/shorts/uLoB7KTVS3A?si=ckW4vTC_igLarO3G" },
+  { title: "Heavy Duty Display Rack Installation", duration: "5:42", type: "vlog", url: "https://youtu.be/gRpPgrPLnWI?si=aQ60yjJVfryiMtSO" },
   { title: "Gondola rack setup in 45 seconds", duration: "0:45", type: "short", url: "https://youtube.com/shorts/DTc5RKwwxOI?si=-FMKqDTLG--Dt-99" },
   { title: "Supermarket aisle layout walkthrough", duration: "2:36", type: "vlog", url: "https://youtube.com/shorts/JBAWity6n5k?si=lE2Lmjk1550EKJTU" },
   { title: "Pharmacy rack client setup", duration: "3:18", type: "vlog", url: "https://youtube.com/shorts/JU9kHiZmmz4?si=i0rJdfQcFY5CXg7e" },

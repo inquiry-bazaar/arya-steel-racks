@@ -97,7 +97,6 @@ export default function BgHeader({
         />
 
         <div className="section-pad relative z-10 flex items-center pb-12 pt-8 lg:min-h-[566px] lg:pb-16">
-          {/* Desktop slanted image */}
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
@@ -155,15 +154,6 @@ export default function BgHeader({
               </motion.nav>
             )}
 
-            {eyebrow && (
-              <motion.span
-                variants={fadeUp}
-                className="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-[15px] font-semibold text-navy shadow-sm"
-              >
-                <span aria-hidden="true" className="h-2.5 w-2.5 shrink-0 rounded-full bg-brand" style={accentBg} />
-                {eyebrow}
-              </motion.span>
-            )}
 
             <motion.h1
               variants={fadeUp}
@@ -183,6 +173,16 @@ export default function BgHeader({
                 {text}
               </motion.p>
             )}
+            
+            {/* {eyebrow && (
+              <motion.span
+                variants={fadeUp}
+                className="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-[15px] font-semibold text-navy shadow-sm mt-4"
+              >
+                <span aria-hidden="true" className="h-2.5 w-2.5 shrink-0 rounded-full bg-brand" style={accentBg} />
+                {eyebrow}
+              </motion.span>
+            )} */}
           </motion.div>
         </div>
 
