@@ -1,5 +1,3 @@
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { catalogue, categoryList } from "@/data/products";
 import { company } from "@/data/content";
 import { getProductDetails } from "@/data/product-source.mjs";

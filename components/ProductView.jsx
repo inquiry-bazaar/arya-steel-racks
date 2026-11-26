@@ -403,8 +403,7 @@ const closeQuote = useCallback(() => {
               </p>
 
               <div className="mt-8 space-y-6 border-t border-slate-200/70 pt-6">
-                {/* Sizes */}
-                <div>
+                {/* <div>
                   <p className="text-sm font-semibold text-navy">Available Sizes</p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {sizes.map((s, i) => (
@@ -425,7 +424,6 @@ const closeQuote = useCallback(() => {
                   </div>
                 </div>
 
-                {/* Colors */}
                 <div>
                   <p className="text-sm font-semibold text-navy">
                     Color Options
@@ -453,7 +451,7 @@ const closeQuote = useCallback(() => {
                       </button>
                     ))}
                   </div>
-                </div>
+                </div> */}
               </div>
 
               {/* CTAs */}
