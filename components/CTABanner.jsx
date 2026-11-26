@@ -119,7 +119,7 @@ export default function CTABanner({
           </div>
         </Reveal>
 
-        <div className="absolute right-6 hidden -translate-y-1/2 flex-col items-end gap-5 lg:flex xl:right-2">
+        <div className="absolute right-6 hidden -translate-y-1/2 flex-col items-end gap-5 lg:flex xl:right-2 mr-8">
           {ctaPills.map(({ icon: Icon, text, offset }) => (
             <div
               key={text}

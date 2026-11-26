@@ -5,6 +5,7 @@ import BgHeader from "@/components/BgHeader";
 import MissionVision from "@/components/Mission";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ContactSection from "@/components/ContactSection";
+import Map from "@/components/Map";
 
 export default function About() {
   return (
@@ -21,6 +22,7 @@ export default function About() {
   ]}
 />
   <ContactSection/>
+  <Map/>
       <CTABanner/>
     </main>
   );
