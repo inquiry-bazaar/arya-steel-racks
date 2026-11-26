@@ -1,10 +1,11 @@
 "use client";
+
+import { useCallback, useState } from "react";
 import {
   ArrowUpRight,
   BarChart3,
   Clock,
   HardHat,
-  Headphones,
   HeadphonesIcon,
   MessageCircle,
   Phone,
@@ -12,6 +13,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import QuoteModal from "@/components/QuoteModal";
 
 const CTA_BG = "/hero.webp";
 const contact = {
@@ -39,9 +41,11 @@ const ctaPills = [
 
 export default function CTABanner({
   name,
-  onQuote = () => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }),
   waHref = `https://wa.me/${contact.whatsapp.replace("+", "")}?text=${encodeURIComponent(contact.whatsappText)}`,
 }) {
+  const [quoteOpen, setQuoteOpen] = useState(false);
+  const closeQuote = useCallback(() => setQuoteOpen(false), []);
+
   return (
     <section className="relative isolate overflow-hidden bg-navy">
       <div
@@ -75,7 +79,7 @@ export default function CTABanner({
             <div className="mt-4 flex flex-wrap items-center gap-2.5">
               <button
                 type="button"
-                onClick={onQuote}
+                onClick={() => setQuoteOpen(true)}
                 className="inline-flex items-center gap-2 rounded-md bg-[#7f0b18] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition hover:bg-brand-dark"
               >
                 Request a Quote <ArrowUpRight className="h-4 w-4" />
@@ -129,6 +133,8 @@ export default function CTABanner({
           ))}
         </div>
       </div>
+
+      <QuoteModal open={quoteOpen} onClose={closeQuote} product={name} />
     </section>
   );
 }

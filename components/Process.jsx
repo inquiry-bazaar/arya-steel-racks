@@ -228,7 +228,7 @@ function StepRow({ step, index, isLast }) {
   const ghostY = useTransform(p, [0, 1], [80, -40]);
   const ghostOpacity = useTransform(p, [0.1, 0.5], [0, 1]);
 
-  const lineScale = useTransform(p, [0.5, 0.7], [0, 1]);
+ const lineScale = useTransform(p, [0.2, 0.4], [0, 1]);
 
   return (
     <li
@@ -286,34 +286,34 @@ function StepRow({ step, index, isLast }) {
             </motion.span>
 
             <div className="relative">
-              <Reveal p={p} range={[0.3, 0.45]} x={-50} className="flex flex-wrap items-center gap-3">
-                <span className="eyebrow">
-                  <span className="h-[2px] w-5 bg-brand" /> Step {index + 1}
-                </span>
-              </Reveal>
+           <Reveal p={p} range={[0, 0.3]} x={-50} className="flex flex-wrap items-center gap-3">
+  <span className="eyebrow">
+    <span className="h-[2px] w-5 bg-brand" /> Step {index + 1}
+  </span>
+</Reveal>
 
-              <Reveal p={p} range={[0.35, 0.52]} x={-80} className="mt-3">
-                <h3 className="text-3xl font-extrabold leading-tight tracking-tight lg:text-4xl">
-                  {step.title}
-                </h3>
-                <motion.div
-                  style={{ scaleX: lineScale, originX: 0 }}
-                  className="mt-3 h-1 w-24 rounded-full bg-brand"
-                />
-              </Reveal>
+<Reveal p={p} range={[0, 0.3]} x={-80} className="mt-3">
+  <h3 className="text-3xl font-extrabold leading-tight tracking-tight lg:text-4xl">
+    {step.title}
+  </h3>
+  <motion.div
+    style={{ scaleX: lineScale, originX: 0 }}
+    className="mt-3 h-1 w-24 rounded-full bg-brand"
+  />
+</Reveal>
 
-              {description && (
-                <Reveal p={p} range={[0.42, 0.6]} x={-60} className="mt-4">
-                  <p className="text-base leading-relaxed opacity-75">{description}</p>
-                </Reveal>
-              )}
+{description && (
+  <Reveal p={p} range={[0, 0.3]} x={-60} className="mt-4">
+    <p className="text-base leading-relaxed opacity-75">{description}</p>
+  </Reveal>
+)}
 
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 {points.map((pt, i) => (
                   <Reveal
                     key={pt}
                     p={p}
-                    range={[0.55 + i * 0.08, 0.72 + i * 0.08]}
+                   range={[0.3 + i * 0.08, 0.47 + i * 0.08]}
                     x={70}
                     className="flex items-start gap-3 rounded-2xl bg-white/70 p-3 shadow-sm"
                   >
@@ -344,7 +344,6 @@ function StepRow({ step, index, isLast }) {
 export default function Process() {
   return (
     <section id="process" className="bg-soft relative overflow-x-clip">
-      {/* full-width sticky header */}
       <div className="sticky top-0 z-30 w-full border-b border-navy/5 bg-soft backdrop-blur-md pt-20 pb-6">
         <div className="section-pad mx-auto w-full max-w-[1400px] py-5">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
