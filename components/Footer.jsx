@@ -61,7 +61,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-[#0a1f44] text-white overflow-hidden">
+<footer className="relative bg-[#1e4080] text-white overflow-hidden">
       {/* Main Footer */}
       <div className="relative">
         {/* Background Watermark (decorative) */}
