@@ -1,15 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { animate, motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
+import QuoteModal from "./QuoteModal";
 
 const IMAGES = {
   main: "/images/products/supermarket-display-rack_o.png",
   side: "/departmental_racks.webp",
 };
 
-const QUOTE_HREF = "#contact";
 const PROCESS_HREF = "#process";
 
 const POINTS = [
@@ -27,7 +27,6 @@ const STATS = [
   { to: 25, suffix: "+", label: "States delivered to" },
   { text: "7 to 10", label: "Days typical delivery" },
 ];
-
 
 function CountUp({ to, suffix = "" }) {
   const ref = useRef(null);
@@ -120,6 +119,8 @@ function Photo({ src, alt, className = "" }) {
 
 export default function AboutUs() {
   const reduce = useReducedMotion();
+  const [quoteOpen, setQuoteOpen] = useState(false);
+  const closeQuote = useCallback(() => setQuoteOpen(false), []);
 
   const fromLeft = (delay = 0) => ({
     initial: reduce ? false : { opacity: 0, x: -40 },
@@ -209,9 +210,13 @@ export default function AboutUs() {
             </ul>
 
             <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
-              <a href={QUOTE_HREF} className="btn-navy !py-3.5">
+              <button
+                type="button"
+                onClick={() => setQuoteOpen(true)}
+                className="btn-orange !py-3.5"
+              >
                 Get a free quote <ArrowRight className="h-4 w-4" />
-              </a>
+              </button>
               <a
                 href={PROCESS_HREF}
                 className="inline-flex items-center gap-2 text-sm font-bold text-[#0f1f4b] underline decoration-brand decoration-2 underline-offset-[6px] transition-colors hover:text-brand"
@@ -248,6 +253,8 @@ export default function AboutUs() {
           </dl>
         </motion.div>
       </div>
+
+      <QuoteModal open={quoteOpen} onClose={closeQuote} />
     </section>
   );
 }

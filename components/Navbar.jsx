@@ -1,7 +1,6 @@
-
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
@@ -10,13 +9,21 @@ import {
   ChevronDown,
   LayoutGrid,
   Menu,
+  MessageCircle,
   X,
 } from "lucide-react";
-
 import { navLinks } from "@/data/content";
 import { catalogue, categoryList } from "@/data/products";
 import MediaSlot from "./MediaSlot";
 import TopBar from "./TopBar";
+import QuoteModal from "./QuoteModal";
+import { FaWhatsapp } from "react-icons/fa";
+
+// Country code + number, digits only (no +, spaces or dashes)
+const WHATSAPP_NUMBER = "91XXXXXXXXXX"; // replace with your number
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+  "Hello Arya Display Rack, I would like to know more about your products."
+)}`;
 
 export function Logo() {
   return (
@@ -49,16 +56,19 @@ export default function Navbar() {
   const [mobileProducts, setMobileProducts] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mega, setMega] = useState(false);
-  const [activeCat, setActiveCat] = useState(
-    categoryList[0]?.slug || ""
-  );
+  const [quoteOpen, setQuoteOpen] = useState(false);
+  const [activeCat, setActiveCat] = useState(categoryList[0]?.slug || "");
 
+  const openQuote = () => {
+    setMega(false);
+    setMenuOpen(false);
+    setQuoteOpen(true);
+  };
+
+  const closeQuote = useCallback(() => setQuoteOpen(false), []);
 
   const isProductRoute = useMemo(() => {
-    if (
-      pathname === "/products" ||
-      pathname.startsWith("/products/")
-    ) {
+    if (pathname === "/products" || pathname.startsWith("/products/")) {
       return true;
     }
 
@@ -81,25 +91,16 @@ export default function Navbar() {
     if (link.href === "/") {
       return pathname === "/";
     }
+
     if (link.dropdown) {
-      return (
-        pathname === link.href ||
-        isProductRoute
-      );
+      return pathname === link.href || isProductRoute;
     }
 
-    return (
-      pathname === link.href ||
-      pathname.startsWith(`${link.href}/`)
-    );
+    return pathname === link.href || pathname.startsWith(`${link.href}/`);
   };
 
-
   const isCategoryActive = (slug) => {
-    return (
-      pathname === `/${slug}` ||
-      pathname.startsWith(`/${slug}/`)
-    );
+    return pathname === `/${slug}` || pathname.startsWith(`/${slug}/`);
   };
 
   useEffect(() => {
@@ -129,7 +130,6 @@ export default function Navbar() {
     }
   }, [pathname]);
 
-
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 24);
@@ -138,20 +138,17 @@ export default function Navbar() {
 
     onScroll();
 
-    window.addEventListener("scroll", onScroll, {
-      passive: true,
-    });
+    window.addEventListener("scroll", onScroll, { passive: true });
 
-    return () =>
-      window.removeEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
     setMega(false);
     setMenuOpen(false);
     setMobileProducts(false);
+    setQuoteOpen(false);
   }, [pathname]);
-
 
   useEffect(() => {
     if (!mega) return;
@@ -164,19 +161,15 @@ export default function Navbar() {
 
     document.addEventListener("click", onClick);
 
-    return () =>
-      document.removeEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
   }, [mega]);
-
 
   const catProducts = useMemo(() => {
     const name = categoryList.find(
       (category) => category.slug === activeCat
     )?.name;
 
-    return catalogue.filter(
-      (product) => product.category === name
-    );
+    return catalogue.filter((product) => product.category === name);
   }, [activeCat]);
 
   const activeCategory = categoryList.find(
@@ -195,8 +188,7 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-
-       <div
+      <div
         className={`grid transition-all duration-300 ${
           scrolled ? "invisible grid-rows-[0fr]" : "visible grid-rows-[1fr]"
         }`}
@@ -205,11 +197,11 @@ export default function Navbar() {
           <TopBar />
         </div>
       </div>
+
       <div className="section-pad flex h-[84px] items-center justify-between">
         <Logo />
 
-
-        <nav className="hidden items-center gap-8 lg:flex">
+        <nav className="hidden items-center gap-5 lg:flex xl:gap-8">
           {navLinks.map((link) => {
             const active = isActive(link);
 
@@ -220,9 +212,7 @@ export default function Navbar() {
                 onMouseEnter={() => setMega(!!link.dropdown)}
                 onFocus={() => setMega(!!link.dropdown)}
                 aria-current={active ? "page" : undefined}
-                aria-haspopup={
-                  link.dropdown ? "true" : undefined
-                }
+                aria-haspopup={link.dropdown ? "true" : undefined}
                 className={`relative flex items-center gap-1 text-[16.5px] font-semibold transition hover:text-brand ${
                   active || (link.dropdown && mega)
                     ? "text-brand"
@@ -250,19 +240,31 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Quote Button */}
+        {/* WhatsApp + Quote Buttons */}
+        <div className="hidden items-center gap-3 lg:flex">
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-bold text-[#073b1c] transition hover:bg-[#1ebe5a]"
+          >
+            <FaWhatsapp className="h-4 w-4 text-white" />
+            WhatsApp
+          </a>
 
-        <Link
-          href="/contact"
-          className="btn-orange hidden !py-3 lg:inline-flex"
-        >
-          Get a Quote
-          <ArrowRight className="h-4 w-4" />
-        </Link>
+          <button
+            type="button"
+            onClick={openQuote}
+            className="btn-orange !py-3"
+          >
+            Get a Quote
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
 
         {/* Mobile Menu Toggle */}
-
         <button
+          type="button"
           className="lg:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
@@ -272,13 +274,11 @@ export default function Navbar() {
         </button>
       </div>
 
-
+      {/* Mega Menu */}
       {mega && (
         <div className="absolute inset-x-0 top-full hidden px-4 pb-4 lg:block">
           <div className="mx-auto grid max-h-[calc(100vh-120px)] max-w-[1300px] grid-cols-[360px_1fr] gap-6 overflow-hidden rounded-b-[28px] border-t border-[#e6ecf7] bg-white p-6 shadow-[0_24px_60px_rgba(20,40,90,0.18)]">
-
             {/* Categories List */}
-
             <div className="rounded-2xl border border-[#e6ecf7] bg-[#f6f8fc] p-4">
               <div className="flex items-center justify-between border-b border-[#e6ecf7] pb-3">
                 <span className="flex items-center gap-2 text-[13px] font-extrabold uppercase tracking-wider text-navy">
@@ -301,16 +301,10 @@ export default function Navbar() {
                     <li key={category.slug}>
                       <Link
                         href={`/${category.slug}`}
-                        onMouseEnter={() =>
-                          setActiveCat(category.slug)
-                        }
-                        onFocus={() =>
-                          setActiveCat(category.slug)
-                        }
+                        onMouseEnter={() => setActiveCat(category.slug)}
+                        onFocus={() => setActiveCat(category.slug)}
                         aria-current={
-                          isCategoryActive(category.slug)
-                            ? "page"
-                            : undefined
+                          isCategoryActive(category.slug) ? "page" : undefined
                         }
                         className={`flex items-center gap-3 rounded-xl p-2.5 transition ${
                           active
@@ -333,9 +327,7 @@ export default function Navbar() {
 
                           <span
                             className={`block text-[12px] ${
-                              active
-                                ? "text-white/70"
-                                : "text-navy/55"
+                              active ? "text-white/70" : "text-navy/55"
                             }`}
                           >
                             {category.count} Products
@@ -344,9 +336,7 @@ export default function Navbar() {
 
                         <ArrowRight
                           className={`h-4 w-4 shrink-0 ${
-                            active
-                              ? "text-brand"
-                              : "text-navy/40"
+                            active ? "text-brand" : "text-navy/40"
                           }`}
                         />
                       </Link>
@@ -356,7 +346,7 @@ export default function Navbar() {
               </ul>
             </div>
 
-
+            {/* Products List */}
             <div className="flex min-h-0 flex-col">
               <div className="mb-3 flex items-center justify-between">
                 <h3 className="text-[16px] font-extrabold text-navy">
@@ -371,10 +361,7 @@ export default function Navbar() {
                     View category
                   </Link>
 
-                  <Link
-                    href="/products"
-                    className="text-navy hover:text-brand"
-                  >
+                  <Link href="/products" className="text-navy hover:text-brand">
                     All products
                   </Link>
                 </div>
@@ -397,7 +384,7 @@ export default function Navbar() {
 
                       <span className="min-w-0">
                         <span className="block text-[11px] font-extrabold tracking-wider text-brand">
-                          {String(index + 1).padStart(2, "00")}
+                          {String(index + 1).padStart(2, "0")}
                         </span>
 
                         <span className="block text-[14px] font-semibold leading-snug text-navy">
@@ -418,7 +405,7 @@ export default function Navbar() {
         </div>
       )}
 
-
+      {/* Mobile Menu */}
       {menuOpen && (
         <div className="max-h-[80vh] overflow-y-auto border-t bg-white px-6 pb-6 pt-3 lg:hidden">
           {navLinks.map((link) => {
@@ -429,24 +416,19 @@ export default function Navbar() {
                 <div className="flex items-center justify-between">
                   <Link
                     href={link.href}
-                    aria-current={
-                      active ? "page" : undefined
-                    }
+                    aria-current={active ? "page" : undefined}
                     className={`block py-3 text-sm font-semibold transition ${
-                      active
-                        ? "text-brand"
-                        : "text-navy"
+                      active ? "text-brand" : "text-navy"
                     }`}
                   >
                     {link.label}
                   </Link>
 
                   <button
+                    type="button"
                     aria-label="Show categories"
                     aria-expanded={mobileProducts}
-                    onClick={() =>
-                      setMobileProducts(!mobileProducts)
-                    }
+                    onClick={() => setMobileProducts(!mobileProducts)}
                     className="p-2"
                   >
                     <ChevronDown
@@ -460,16 +442,13 @@ export default function Navbar() {
                 {mobileProducts && (
                   <div className="mb-2 ml-3 border-l-2 border-brand/30 pl-3">
                     {categoryList.map((category) => {
-                      const categoryActive =
-                        isCategoryActive(category.slug);
+                      const categoryActive = isCategoryActive(category.slug);
 
                       return (
                         <Link
                           key={category.slug}
                           href={`/${category.slug}`}
-                          aria-current={
-                            categoryActive ? "page" : undefined
-                          }
+                          aria-current={categoryActive ? "page" : undefined}
                           className={`block py-2 text-[13.5px] transition ${
                             categoryActive
                               ? "font-bold text-brand"
@@ -496,9 +475,7 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                aria-current={
-                  active ? "page" : undefined
-                }
+                aria-current={active ? "page" : undefined}
                 className={`block border-l-2 py-3 pl-3 text-sm font-semibold transition ${
                   active
                     ? "border-brand text-brand"
@@ -510,15 +487,28 @@ export default function Navbar() {
             );
           })}
 
-          <Link
-            href="/#contact"
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-bold text-[#073b1c]"
+          >
+            <FaWhatsapp size={28} aria-hidden="true" />
+            WhatsApp
+          </a>
+
+          <button
+            type="button"
+            onClick={openQuote}
             className="btn-orange mt-3 w-full justify-center"
           >
             Get a Quote
             <ArrowRight className="h-4 w-4" />
-          </Link>
+          </button>
         </div>
       )}
+
+      <QuoteModal open={quoteOpen} onClose={closeQuote} />
     </motion.header>
   );
 }

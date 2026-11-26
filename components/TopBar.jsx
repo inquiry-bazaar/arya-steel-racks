@@ -1,15 +1,6 @@
-export const company = {
-  name: "Arya Display Rack",
-  tagline: "Manufacturer of Supermarket Display Racks & Shopping Trolleys",
-  established: 2021,
-  nature: "Manufacturer, Factory / Wholesale",
-  ceo: "Sandeep Kumar",
-  address: "Ground Floor, Plot No-42, Block-B, Maharani Enclave, Hastsal, New Delhi - 110059, Delhi, India",
-  phone: "+91 7942647738",
-  phoneHref: "+917942647738",
-  email: "rvpariwar@yahoo.com",
-  gst: "07BTWPM5031P1ZV",
-};
+import { contact } from "@/data/content";
+import { Clock } from "lucide-react";
+
 
 
 const Phone = () => (
@@ -33,16 +24,20 @@ export default function TopBar() {
     <div className="relative z-[31] bg-[#cdcdcd] text-[0.82rem] font-semibold text-ink max-[720px]:rounded-b-[14px] max-[720px]:text-[0.74rem]">
       <div className="flex min-h-9 items-center justify-between gap-4 px-11 py-1.5 max-[720px]:px-3">
         <div className="flex min-w-0 items-center gap-[26px] max-[720px]:w-full max-[720px]:justify-between max-[720px]:gap-2.5">
-          <a href={`tel:${company.phoneHref}`} className={linkCls}>
+          <a href={`tel:${contact.phoneHref}`} className={linkCls}>
             <Phone />
-            <span className={textCls}>{company.phone}</span>
+            <span className={textCls}>{contact.phone}</span>
           </a>
-          <a href={`mailto:${company.email}`} className={linkCls}>
+          <a href={`mailto:${contact.email}`} className={linkCls}>
             <Mail />
-            <span className={textCls}>{company.email}</span>
+            <span className={textCls}>{contact.email}</span>
+          </a>
+          <a className={linkCls}>
+            <Clock size={14}/>
+           <span className={textCls}>Mon–Sat, 9:30 am – 7 pm</span> 
           </a>
         </div>
-        <span className="whitespace-nowrap max-[720px]:hidden">GSTIN: {company.gst}</span>
+        <span className="whitespace-nowrap max-[720px]:hidden">GSTIN: {contact.gst}</span>
       </div>
     </div>
   );

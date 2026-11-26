@@ -46,7 +46,7 @@ export default function ProductCatalog() {
         </div>
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <Link href={`/${category.slug}`} className="btn-navy !py-3">
+          <Link href={`/${category.slug}`} className="btn-orange !py-3">
             {items.length > SHOWN ? `View All ${items.length} in ${category.name}` : `View ${category.name}`}
             <ArrowRight className="h-4 w-4" />
           </Link>

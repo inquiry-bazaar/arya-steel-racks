@@ -59,7 +59,7 @@ export default function Products() {
           <p className="mt-5 max-w-[330px] text-[14.5px] leading-relaxed text-navy/80">
             A few of our best-selling racks, counters and trolleys. Tap a product for details, or browse the full range.
           </p>
-          <Link href="/products" className="btn-navy mt-7 !py-3">
+          <Link href="/products" className="btn-orange mt-7 !py-3">
             View All Products <ArrowRight className="h-4 w-4" />
           </Link>
         </motion.div>
