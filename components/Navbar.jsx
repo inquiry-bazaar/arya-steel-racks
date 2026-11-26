@@ -248,7 +248,7 @@ export default function Navbar() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-3 text-sm font-bold text-[#073b1c] transition hover:bg-[#1ebe5a]"
           >
-            <FaWhatsapp className="h-4 w-4 text-white" />
+            <FaWhatsapp className="h-6 w-6 text-white" />
             WhatsApp
           </a>
 
