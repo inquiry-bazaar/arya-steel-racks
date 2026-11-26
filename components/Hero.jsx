@@ -92,7 +92,7 @@ export default function Hero() {
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-9 flex flex-wrap items-center gap-6">
-            <a href="#products" className="btn-orange">
+            <a href="/products" className="btn-orange">
               Explore Our Products <ArrowRight className="h-4 w-4" />
             </a>
             <button onClick={() => setVideoOpen(true)} className="group flex items-center gap-3 text-[14px] font-semibold">

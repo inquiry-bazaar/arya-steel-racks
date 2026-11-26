@@ -40,8 +40,8 @@ export const media = {
 export const navLinks = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products", dropdown: true },
-  { label: "About Us", href: "/#why" },
-  { label: "Contact Us", href: "/#contact" },
+  { label: "About Us", href: "/about" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 const FEATURED = [

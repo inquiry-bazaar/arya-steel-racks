@@ -20,43 +20,43 @@ const icons = { gem: Gem, settings: Settings, zap: Zap, headset: Headset };
 
 const SHAPE = "28px 120px 28px 120px";
 const EASE = [0.22, 1, 0.36, 1];
-const VIEW = { once: true, amount: 0.25 };
+const VIEW = { once: true, amount: 0.1, margin: "0px 0px -40px 0px" };
 
-const stagger = (gap = 0.12, delay = 0) => ({
+const stagger = (gap = 0.06, delay = 0) => ({
   hidden: {},
   show: { transition: { staggerChildren: gap, delayChildren: delay } },
 });
 const rise = {
-  hidden: { opacity: 0, y: 44 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE } },
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE } },
 };
 const pop = {
-  hidden: { opacity: 0, scale: 0.4 },
-  show: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 170, damping: 13 } },
+  hidden: { opacity: 0, scale: 0.5 },
+  show: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 260, damping: 16 } },
 };
 const spinPop = {
-  hidden: { opacity: 0, scale: 0, rotate: -180 },
-  show: { opacity: 1, scale: 1, rotate: 0, transition: { type: "spring", stiffness: 90, damping: 12 } },
+  hidden: { opacity: 0, scale: 0, rotate: -120 },
+  show: { opacity: 1, scale: 1, rotate: 0, transition: { type: "spring", stiffness: 160, damping: 14 } },
 };
 const fromBottomRight = {
-  hidden: { opacity: 0, x: 90, y: 90, scale: 0.9 },
-  show: { opacity: 1, x: 0, y: 0, scale: 1, transition: { duration: 1, ease: EASE } },
+  hidden: { opacity: 0, x: 60, y: 60, scale: 0.95 },
+  show: { opacity: 1, x: 0, y: 0, scale: 1, transition: { duration: 0.55, ease: EASE } },
 };
 const fromTopLeft = {
-  hidden: { opacity: 0, x: -50, y: -50 },
-  show: { opacity: 1, x: 0, y: 0, transition: { duration: 1, ease: EASE } },
+  hidden: { opacity: 0, x: -30, y: -30 },
+  show: { opacity: 1, x: 0, y: 0, transition: { duration: 0.55, ease: EASE } },
 };
 const slideLeft = {
-  hidden: { opacity: 0, x: -70 },
-  show: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 80, damping: 14 } },
+  hidden: { opacity: 0, x: -50 },
+  show: { opacity: 1, x: 0, transition: { type: "spring", stiffness: 160, damping: 16 } },
 };
 const word = {
-  hidden: { opacity: 0, y: "0.6em", filter: "blur(10px)" },
-  show: { opacity: 1, y: "0em", filter: "blur(0px)", transition: { duration: 0.75, ease: EASE } },
+  hidden: { opacity: 0, y: "0.5em", filter: "blur(6px)" },
+  show: { opacity: 1, y: "0em", filter: "blur(0px)", transition: { duration: 0.4, ease: EASE } },
 };
 const cardV = {
-  hidden: { opacity: 0, y: 60, scale: 0.9 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: EASE } },
+  hidden: { opacity: 0, y: 36, scale: 0.95 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.45, ease: EASE } },
 };
 
 function Parallax({ mx, my, depth = 20, className = "", children }) {
@@ -89,12 +89,12 @@ function Counter({ to = 1000, suffix = "+" }) {
 
   useEffect(() => {
     if (!inView) return;
-    const controls = animate(0, to, {
-      duration: 2.2,
-      delay: 0.9,
-      ease: "easeOut",
-      onUpdate: (v) => setVal(Math.round(v)),
-    });
+  const controls = animate(0, to, {
+  duration: 1.2,
+  delay: 0.2,
+  ease: "easeOut",
+  onUpdate: (v) => setVal(Math.round(v)),
+});
     return () => controls.stop();
   }, [inView, to]);
 

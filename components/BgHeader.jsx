@@ -1,8 +1,62 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, MotionConfig } from "framer-motion";
 import { ChevronRight } from "lucide-react";
+import MediaSlot from "./MediaSlot";
+
+const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } } };
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+};
+
+const FALLBACK_IMG = "/hero.webp";
+const LEFT_ART = "/hero-left.jpg";
+
+const SLANT = "polygon(33% 0, 100% 0, 100% 100%, 0 100%)";
+const SWOOSH = "polygon(40.5% 0, 27% 0, 0 92%, 0 103%)";
+
+// Positions for the floating cards (first = top, second = bottom)
+const CARD_POSITIONS = [
+  "right-3 top-4 lg:right-10 lg:top-[24%]",
+  "bottom-4 right-3 lg:bottom-[18%] lg:right-10",
+];
+
+// Keeps the highlighted words where they sit in the title
+function splitTitle(title, highlight) {
+  const clean = title.trim();
+
+  if (highlight) {
+    const start = clean.indexOf(highlight);
+    if (start === -1) return [`${clean} `, highlight, ""];
+    return [clean.slice(0, start), highlight, clean.slice(start + highlight.length)];
+  }
+
+  const words = clean.split(/\s+/);
+  if (words.length < 2) return [clean, "", ""];
+  const last = words.pop();
+  return [`${words.join(" ")} `, last, ""];
+}
+
+function FloatingCard({ card, index }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: index === 0 ? -20 : 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 1 + index * 0.2 }}
+      className={`absolute z-20 ${CARD_POSITIONS[index]}`}
+    >
+      <div className="glass-card flex animate-float items-center gap-3 px-4 py-2.5 motion-reduce:animate-none lg:px-5 lg:py-3">
+        {card.icon}
+        <div className="leading-tight">
+          <p className="text-[17px] font-extrabold text-navy lg:text-[19px]">{card.title}</p>
+          {card.subtitle && <p className="text-[13px] font-medium lg:text-[14px] text-navy/70">{card.subtitle}</p>}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function BgHeader({
   title = "",
@@ -11,137 +65,137 @@ export default function BgHeader({
   eyebrow,
   highlight,
   accent,
-  breadcrumbs = [], // [{ label: "Home", href: "/" }, { label: "Products" }]
+  breadcrumbs = [],
+  cards = [], 
 }) {
-  const words = title.trim().split(" ");
-  const accentText = highlight ?? (words.length > 1 ? words.pop() : "");
-  const mainText = highlight ? title.replace(highlight, "").trim() : words.join(" ");
+  const [before, accentText, after] = splitTitle(title, highlight);
+  const image = backgroundImage || FALLBACK_IMG;
+  const accentColor = accent ? { color: accent } : undefined;
+  const accentBg = accent ? { backgroundColor: accent } : undefined;
+  const floating = cards.slice(0, 2).map((card, i) => <FloatingCard key={i} card={card} index={i} />);
 
   return (
-    <section
-      className="relative isolate flex min-h-[437px] w-full items-center overflow-hidden bg-background py-10 md:min-h-[470px] md:py-0 md:aspect-auto md:h-[504px]"
-      style={accent ? { "--header-accent": accent } : undefined}
-    >
-      {/* Left faded background image (desktop) */}
-      <div
-        aria-hidden
-        className="absolute inset-y-0 left-0 z-0 hidden w-[42%] bg-cover bg-center opacity-25 grayscale [mask-image:linear-gradient(to_right,black_40%,transparent_100%)] md:block"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      />
+    <MotionConfig reducedMotion="user">
+      <section className="relative overflow-hidden bg-gradient-to-br from-white via-[#eef3fb] to-[#e3ebf8] pt-[84px]">
+        {/* Soft light panel */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-0 top-0 hidden h-full w-[48%] bg-gradient-to-r from-white/70 to-transparent lg:block"
+          style={{ clipPath: "polygon(0 0, 100% 0, 78% 100%, 0 100%)" }}
+        />
 
-      {/* Main background image with clip */}
-      <div
-        aria-hidden
-        className="absolute inset-0 z-[1] bg-cover bg-center md:[clip-path:polygon(65%_0,100%_0,100%_100%,39%_100%)]"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      />
+        {/* Left illustration */}
+        <img
+          src={LEFT_ART}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute left-0 top-0 hidden h-full w-[7.5%] object-cover object-left lg:block"
+          style={{
+            WebkitMaskImage: "linear-gradient(to right, #000 55%, transparent)",
+            maskImage: "linear-gradient(to right, #000 55%, transparent)",
+          }}
+        />
 
-      {/* Mobile overlay */}
-      <div aria-hidden className="absolute inset-0 z-[2] bg-background/85 md:hidden" />
-
-      {/* Accent slash */}
-      <div
-        aria-hidden
-        className="absolute inset-0 z-[3] hidden bg-[var(--header-accent,var(--primary))] md:block [clip-path:polygon(57%_0,62%_0,49%_63%,45.5%_63%)]"
-      />
-
-      {/* Decorative dots */}
-      <div
-        aria-hidden
-        className="absolute left-[53%] top-[8%] z-[3] hidden h-16 w-16 text-muted-foreground opacity-40 [background-image:radial-gradient(currentColor_1.2px,transparent_1.5px)] [background-size:12px_12px] md:block"
-      />
-      <div
-        aria-hidden
-        className="absolute bottom-[10%] left-[10%] z-[3] hidden h-14 w-14 text-muted-foreground opacity-30 [background-image:radial-gradient(currentColor_1px,transparent_1.3px)] [background-size:12px_12px] md:block"
-      />
-
-      {/* Content */}
-      <div className="relative z-[4] w-full px-6 md:pl-[6%] md:pr-8">
-        <div className="max-w-[560px]">
-
-          {/* ========== PAGE NAVIGATION / BREADCRUMBS ========== */}
-          {breadcrumbs.length > 0 && (
-            <motion.nav
-              aria-label="Breadcrumb"
-              className="mb-4 flex flex-wrap items-center gap-1.5 text-[13px] font-medium"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45 }}
-            >
-              {breadcrumbs.map((item, i) => {
-                const isLast = i === breadcrumbs.length - 1;
-
-                return (
-                  <span key={i} className="flex items-center gap-1.5">
-                    {i > 0 && (
-                      <ChevronRight
-                        className="h-3.5 w-3.5 shrink-0 text-navy/40"
-                        aria-hidden="true"
-                      />
-                    )}
-
-                    {isLast || !item.href ? (
-                      <span className="font-semibold text-navy/90" aria-current="page">
-                        {item.label}
-                      </span>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        className="text-navy/55 transition hover:text-brand"
-                      >
-                        {item.label}
-                      </Link>
-                    )}
-                  </span>
-                );
-              })}
-            </motion.nav>
-          )}
-
-          {/* Eyebrow */}
-          {eyebrow && (
-            <motion.div
-              className="mb-2 flex items-center gap-4"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <span className="h-[3px] w-12 bg-[var(--header-accent,var(--primary))]" />
-              <span className="text-xs font-medium uppercase tracking-[0.3em] text-muted-foreground">
-                {eyebrow}
-              </span>
-            </motion.div>
-          )}
-
-          {/* Title */}
-          <motion.h1
-            className="mb-3 text-[length:clamp(2.25rem,5vw,3.75rem)] font-extrabold leading-[1.05] tracking-[-0.02em] text-foreground"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+        <div className="section-pad relative z-10 flex items-center pb-12 pt-8 lg:min-h-[566px] lg:pb-16">
+          {/* Desktop slanted image */}
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="absolute -top-[84px] bottom-0 hidden lg:block"
+            style={{ left: "max(51%, 600px)", right: "calc(50% - 50vw)" }}
           >
-            {mainText}
-            {accentText && (
-              <span className="text-[var(--header-accent,var(--primary))]">
-                {" "}
-                {accentText}
-              </span>
-            )}
-          </motion.h1>
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-b from-brand via-brand/70 to-brand/10"
+              style={{
+                clipPath: SWOOSH,
+                ...(accent && { backgroundImage: `linear-gradient(to bottom, ${accent}, transparent)` }),
+              }}
+            />
+            <div className="absolute inset-0 overflow-hidden" style={{ clipPath: SLANT }}>
+              <MediaSlot src={image} alt={title} className="absolute inset-0 h-full w-full object-cover" />
+              <div className="absolute inset-x-0 top-0 h-[16%] bg-gradient-to-b from-white/80 to-transparent" />
+            </div>
+            {floating}
+          </motion.div>
 
-          {/* Description text */}
-          {text && (
-            <motion.p
-              className="max-w-[460px] text-[length:clamp(1rem,1.6vw,1.2rem)] leading-[1.4] text-muted-foreground"
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+          {/* Content */}
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            animate="show"
+            className="relative z-10 w-full max-w-[640px] lg:max-w-[520px] xl:max-w-[600px]"
+          >
+            {breadcrumbs.length > 0 && (
+              <motion.nav variants={fadeUp} aria-label="Breadcrumb" className="mb-5">
+                <ol className="flex flex-wrap items-center gap-1.5 text-[15px] font-medium">
+                  {breadcrumbs.map((item, i) => {
+                    const isLast = i === breadcrumbs.length - 1;
+
+                    return (
+                      <li key={i} className="flex items-center gap-1.5">
+                        {i > 0 && <ChevronRight className="h-3.5 w-3.5 text-navy/40" aria-hidden="true" />}
+                        {isLast || !item.href ? (
+                          <span
+                            className="font-semibold text-navy/90"
+                            aria-current={isLast ? "page" : undefined}
+                          >
+                            {item.label}
+                          </span>
+                        ) : (
+                          <Link href={item.href} className="text-navy/55 transition hover:text-brand">
+                            {item.label}
+                          </Link>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ol>
+              </motion.nav>
+            )}
+
+            {eyebrow && (
+              <motion.span
+                variants={fadeUp}
+                className="inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-2 text-[15px] font-semibold text-navy shadow-sm"
+              >
+                <span aria-hidden="true" className="h-2.5 w-2.5 shrink-0 rounded-full bg-brand" style={accentBg} />
+                {eyebrow}
+              </motion.span>
+            )}
+
+            <motion.h1
+              variants={fadeUp}
+              className="mt-6 text-[44px] font-extrabold leading-[1.1] tracking-tight text-navy sm:text-[60px] lg:text-[62px] xl:text-[70px]"
             >
-              {text}
-            </motion.p>
-          )}
+              {before}
+              {accentText && (
+                <span className="text-brand" style={accentColor}>
+                  {accentText}
+                </span>
+              )}
+              {after}
+            </motion.h1>
+
+            {text && (
+              <motion.p variants={fadeUp} className="mt-6 max-w-[500px] text-[18px] leading-relaxed text-navy/80 lg:text-[20px]">
+                {text}
+              </motion.p>
+            )}
+          </motion.div>
         </div>
-      </div>
-    </section>
+
+        {/* Mobile / tablet image */}
+        <div className="section-pad relative pb-12 lg:hidden">
+          <div className="relative">
+            <div className="aspect-[4/3.1] overflow-hidden rounded-[36px] shadow-glass">
+              <MediaSlot src={image} alt={title} className="h-full w-full object-cover" />
+            </div>
+            {floating}
+          </div>
+        </div>
+      </section>
+    </MotionConfig>
   );
 }

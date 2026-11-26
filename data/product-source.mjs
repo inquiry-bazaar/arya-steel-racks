@@ -328,3 +328,4 @@ export function getProductDetails(product, company = {}) {
     faqs,
   };
 }
+

@@ -19,7 +19,6 @@ export default function ProductDetail({ product }) {
 
   return (
     <main>
-      <Navbar />
       <ProductView
         product={{
           slug: product.slug,
@@ -34,7 +33,6 @@ export default function ProductDetail({ product }) {
         details={details}
         waNumber={company.phoneHref.replace("+", "")}
       />
-      <Footer />
     </main>
   );
 }

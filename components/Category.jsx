@@ -1,6 +1,4 @@
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import { catalogue, categoryList } from "@/data/products";
 
@@ -9,7 +7,6 @@ export default function Category({ category }) {
 
   return (
     <main>
-      <Navbar />
       <section className="bg-soft pb-16 pt-28">
         <div className="section-pad">
           <nav className="flex flex-wrap items-center gap-2 text-[13px] text-navy/60">
@@ -50,7 +47,6 @@ export default function Category({ category }) {
           </div>
         </div>
       </section>
-      <Footer />
     </main>
   );
 }

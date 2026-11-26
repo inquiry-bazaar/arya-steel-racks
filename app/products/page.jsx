@@ -44,7 +44,7 @@ export default function ProductsPage() {
   <BgHeader
   title="Products"
   eyebrow="Let Us Know your Query"
-  accent="#f9c32f"
+  accent="#f97316"
   text="Display racks, counters, trolleys and baskets built for supermarkets, garment stores and retail shops. Pick a category or scroll through everything."
   backgroundImage="/products_hero.webp"
   breadcrumbs={[
@@ -53,10 +53,8 @@ export default function ProductsPage() {
   ]}
 />
 
-      {/* Sticky Category Slider */}
       <CategorySlider grouped={grouped} />
 
-      {/* Category Sections */}
       <section className="bg-soft pb-20 pt-4">
         <div className="section-pad">
           {grouped.map((c, i) => (
@@ -67,7 +65,6 @@ export default function ProductsPage() {
                 i === 0 ? "pt-8" : "pt-14"
               }`}
             >
-              {/* Category Heading */}
               <div className="mb-6 flex items-end justify-between gap-4 border-b border-[#dbe3f3] pb-4">
                 <div className="flex items-center gap-3">
                   <span
