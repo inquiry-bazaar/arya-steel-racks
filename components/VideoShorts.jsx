@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowRight,
@@ -36,6 +36,7 @@ const FEATURES = [
 ];
 
 const PER_PAGE = 4;
+const AUTO_SLIDE_MS = 4000; // change the slider speed here
 const THUMB_TILT = [-3, -1.2, 0.8, 2.5];
 const BLUE = "#1f4fd8";
 const NAVY = "#14214f";
@@ -130,8 +131,6 @@ function Media({ video }) {
     </>
   );
 }
-
-
 
 function MainCard({ video, playing, onPlay }) {
   return (
@@ -238,12 +237,40 @@ export default function VideoVlogs() {
   const [active, setActive] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [page, setPage] = useState(0);
+  const [hovered, setHovered] = useState(false);
+  const [touching, setTouching] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const paused = hovered || touching || focused;
 
   const others = VIDEOS.map((v, i) => ({ v, i })).filter((o) => o.i !== active);
   const pages = Math.max(1, Math.ceil(others.length / PER_PAGE));
   const safePage = Math.min(page, pages - 1);
   const visible = others.slice(safePage * PER_PAGE, safePage * PER_PAGE + PER_PAGE);
   const go = (d) => setPage((safePage + d + pages) % pages);
+
+  /* ---------- Auto slider ---------- */
+  useEffect(() => {
+    if (reduce || playing || paused || pages <= 1) return;
+
+    // restarts whenever the page changes, so a manual click gets a full delay
+    const timer = setTimeout(() => {
+      setPage((p) => (p + 1) % pages);
+    }, AUTO_SLIDE_MS);
+
+    return () => clearTimeout(timer);
+  }, [page, pages, playing, paused, reduce]);
+
+  const pauseHandlers = {
+    onPointerEnter: (e) => e.pointerType === "mouse" && setHovered(true),
+    onPointerLeave: (e) => e.pointerType === "mouse" && setHovered(false),
+    onTouchStart: () => setTouching(true),
+    onTouchEnd: () => setTouching(false),
+    onTouchCancel: () => setTouching(false),
+    // pause for keyboard focus only, not focus left behind by a mouse click
+    onFocus: (e) => e.target.matches(":focus-visible") && setFocused(true),
+    onBlur: (e) =>
+      !e.currentTarget.contains(e.relatedTarget) && setFocused(false),
+  };
 
   const select = (i) => {
     setActive(i);
@@ -259,8 +286,6 @@ export default function VideoVlogs() {
         className="relative mx-auto w-full max-w-[1920px] pb-10 lg:aspect-[1672/790] lg:pb-0"
         style={{ containerType: "inline-size" }}
       >
-       
-
         {/* ---------------- LEFT ---------------- */}
         <div className="relative z-10 space-y-5 px-6 pt-10 lg:contents lg:space-y-0">
           {/* badge */}
@@ -271,28 +296,27 @@ export default function VideoVlogs() {
             </span>
           </div>
 
-<h2
-  className="text-[30px] font-extrabold leading-[1.2] tracking-tight sm:text-4xl lg:absolute lg:left-[6.2%] lg:top-[19.2%] lg:z-10 lg:text-[length:3.3cqw] lg:leading-[1.18]"
-  style={{ color: NAVY }}
->
-  <span className="lg:whitespace-nowrap pb-3 lg:pb-[0.55cqw] block">
-    Watch, Learn &amp; Explore
-  </span>
-  <span className="lg:whitespace-nowrap">
-    with Our{" "}
-    <span className="relative inline-block" style={{ color: BLUE }}>
-      Video Vlogs
-    </span>
-  </span>
-</h2>
+          <h2
+            className="text-[30px] font-extrabold leading-[1.2] tracking-tight sm:text-4xl lg:absolute lg:left-[6.2%] lg:top-[19.2%] lg:z-10 lg:text-[length:3.3cqw] lg:leading-[1.18]"
+            style={{ color: NAVY }}
+          >
+            <span className="lg:whitespace-nowrap pb-3 lg:pb-[0.55cqw] block">
+              Watch, Learn &amp; Explore
+            </span>
+            <span className="lg:whitespace-nowrap">
+              with Our{" "}
+              <span className="relative inline-block" style={{ color: BLUE }}>
+                Video Vlogs
+              </span>
+            </span>
+          </h2>
+
           {/* sub copy */}
           <p className="max-w-md text-base leading-relaxed text-[#6b7290] lg:absolute lg:left-[6.2%] lg:top-[37.2%] lg:z-10 lg:w-[36%] lg:max-w-none lg:text-[length:1.43cqw] lg:leading-[1.38]">
             Product demos, installations, client setups and expert tips — all in one place.
           </p>
 
-       
-
-<ul className="space-y-4 pt-2 lg:absolute lg:left-[6.3%] lg:top-[50.6%] lg:z-10 lg:space-y-[1.1cqw] lg:pt-0">
+          <ul className="space-y-4 pt-2 lg:absolute lg:left-[6.3%] lg:top-[50.6%] lg:z-10 lg:space-y-[1.1cqw] lg:pt-0">
             {FEATURES.map(({ icon: Icon, label }) => (
               <li key={label} className="flex items-center gap-4 lg:gap-[1.2cqw]">
                 <span className="flex h-12 w-14 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_10px_22px_-10px_rgba(31,79,216,0.5)] lg:h-[3.75cqw] lg:w-[4.4cqw]">
@@ -314,8 +338,8 @@ export default function VideoVlogs() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-b from-[#f02a1d] to-[#d4130c] px-7 py-4 text-base font-bold text-white shadow-[0_16px_28px_-10px_rgba(225,20,10,0.65)] transition-transform hover:-translate-y-0.5 lg:absolute lg:left-[6.3%] lg:top-[88.3%] lg:z-10 lg:h-[3.8cqw] lg:w-[21.8%] lg:gap-[0.9cqw] lg:px-0 lg:py-0 lg:text-[length:1.27cqw]"
-            style={{marginTop: "12px"}}
-           >
+            style={{ marginTop: "12px" }}
+          >
             <YtMarkWhite className="w-9 lg:w-[2.7cqw]" />
             Subscribe on YouTube
             <ArrowRight className="h-5 w-5 lg:h-[1.4cqw] lg:w-[1.4cqw]" />
@@ -323,9 +347,10 @@ export default function VideoVlogs() {
         </div>
 
         {/* ---------------- RIGHT ---------------- */}
-        <div className="relative z-10 mx-4 mt-8 rounded-[2rem] bg-gradient-to-br from-[#1e4fc5] to-[#2d66e0] p-4 lg:contents">
-
-
+        <div
+          {...pauseHandlers}
+          className="relative z-10 mx-4 mt-8 rounded-[2rem] bg-gradient-to-br from-[#1e4fc5] to-[#2d66e0] p-4 lg:contents"
+        >
           {/* player */}
           <div className="lg:absolute lg:left-[43.8%] lg:top-[7.1%] lg:z-10 lg:h-[26cqw] lg:w-[46%] lg:[transform:perspective(1700px)_rotateZ(-3deg)_rotateY(-7deg)]">
             <motion.div
