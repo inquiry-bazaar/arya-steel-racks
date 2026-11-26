@@ -432,6 +432,7 @@ export default function Industries({
   const [dir, setDir] = useState(1);
   const gridRef = useRef(null);
   const gridInView = useInView(gridRef, { once: true, amount: 0.25 });
+    const [mega, setMega] = useState(false);
   const desktop = useMediaQuery("(min-width: 1024px)");
   const [quoteOpen, setQuoteOpen] = useState(false);
   const openQuote = () => {
@@ -479,17 +480,12 @@ export default function Industries({
             {subtitle && <p className="mt-2 text-sm opacity-70">{subtitle}</p>}
           </header>
 
-          {/* Mobile: 2-column grid. Desktop: top row + bottom row.
-              Corner cards (cubes) = top-left cream, top-right image, bottom-left image, bottom-right image. */}
           <div
             ref={gridRef}
             className="grid grid-cols-2 gap-3 lg:flex lg:flex-col"
           >
-            {/* ---------- TOP ROW ---------- */}
             <div className="contents lg:grid lg:h-[clamp(440px,38vw,540px)] lg:grid-cols-[173fr_410fr_170fr] lg:grid-rows-[minmax(0,1fr)] lg:gap-3">
-              {/* left column */}
               <div className="contents lg:grid lg:min-h-0 lg:grid-rows-[188fr_216fr] lg:gap-3">
-                {/* CORNER: top-left */}
                 <Tile {...reveal} cubes step={1} seed={1} className="order-2 col-span-2 lg:order-none lg:col-span-1">
                   <div className={creamCard}>
                     <p className={label}>{eyebrow}</p>

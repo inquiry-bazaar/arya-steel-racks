@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -44,6 +44,7 @@ import MediaSlot from "./MediaSlot";
 import VideoModal from "./VideoModal";
 import WhatsAppIcon from "./WhatsAppIcon";
 import BgHeader from "./BgHeader";
+import QuoteModal from "./QuoteModal";
 
 const BLUE = "#1f5fd6";
 const CARD = "rounded-2xl border border-slate-200/70 bg-white shadow-sm";
@@ -272,10 +273,19 @@ export default function ProductView({ product, category, related, details, waNum
   const [openFaq, setOpenFaq] = useState(0);
   const [tab, setTab] = useState("overview");
   const [video, setVideo] = useState(false);
-
+  const [mega, setMega] = useState(false);
   const words = product.title.split(" ");
   const last = words.pop();
+const [quoteOpen, setQuoteOpen] = useState(false);
 
+const openQuote = () => {
+  setMega(false);
+  setQuoteOpen(true);
+};
+
+const closeQuote = useCallback(() => {
+  setQuoteOpen(false);
+}, []);
   const wa = `https://wa.me/${waNumber}?text=${encodeURIComponent(
     `Hello, I would like a quote for ${product.title} (Size: ${sizes[size]}, Colour: ${colors[color].name}).`
   )}`;
@@ -448,14 +458,14 @@ export default function ProductView({ product, category, related, details, waNum
 
               {/* CTAs */}
               <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Link
-                  href="/#contact"
-                  className="inline-flex h-11 items-center gap-2 rounded-full bg-gradient-to-r from-orange-500 to-orange-400 px-6 text-sm font-semibold text-white shadow-sm transition hover:brightness-105"
-                >
-                  <FileText className="h-4 w-4" />
-                  Get a Quote
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+               <button
+                               type="button"
+                               onClick={openQuote}
+                               className="btn-orange !py-3"
+                             >
+                               Get a Quote
+                               <ArrowRight className="h-4 w-4" />
+                             </button>
                 <a
                   href={details.brochure}
                   download
@@ -734,7 +744,7 @@ export default function ProductView({ product, category, related, details, waNum
           })}
         </div>
       </Section>
-
+ <QuoteModal open={quoteOpen} onClose={closeQuote} />
       {details.video && (
         <VideoModal open={video} onClose={() => setVideo(false)} src={details.video} />
       )}
