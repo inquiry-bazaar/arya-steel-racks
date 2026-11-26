@@ -144,15 +144,19 @@ function CubeField({ show, delay, seed, size }) {
 
 function Tile({ step, seed = 1, size = 44, cubes = false, gridInView, desktop, className = "", children }) {
   const ref = useRef(null);
-  const selfInView = useInView(ref, { once: true, amount: 0.2 });
+  const selfInView = useInView(ref, { once: false, amount: 0.2 });   // was once: true
   const show = desktop ? gridInView : selfInView;
   const delay = desktop ? step * STAGGER : 0;
 
-  // once the cube animation is over, remove the cube layer completely
+  // remove the cube layer after the animation, and bring it back when the tile leaves view
   const [gone, setGone] = useState(false);
   useEffect(() => {
-    if (!cubes || !show) return;
-    const total = (delay + CUBE_DURATION + 0.8) * 1000; // 0.8s covers the per-cube wave offset
+    if (!cubes) return;
+    if (!show) {
+      setGone(false);
+      return;
+    }
+    const total = (delay + CUBE_DURATION + 0.8) * 1000;
     const t = setTimeout(() => setGone(true), total);
     return () => clearTimeout(t);
   }, [cubes, show, delay]);
@@ -404,10 +408,10 @@ export default function Industries({
   const [active, setActive] = useState(0);
   const [dir, setDir] = useState(1);
   const gridRef = useRef(null);
-  const gridInView = useInView(gridRef, { once: true, amount: 0.25 });
+const gridInView = useInView(gridRef, { once: false, amount: 0.25 });  
   const desktop = useMediaQuery("(min-width: 1024px)");
 const [quoteOpen, setQuoteOpen] = useState(false);
-const openQuote = () => setQuoteOpen(true);   // removed setMega / setMenuOpen
+const openQuote = () => setQuoteOpen(true); 
 
   const closeQuote = useCallback(() => setQuoteOpen(false), []);
 
