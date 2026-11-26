@@ -21,11 +21,6 @@ const STAT_ICONS = {
   chart: TrendingUp,
 };
 
-/* ---------- settings you may want to tweak ---------- */
-
-// "contain" = cut-out rack artwork (nothing gets cropped)
-// "cover"   = real photos that fill the card
-// A single item can override this with `fit: "cover"` in your data.
 const IMAGE_FIT = "contain";
 const CTA_HREF = "#contact";
 const STAGGER = 0.18; // seconds between each card starting
@@ -35,11 +30,10 @@ const EASE_OUT = [0.16, 1, 0.3, 1];
 
 const GLASS =
   "relative h-full w-full overflow-hidden rounded-[8px] border border-white/70 " +
-  "bg-gradient-to-br from-white/60 via-white/15 to-white/5 backdrop-blur-[2px] " +
+  "bg-gradient-to-br from-white/60 via-white/15 to-white/5 " +
   "shadow-[inset_0_1px_1px_rgba(255,255,255,0.95),inset_0_-8px_12px_rgba(255,255,255,0.18),0_10px_22px_rgba(20,30,50,0.20)]";
-
-// diagonal mirror streak across each cube
-const SHEEN =
+ 
+  const SHEEN =
   "pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,transparent_28%,rgba(255,255,255,0.65)_46%,rgba(255,255,255,0.08)_56%,transparent_70%)]";
 
 // deterministic pseudo-random number in [0, 1) so the layout is stable between renders
@@ -65,13 +59,11 @@ function useMediaQuery(query) {
 
 const CUBE_DURATION = 2.3; // seconds each cube's whole animation lasts
 
-/** The wall of glass cubes that covers one corner card. Never blocks clicks. */
+
 function CubeField({ show, delay, seed, size }) {
   const ref = useRef(null);
   const [grid, setGrid] = useState({ cols: 0, rows: 0 });
 
-  // Measure the card to decide how many cubes fit. Stops once the animation
-  // has started, so a window resize can't replay it.
   useEffect(() => {
     const el = ref.current;
     if (!el || show) return;
@@ -93,33 +85,29 @@ function CubeField({ show, delay, seed, size }) {
     const out = [];
     for (let r = 0; r < R; r++) {
       for (let c = 0; c < C; c++) {
+        const order = c + r;
+        const frac = order / (C + R);
+        const tOut = 0.5 + frac * 0.3; // when the flip-away starts (0..1 of total)
         out.push({
-          c,
-          r,
-          order: c + r,
-          frac: (c + r) / (C + R),
-          // start deep behind the screen, only a little off-centre
-          sx: (rnd(c, r, seed + 1) - 0.5) * 120,
-          sy: (rnd(c, r, seed + 2) - 0.5) * 120,
-          sz: -900 - rnd(c, r, seed + 3) * 700,
-          rx: (rnd(c, r, seed + 4) - 0.5) * 300,
-          ry: (rnd(c, r, seed + 5) - 0.5) * 300,
-          rz: (rnd(c, r, seed + 6) - 0.5) * 120,
+          key: `${r}-${c}`,
+          vars: {
+            "--sx": `${(rnd(c, r, seed + 1) - 0.5) * 120}px`,
+            "--sy": `${(rnd(c, r, seed + 2) - 0.5) * 120}px`,
+            "--sz": `${-900 - rnd(c, r, seed + 3) * 700}px`,
+            "--rx": `${(rnd(c, r, seed + 4) - 0.5) * 300}deg`,
+            "--ry": `${(rnd(c, r, seed + 5) - 0.5) * 300}deg`,
+            "--rz": `${(rnd(c, r, seed + 6) - 0.5) * 120}deg`,
+          },
+          start: delay + order * 0.018,
+          outAt: tOut * CUBE_DURATION,
+          outDur: (1 - tOut) * CUBE_DURATION,
         });
       }
     }
     return out;
-  }, [grid, seed]);
+  }, [grid, seed, delay]);
 
-  const hidden = (k) => ({
-    opacity: 0,
-    x: k.sx,
-    y: k.sy,
-    z: k.sz,
-    rotateX: k.rx,
-    rotateY: k.ry,
-    rotateZ: k.rz,
-  });
+  const inDur = CUBE_DURATION * 0.36;
 
   return (
     <div ref={ref} aria-hidden className="pointer-events-none absolute inset-0 z-10">
@@ -132,34 +120,19 @@ function CubeField({ show, delay, seed, size }) {
           }}
         >
           {cells.map((k) => (
-            <div key={`${k.r}-${k.c}`} className="p-[1.5px]">
-              <motion.div
-                className={GLASS}
-                style={{ transformPerspective: 700 }}
-                initial={hidden(k)}
-                animate={
-                  show
-                    ? {
-                        opacity: [0, 1, 1, 0],
-                        x: [k.sx, 0, 0, 0],
-                        y: [k.sy, 0, 0, 0],
-                        z: [k.sz, 0, 0, 160],
-                        rotateX: [k.rx, 0, 0, -100],
-                        rotateY: [k.ry, 0, 0, 100],
-                        rotateZ: [k.rz, 0, 0, 0],
-                      }
-                    : hidden(k)
-                }
-                transition={{
-                  duration: CUBE_DURATION,
-                  delay: delay + k.order * 0.018,
-                  // flip-away starts later for cubes further down-right: a diagonal wave
-                  times: [0, 0.36, 0.5 + k.frac * 0.3, 1],
-                  ease: ["easeOut", "linear", "easeIn"],
+            <div key={k.key} className="p-[1.5px]">
+              <div
+                className={`cube ${GLASS}`}
+                style={{
+                  ...k.vars,
+                  animation: show
+                    ? `cubeIn ${inDur}s cubic-bezier(0,0,.58,1) ${k.start}s both, ` +
+                      `cubeOut ${k.outDur}s cubic-bezier(.42,0,1,1) ${k.start + k.outAt}s forwards`
+                    : "none",
                 }}
               >
                 <span className={SHEEN} />
-              </motion.div>
+              </div>
             </div>
           ))}
         </div>
@@ -432,14 +405,9 @@ export default function Industries({
   const [dir, setDir] = useState(1);
   const gridRef = useRef(null);
   const gridInView = useInView(gridRef, { once: true, amount: 0.25 });
-    const [mega, setMega] = useState(false);
   const desktop = useMediaQuery("(min-width: 1024px)");
-  const [quoteOpen, setQuoteOpen] = useState(false);
-  const openQuote = () => {
-    setMega(false);
-    setMenuOpen(false);
-    setQuoteOpen(true);
-  };
+const [quoteOpen, setQuoteOpen] = useState(false);
+const openQuote = () => setQuoteOpen(true);   // removed setMega / setMenuOpen
 
   const closeQuote = useCallback(() => setQuoteOpen(false), []);
 
@@ -530,7 +498,7 @@ export default function Industries({
                     <button
                                type="button"
                                onClick={openQuote}
-                               className="btn-orange !py-3"
+                               className="btn-orange !py-3 w-52"
                              >
                                Get a Quote
                                <ArrowRight className="h-4 w-4" />

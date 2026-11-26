@@ -83,3 +83,35 @@ body {
     }
   }
 }
+
+
+@keyframes cubeIn {
+  from {
+    opacity: 0;
+    transform: perspective(700px) translate3d(var(--sx), var(--sy), var(--sz))
+      rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(var(--rz));
+  }
+  to {
+    opacity: 1;
+    transform: perspective(700px) translate3d(0px, 0px, 0px)
+      rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+}
+
+@keyframes cubeOut {
+  from {
+    opacity: 1;
+    transform: perspective(700px) translate3d(0px, 0px, 0px)
+      rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  to {
+    opacity: 0;
+    transform: perspective(700px) translate3d(0px, 0px, 160px)
+      rotateX(-100deg) rotateY(100deg) rotateZ(0deg);
+  }
+}
+
+.cube {
+  opacity: 0;
+  will-change: transform, opacity;
+}
