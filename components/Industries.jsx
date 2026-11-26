@@ -30,9 +30,10 @@ const EASE_OUT = [0.16, 1, 0.3, 1];
 
 const GLASS =
   "relative h-full w-full overflow-hidden rounded-[8px] border border-white/70 " +
-  "bg-gradient-to-br from-white/60 via-white/15 to-white/5 " +
-  "shadow-[inset_0_1px_1px_rgba(255,255,255,0.95),inset_0_-8px_12px_rgba(255,255,255,0.18),0_10px_22px_rgba(20,30,50,0.20)]";
- 
+  "shadow-[inset_0_1px_1px_rgba(255,255,255,0.95),0_10px_22px_rgba(20,30,50,0.20)]";
+
+const GLOSS =
+  "pointer-events-none absolute inset-0 bg-gradient-to-br from-white/25 via-transparent to-transparent"; 
   const SHEEN =
   "pointer-events-none absolute inset-0 bg-[linear-gradient(115deg,transparent_28%,rgba(255,255,255,0.65)_46%,rgba(255,255,255,0.08)_56%,transparent_70%)]";
 
@@ -59,10 +60,24 @@ function useMediaQuery(query) {
 
 const CUBE_DURATION = 2.3; // seconds each cube's whole animation lasts
 
+// static, non-interactive copy of an ImageCard, used as the picture on the cubes
+function CardFace({ item }) {
+  if (!item) return <div className="absolute inset-0 bg-[#f1ebdf]" />; // cream cards have no image
+  return (
+    <div className="absolute inset-0 bg-gradient-to-br from-[#d8cdb8] to-[#a8987c] text-[#23221e]">
+      <span className="absolute inset-0 pb-8">
+        <Picture item={item} />
+      </span>
+      <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent px-4 pb-3 pt-8 text-left text-xs font-bold uppercase tracking-[0.12em] text-white">
+        {item.name}
+      </span>
+    </div>
+  );
+}
 
-function CubeField({ show, delay, seed, size }) {
+function CubeField({ show, delay, seed, size, item }) {
   const ref = useRef(null);
-  const [grid, setGrid] = useState({ cols: 0, rows: 0 });
+  const [grid, setGrid] = useState({ cols: 0, rows: 0, w: 0, h: 0 });
 
   useEffect(() => {
     const el = ref.current;
@@ -71,7 +86,11 @@ function CubeField({ show, delay, seed, size }) {
       const { width, height } = el.getBoundingClientRect();
       const cols = Math.max(2, Math.round(width / size));
       const rows = Math.max(2, Math.round(height / size));
-      setGrid((g) => (g.cols === cols && g.rows === rows ? g : { cols, rows }));
+      setGrid((g) =>
+        g.cols === cols && g.rows === rows && g.w === width && g.h === height
+          ? g
+          : { cols, rows, w: width, h: height }
+      );
     };
     measure();
     const ro = new ResizeObserver(measure);
@@ -87,9 +106,11 @@ function CubeField({ show, delay, seed, size }) {
       for (let c = 0; c < C; c++) {
         const order = c + r;
         const frac = order / (C + R);
-        const tOut = 0.5 + frac * 0.3; // when the flip-away starts (0..1 of total)
+        const tOut = 0.5 + frac * 0.3;
         out.push({
           key: `${r}-${c}`,
+          c,
+          r,
           vars: {
             "--sx": `${(rnd(c, r, seed + 1) - 0.5) * 120}px`,
             "--sy": `${(rnd(c, r, seed + 2) - 0.5) * 120}px`,
@@ -108,6 +129,8 @@ function CubeField({ show, delay, seed, size }) {
   }, [grid, seed, delay]);
 
   const inDur = CUBE_DURATION * 0.36;
+  const cw = grid.cols ? grid.w / grid.cols : 0;
+  const ch = grid.rows ? grid.h / grid.rows : 0;
 
   return (
     <div ref={ref} aria-hidden className="pointer-events-none absolute inset-0 z-10">
@@ -131,6 +154,19 @@ function CubeField({ show, delay, seed, size }) {
                     : "none",
                 }}
               >
+                {/* full-size copy of the card, shifted so this cube shows only its own piece */}
+                <div
+                  className="absolute"
+                  style={{
+                    width: grid.w,
+                    height: grid.h,
+                    left: -(k.c * cw + 2.5),
+                    top: -(k.r * ch + 2.5),
+                  }}
+                >
+                  <CardFace item={item} />
+                </div>
+                <span className={GLOSS} />
                 <span className={SHEEN} />
               </div>
             </div>
@@ -142,7 +178,7 @@ function CubeField({ show, delay, seed, size }) {
 }
 
 
-function Tile({ step, seed = 1, size = 44, cubes = false, gridInView, desktop, className = "", children }) {
+function Tile({ step, seed = 1, size = 44, cubes = false, item, gridInView, desktop, className = "", children }) {
   const ref = useRef(null);
   const selfInView = useInView(ref, { once: false, amount: 0.2 });   // was once: true
   const show = desktop ? gridInView : selfInView;
@@ -188,7 +224,7 @@ function Tile({ step, seed = 1, size = 44, cubes = false, gridInView, desktop, c
       >
         {children}
       </motion.div>
-      {cubes && !gone && <CubeField show={show} delay={delay} seed={seed} size={size} />}
+{cubes && !gone && <CubeField show={show} delay={delay} seed={seed} size={size} item={item} />}
     </div>
   );
 }

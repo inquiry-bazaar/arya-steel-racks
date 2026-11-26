@@ -43,7 +43,7 @@ export const contact = {
 export const media = {
   heroImage: "/hero.webp",
   heroVideo: "/bg_main_enhanced_.mp4",
-  whyPoster: "/hero.webp",
+  whyPoster: "/bg_main_poster_.webp",
   whyVideo: "/bg_main_enhanced_.mp4",
   whyCorner: "/hero.webp",
 };

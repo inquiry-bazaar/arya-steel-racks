@@ -349,7 +349,7 @@ export default function WhyChooseUs() {
                 className="h-36 w-36 overflow-hidden rounded-full border-[6px] border-white bg-white shadow-glass sm:h-44 sm:w-44"
               >
                 <MediaSlot
-                  src={media.whyPoster}
+                  src={media.whyCorner}
                   alt="Display rack detail"
                   className="h-full w-full scale-[1.8] object-cover object-[78%_60%]"
                 />
