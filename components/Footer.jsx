@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import { navLinks } from "@/data/content";
 import { Logo } from "./Navbar";
 
@@ -22,11 +21,9 @@ const legal = [
 ];
 
 const socials = [
-  { name: "Facebook", href: "https://facebook.com/your-page", Icon: FaFacebookF },
-  { name: "Instagram", href: "https://instagram.com/your-page", Icon: FaInstagram },
-  { name: "LinkedIn", href: "https://linkedin.com/company/your-page", Icon: FaLinkedinIn },
-  { name: "YouTube", href: "https://youtube.com/@your-page", Icon: FaYoutube },
-  { name: "X", href: "https://x.com/your-page", Icon: FaXTwitter },
+  { name: "Facebook", href: "https://www.facebook.com/profile.php?viewas=100000686899395&id=61571410907364", Icon: FaFacebookF },
+  { name: "Instagram", href: "https://www.instagram.com/aryadisplay/?igsh=MTJlaDFhaGgxeXl4eQ%3D%3D#", Icon: FaInstagram },
+  { name: "YouTube", href: "https://www.youtube.com/@aryaindustry1074", Icon: FaYoutube },
 ];
 
 function FooterColumn({ title, links }) {
