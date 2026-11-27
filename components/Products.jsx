@@ -48,7 +48,7 @@ export default function Products() {
           transition={{ duration: 0.7 }}
         >
           <span className="eyebrow">
-            <span className="h-[2px] w-5 bg-brand" /> Our Products
+            <span className="h-[2px] w-5 bg-brand" /> Our Featured Products
           </span>
           <h2 className="mt-4 text-[38px] font-extrabold leading-[1.12] tracking-tight sm:text-[42px]">
             Explore Our <span className="text-brand">Display Rack</span> Range
