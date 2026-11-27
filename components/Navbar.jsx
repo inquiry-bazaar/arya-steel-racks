@@ -9,7 +9,6 @@ import {
   ChevronDown,
   LayoutGrid,
   Menu,
-  MessageCircle,
   X,
 } from "lucide-react";
 import { navLinks } from "@/data/content";
@@ -27,24 +26,28 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 
 export function Logo() {
   return (
-    <Link href="/" className="flex flex-col leading-none p-6">
-      <span className="flex items-center text-[26px] font-extrabold tracking-tight text-navy">
-        Arya <span className="ml-1.5 text-brand">Display Rack</span>
+    <Link
+      href="/"
+      className="flex shrink-0 items-center gap-3 py-2"
+      aria-label="Arya Insulation Pvt. Ltd. – Home"
+    >
+      <img
+        src="/logo.webp"
+        alt="ARYA"
+        width={60}
+        height={60}
+        className="h-[60px] w-auto shrink-0 object-contain"
+      />
 
-        <svg
-          viewBox="0 0 24 24"
-          className="ml-1 h-5 w-5 text-brand"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.4"
-        >
-          <path d="M4 20V6l8-3 8 3v14M4 12h16M4 16h16M12 3v17" />
-        </svg>
-      </span>
+      <div className="flex flex-col justify-center leading-tight">
+        <span className="whitespace-nowrap text-[22px] font-extrabold tracking-tight text-navy xl:text-[26px]">
+          Arya Insulation <span className="text-brand">Pvt. Ltd.</span>
+        </span>
 
-      <span className="mt-1 text-[9px] font-semibold uppercase tracking-[0.22em] text-navy/70">
-        Manufacturer · New Delhi
-      </span>
+        <span className="mt-1 whitespace-nowrap text-[9px] font-semibold uppercase tracking-[0.22em] text-navy/70">
+          Retail Display Rack · New Delhi
+        </span>
+      </div>
     </Link>
   );
 }
