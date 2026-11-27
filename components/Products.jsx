@@ -22,10 +22,8 @@ import { products } from "@/data/content";
 
 const MIN_SLIDES = 12;
 
-// small icon shown above each product title (cycled by product index)
 const ICONS = [ShoppingCart, Layers, Server, Package, Store];
 
-// wavy top edge for the bottom info panel (used as a CSS mask)
 const WAVE_MASK =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0 26 C22 -4 42 0 60 24 S90 52 100 30 L100 100 L0 100 Z' fill='black'/%3E%3C/svg%3E\")";
 
@@ -43,7 +41,6 @@ export default function Products() {
   return (
     <section id="products" className="bg-soft overflow-hidden py-20">
       <div className="section-pad grid items-center gap-10 lg:grid-cols-[360px_1fr]">
-        {/* left: heading */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}

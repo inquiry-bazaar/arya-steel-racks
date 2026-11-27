@@ -56,14 +56,8 @@ export const navLinks = [
 ];
 
 const FEATURED = [
-  "Supermarket Display Rack",
-  "Supermarket Center Rack (Island Rack)",
-  "Gondola Display Rack",
-  "Double Sided Display Rack",
-  "Grocery Store Rack",
+  "Double Sided Gondola Retail Display Rack",
   "Garment Display Rack",
-  "Pharmacy / Medical Store Rack",
-  "Shopping Trolley",
 ];
 
 export const products = FEATURED.map((t) => catalogue.find((p) => p.title === t)).filter(Boolean);

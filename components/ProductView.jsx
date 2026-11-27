@@ -102,7 +102,7 @@ const isLight = (hex) => {
   return (r * 299 + g * 587 + b * 114) / 1000 > 180;
 };
 
-function Pic({ g, pad = "p-0" }) {
+function Pic({ g, pad = "p-0", alt = "" }) {
   const c = CROPS[(g.crop || 0) % CROPS.length];
 
   return (
@@ -116,7 +116,7 @@ function Pic({ g, pad = "p-0" }) {
       >
         <MediaSlot
           src={g.src}
-          alt=""
+          alt={alt}
           className={`absolute inset-0 h-full w-full object-cover ${pad}`}
         />
       </div>
@@ -221,14 +221,14 @@ function FrontView({ shelves, height, length }) {
       {/* height */}
       <line x1="66" y1={top} x2="66" y2={bottom} stroke="#f97316" strokeWidth="1.5" markerStart="url(#arrF)" markerEnd="url(#arrF)" />
       <text x="2" y={(top + bottom) / 2 + 4} fontSize="11" fontWeight="700" fill="#f97316">
-        {height.length > 10 ? "Height" : height}
+        {height.length > 10 || height.startsWith("Custom") ? "Height" : height}
       </text>
 
       {/* length */}
       <line x1={left} y1="150" x2={mid - 30} y2="150" stroke="#f97316" strokeWidth="1.5" markerStart="url(#arrF)" />
       <line x1={mid + 30} y1="150" x2={right} y2="150" stroke="#f97316" strokeWidth="1.5" markerEnd="url(#arrF)" />
       <text x={mid} y="154" textAnchor="middle" fontSize="11" fontWeight="700" fill="#f97316">
-        {length.length > 14 ? "Length" : length}
+        {length.length > 14 || length.startsWith("Custom") ? "Length" : length}
       </text>
     </svg>
   );
@@ -257,7 +257,7 @@ function SideView({ shelves, depth }) {
       <line x1="22" y1="150" x2="44" y2="150" stroke="#f97316" strokeWidth="1.5" markerStart="url(#arrS)" />
       <line x1="96" y1="150" x2="116" y2="150" stroke="#f97316" strokeWidth="1.5" markerEnd="url(#arrS)" />
       <text x="69" y="154" textAnchor="middle" fontSize="11" fontWeight="700" fill="#f97316">
-        {depth.length > 12 ? "Depth" : depth}
+        {depth.length > 12 || depth.startsWith("Custom") ? "Depth" : depth}
       </text>
     </svg>
   );
@@ -308,7 +308,9 @@ const closeQuote = useCallback(() => {
     return () => io.disconnect();
   }, []);
 
-  const specRows = [
+  const specRows = details.specTable
+    ? details.specTable.map((r) => ({ icon: Check, ...r }))
+    : [
     { icon: MoveVertical, label: "Height", value: specs.height },
     { icon: MoveHorizontal, label: "Length", value: specs.length },
     { icon: Box, label: "Depth", value: specs.depth },
@@ -355,7 +357,7 @@ const closeQuote = useCallback(() => {
                     transition={{ duration: 0.2 }}
                     className="absolute inset-0"
                   >
-                    <Pic g={gallery[active]} pad="p-0" />
+                    <Pic g={gallery[active]} pad="p-0" alt={details.galleryAlts[active] || product.title} />
                   </motion.div>
                 </AnimatePresence>
 
@@ -382,7 +384,7 @@ const closeQuote = useCallback(() => {
                       active === i ? "border-[#1f5fd6]" : "border-slate-200 hover:border-slate-300"
                     }`}
                   >
-                    <Pic g={g} pad="p-0" />
+                    <Pic g={g} pad="p-0" alt={details.galleryAlts[i] || ""} />
                   </button>
                 ))}
               </div>
@@ -496,7 +498,7 @@ const closeQuote = useCallback(() => {
                       <Icon className="h-3.5 w-3.5 text-[#1f5fd6]" />
                       {label}
                     </dt>
-                    <dd className="truncate text-sm font-bold text-navy">{value}</dd>
+                    <dd className="text-sm font-bold text-navy">{value}</dd>
                   </div>
                 ))}
               </dl>
@@ -640,8 +642,8 @@ const closeQuote = useCallback(() => {
         accent="Specifications"
         blurb="Detailed dimensions and configuration for your store requirements."
       >
-        <div className="grid items-stretch gap-4 md:grid-cols-2">
-          <div className={`${CARD} flex items-end justify-center gap-6 p-6`}>
+        <div className="grid items-start gap-4 md:grid-cols-2">
+          <div className={`${CARD} flex h-[320px] items-center justify-center gap-6 p-6 md:sticky md:top-40 md:self-start`}>
             <FrontView shelves={specs.shelves} height={specs.height} length={specs.length} />
             <SideView shelves={specs.shelves} depth={specs.depth} />
           </div>
@@ -650,10 +652,10 @@ const closeQuote = useCallback(() => {
             {specRows.map(({ icon: Icon, label, value }) => (
               <div key={label} className="flex items-center justify-between gap-4 px-3 py-3.5">
                 <dt className="flex items-center gap-2.5 text-sm font-semibold text-navy">
-                  <Icon className="h-4 w-4 text-[#1f5fd6]" />
+                  <Icon className="h-4 w-4 shrink-0 text-[#1f5fd6]" />
                   {label}
                 </dt>
-                <dd className="text-right text-sm text-navy/80">{value}</dd>
+                <dd className="max-w-[60%] text-right text-sm text-navy/80">{value}</dd>
               </div>
             ))}
           </dl>
@@ -668,29 +670,38 @@ const closeQuote = useCallback(() => {
         blurb="Explore more display rack solutions for your retail space."
       >
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 xl:grid-cols-4">
-          {related.slice(0, 8).map((p) => (
-            <Link
-              key={p.slug}
-              href={`/${p.slug}`}
-              className={`${CARD} group flex flex-col overflow-hidden transition hover:-translate-y-0.5 hover:shadow-md`}
-            >
-              <div className="relative aspect-[4/3] bg-white">
-                <MediaSlot
-                  src={p.image}
-                  alt={p.title}
-                  className="absolute inset-0 h-full w-full object-contain p-4"
-                />
-              </div>
-              <div className="flex items-center justify-between gap-2 border-t border-slate-100 px-3.5 py-3">
-                <h3 className="line-clamp-2 text-sm font-semibold leading-snug text-navy">
-                  {p.title}
-                </h3>
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-orange-500 text-white transition group-hover:translate-x-0.5">
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </span>
-              </div>
-            </Link>
-          ))}
+          {related.slice(0, 8).map((p) => {
+            const Card = p.slug ? Link : "div";
+            return (
+              <Card
+                key={p.title}
+                {...(p.slug ? { href: `/${p.slug}` } : {})}
+                className={`${CARD} group flex flex-col overflow-hidden ${
+                  p.slug ? "transition hover:-translate-y-0.5 hover:shadow-md" : ""
+                }`}
+              >
+                {p.image && (
+                  <div className="relative aspect-[4/3] bg-white">
+                    <MediaSlot
+                      src={p.image}
+                      alt={p.title}
+                      className="absolute inset-0 h-full w-full object-contain p-4"
+                    />
+                  </div>
+                )}
+                <div className="mt-auto flex items-center justify-between gap-2 border-t border-slate-100 px-3.5 py-3">
+                  <h3 className="line-clamp-2 text-sm font-semibold leading-snug text-navy">
+                    {p.title}
+                  </h3>
+                  {p.slug && (
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-orange-500 text-white transition group-hover:translate-x-0.5">
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </span>
+                  )}
+                </div>
+              </Card>
+            );
+          })}
         </div>
       </Section>
 

@@ -5,15 +5,22 @@ import ProductView from "@/components/ProductView";
 
 export default function ProductDetail({ product }) {
   const category = categoryList.find((c) => c.name === product.category);
+  const details = getProductDetails(product, company);
 
   // same-category products first, then fill up from the rest of the catalogue
   const same = catalogue.filter((p) => p.category === product.category && p.slug !== product.slug);
   const others = catalogue.filter((p) => p.category !== product.category);
-  const related = [...same, ...others]
+  const automatic = [...same, ...others]
     .slice(0, Math.max(4, Math.min(8, same.length)))
     .map((p) => ({ slug: p.slug, title: p.title, image: p.image }));
 
-  const details = getProductDetails(product, company);
+  // a product's own related list wins; names with no product page yet get no link
+  const related = details.relatedProducts
+    ? details.relatedProducts.map((title) => {
+        const match = catalogue.find((p) => p.title === title);
+        return { slug: match?.slug || null, title, image: match?.image || null };
+      })
+    : automatic;
 
   return (
     <main>

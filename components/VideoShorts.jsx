@@ -19,12 +19,13 @@ const CHANNEL_URL = "https://www.youtube.com/@aryaindustry1074";
 
 const RAW_VIDEOS = [
   { title: "Heavy Duty Display Rack Installation", duration: "5:42", type: "vlog", url: "https://youtu.be/gRpPgrPLnWI?si=aQ60yjJVfryiMtSO" },
-  { title: "Gondola rack setup in 45 seconds", duration: "0:45", type: "short", url: "https://youtube.com/shorts/DTc5RKwwxOI?si=-FMKqDTLG--Dt-99" },
+  { title: "Gondola rack setup in 45 seconds", duration: "1:00", type: "short", url: "https://youtube.com/shorts/DTc5RKwwxOI?si=-FMKqDTLG--Dt-99" },
   { title: "Supermarket aisle layout walkthrough", duration: "2:36", type: "vlog", url: "https://youtube.com/shorts/JBAWity6n5k?si=lE2Lmjk1550EKJTU" },
   { title: "Pharmacy rack client setup", duration: "3:18", type: "vlog", url: "https://youtube.com/shorts/JU9kHiZmmz4?si=i0rJdfQcFY5CXg7e" },
   { title: "Quick load test on a shelf", duration: "0:59", type: "short", url: "https://youtube.com/shorts/arBo9VtUVQg?si=OetCP_XbZzkapI7m" },
   { title: "Inside our powder coating plant", duration: "4:12", type: "vlog", url: "https://youtube.com/shorts/tVao0XMXaXk?si=qr9uRvvPX6kCF5o8" },
   { title: "Wall rack assembly tips", duration: "1:05", type: "short", url: "https://youtube.com/shorts/HCP2mN-X844?si=pYqW90-bB8pL77Jh" },
+  { title: "Cash counter and billing rack ideas", duration: "3:50", type: "vlog", url: "https://youtube.com/shorts/2Mk3HhrILf8?si=Qf00ZqH8Z1O4zPnt" },
   { title: "Cash counter and billing rack ideas", duration: "3:50", type: "vlog", url: "https://youtube.com/shorts/2Mk3HhrILf8?si=Qf00ZqH8Z1O4zPnt" },
 ];
 
@@ -71,7 +72,6 @@ function YtMarkWhite({ className = "" }) {
   );
 }
 
-/* Warehouse rack illustration, used until the real YouTube thumbnail loads */
 function RackArt() {
   const levels = [112, 192, 272];
   const xs = [72, 110, 148, 190, 228, 270, 312, 350, 392, 430, 472, 510, 548, 586];
@@ -194,7 +194,6 @@ function MainCard({ video, playing, onPlay }) {
   );
 }
 
-/* ---------- Thumbnail ---------- */
 
 function Thumb({ video, index, onSelect }) {
   const short = video.type === "short";
@@ -286,7 +285,6 @@ export default function VideoVlogs() {
         className="relative mx-auto w-full max-w-[1920px] pb-10 lg:aspect-[1672/790] lg:pb-0"
         style={{ containerType: "inline-size" }}
       >
-        {/* ---------------- LEFT ---------------- */}
         <div className="relative z-10 space-y-5 px-6 pt-10 lg:contents lg:space-y-0">
           {/* badge */}
           <div className="flex items-center gap-3 lg:absolute lg:left-[6.4%] lg:top-[12.2%] lg:z-10 lg:gap-[0.7cqw]">

@@ -126,33 +126,41 @@ export default function BgHeader({
             animate="show"
             className="relative z-10 w-full max-w-[640px] lg:max-w-[520px] xl:max-w-[600px]"
           >
-            {breadcrumbs.length > 0 && (
-              <motion.nav variants={fadeUp} aria-label="Breadcrumb" className="mb-5">
-                <ol className="flex flex-wrap items-center gap-1.5 text-[15px] font-medium">
-                  {breadcrumbs.map((item, i) => {
-                    const isLast = i === breadcrumbs.length - 1;
+{breadcrumbs.length > 0 && (
+  <motion.nav variants={fadeUp} aria-label="Breadcrumb" className="mb-5 w-full min-w-0">
+    <ol className="flex w-full min-w-0 flex-nowrap items-center gap-1.5 text-[15px] font-medium leading-none">
+      {breadcrumbs.map((item, i) => {
+        const isLast = i === breadcrumbs.length - 1;
 
-                    return (
-                      <li key={i} className="flex items-center gap-1.5">
-                        {i > 0 && <ChevronRight className="h-3.5 w-3.5 text-navy/40" aria-hidden="true" />}
-                        {isLast || !item.href ? (
-                          <span
-                            className="font-semibold text-navy/90"
-                            aria-current={isLast ? "page" : undefined}
-                          >
-                            {item.label}
-                          </span>
-                        ) : (
-                          <Link href={item.href} className="text-navy/55 transition hover:text-brand">
-                            {item.label}
-                          </Link>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ol>
-              </motion.nav>
+        return (
+          <li
+            key={i}
+            className={`flex items-center gap-1.5 whitespace-nowrap ${
+              isLast ? "min-w-0" : "shrink-0"
+            }`}
+          >
+            {i > 0 && (
+              <ChevronRight className="h-3.5 w-3.5 shrink-0 text-navy/40" aria-hidden="true" />
             )}
+            {isLast || !item.href ? (
+              <span
+                className={`font-semibold text-navy/90 ${isLast ? "truncate py-1" : ""}`}
+                aria-current={isLast ? "page" : undefined}
+                title={item.label}
+              >
+                {item.label}
+              </span>
+            ) : (
+              <Link href={item.href} className="text-navy/55 transition hover:text-brand">
+                {item.label}
+              </Link>
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  </motion.nav>
+)}
 
 
             <motion.h1
