@@ -117,7 +117,7 @@ function Pic({ g, pad = "p-0", alt = "" }) {
         <MediaSlot
           src={g.src}
           alt={alt}
-          className={`absolute inset-0 h-full w-full object-cover ${pad}`}
+          className={`absolute inset-0 h-full w-full object-fill ${pad}`}
         />
       </div>
     </div>
@@ -153,9 +153,8 @@ function FeatureItem({ icon, label, index, fallback, span }) {
   const Icon = ICONS[icon] || fallback;
   return (
     <li
-      className={`${CARD} group relative flex items-center gap-3.5 overflow-hidden px-4 py-3.5 transition hover:border-orange-300 hover:shadow-md ${
-        span ? "sm:col-span-2" : ""
-      }`}
+      className={`${CARD} group relative flex items-center gap-3.5 overflow-hidden px-4 py-3.5 transition hover:border-orange-300 hover:shadow-md ${span ? "sm:col-span-2" : ""
+        }`}
     >
       <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-orange-500 transition group-hover:bg-orange-500 group-hover:text-white">
         <Icon className="h-5 w-5" strokeWidth={1.8} />
@@ -276,16 +275,16 @@ export default function ProductView({ product, category, related, details, waNum
   const [mega, setMega] = useState(false);
   const words = product.title.split(" ");
   const last = words.pop();
-const [quoteOpen, setQuoteOpen] = useState(false);
+  const [quoteOpen, setQuoteOpen] = useState(false);
 
-const openQuote = () => {
-  setMega(false);
-  setQuoteOpen(true);
-};
+  const openQuote = () => {
+    setMega(false);
+    setQuoteOpen(true);
+  };
 
-const closeQuote = useCallback(() => {
-  setQuoteOpen(false);
-}, []);
+  const closeQuote = useCallback(() => {
+    setQuoteOpen(false);
+  }, []);
   const wa = `https://wa.me/${waNumber}?text=${encodeURIComponent(
     `Hello, I would like a quote for ${product.title} (Size: ${sizes[size]}, Colour: ${colors[color].name}).`
   )}`;
@@ -311,27 +310,27 @@ const closeQuote = useCallback(() => {
   const specRows = details.specTable
     ? details.specTable.map((r) => ({ icon: Check, ...r }))
     : [
-    { icon: MoveVertical, label: "Height", value: specs.height },
-    { icon: MoveHorizontal, label: "Length", value: specs.length },
-    { icon: Box, label: "Depth", value: specs.depth },
-    { icon: Layers, label: specs.shelfLabel, value: specs.shelves },
-    ...(specs.load ? [{ icon: ShieldCheck, label: "Load Capacity", value: specs.load }] : []),
-  ];
+      { icon: MoveVertical, label: "Height", value: specs.height },
+      { icon: MoveHorizontal, label: "Length", value: specs.length },
+      { icon: Box, label: "Depth", value: specs.depth },
+      { icon: Layers, label: specs.shelfLabel, value: specs.shelves },
+      ...(specs.load ? [{ icon: ShieldCheck, label: "Load Capacity", value: specs.load }] : []),
+    ];
 
   return (
     <div className="bg-soft pb-16">
-       <BgHeader
-  title={product.title}
-  eyebrow="Need a bulk Order for this product"
-  accent="#f97316"
-  text="Display racks, counters, trolleys and baskets built for supermarkets, garment stores and retail shops. Pick a category or scroll through everything."
-  backgroundImage="/products_hero.webp"
-  breadcrumbs={[
-    { label: "Home", href: "/" },
-    { label: category.name , href : category.slug },
-    { label: product.title },     
-  ]}
-/>
+      <BgHeader
+        title={product.title}
+        eyebrow="Need a bulk Order for this product"
+        accent="#f97316"
+        text="Display racks, counters, trolleys and baskets built for supermarkets, garment stores and retail shops. Pick a category or scroll through everything."
+        backgroundImage="/products_hero.webp"
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: category.name, href: category.slug },
+          { label: product.title },
+        ]}
+      />
       <section className="pb-10 pt-24">
         <div className="section-pad">
           {/* <nav className="flex flex-wrap items-center gap-1.5 text-sm text-navy/60">
@@ -380,9 +379,8 @@ const closeQuote = useCallback(() => {
                     type="button"
                     aria-label={`Show image ${i + 1}`}
                     onClick={() => setActive(i)}
-                    className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 bg-white transition sm:h-20 sm:w-20 ${
-                      active === i ? "border-[#1f5fd6]" : "border-slate-200 hover:border-slate-300"
-                    }`}
+                    className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 bg-white transition sm:h-20 sm:w-20 ${active === i ? "border-[#1f5fd6]" : "border-slate-200 hover:border-slate-300"
+                      }`}
                   >
                     <Pic g={g} pad="p-0" alt={details.galleryAlts[i] || ""} />
                   </button>
@@ -458,14 +456,14 @@ const closeQuote = useCallback(() => {
 
               {/* CTAs */}
               <div className="mt-8 flex flex-wrap items-center gap-3">
-               <button
-                               type="button"
-                               onClick={openQuote}
-                               className="btn-orange !py-3"
-                             >
-                               Get a Quote
-                               <ArrowRight className="h-4 w-4" />
-                             </button>
+                <button
+                  type="button"
+                  onClick={openQuote}
+                  className="btn-orange !py-3"
+                >
+                  Get a Quote
+                  <ArrowRight className="h-4 w-4" />
+                </button>
                 <a
                   href={details.brochure}
                   download
@@ -531,11 +529,10 @@ const closeQuote = useCallback(() => {
                 key={id}
                 type="button"
                 onClick={() => go(id)}
-                className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${
-                  tab === id
+                className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${tab === id
                     ? "bg-[#1f5fd6] text-white"
                     : "text-navy/70 hover:bg-slate-100 hover:text-navy"
-                }`}
+                  }`}
               >
                 <Icon className="h-4 w-4" strokeWidth={1.8} />
                 {label}
@@ -547,10 +544,9 @@ const closeQuote = useCallback(() => {
 
       <Section id="overview" lead="Product" accent="Overview">
         <div className="grid items-stretch gap-6 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
-          {/* Image fills the card edge-to-edge, no dead padding */}
           <div className={`${CARD} relative min-h-[320px] overflow-hidden md:min-h-[420px]`}>
             <MediaSlot
-              src={details.scene || product.image}
+              src={gallery[0]?.src || product.image}
               alt={`${product.title} in store`}
               className="absolute inset-0 h-full w-full object-cover"
             />
@@ -559,27 +555,8 @@ const closeQuote = useCallback(() => {
             </span>
           </div>
 
-          {/* Content column: top-aligned with the image, same height */}
           <div className="flex flex-col gap-5">
             <p className="text-[15px] leading-relaxed text-navy/75">{details.overview}</p>
-
-            {/* Quick facts strip from specs */}
-            {/* <dl className="grid grid-cols-2 divide-slate-100 overflow-hidden rounded-2xl border border-slate-200/70 bg-white shadow-sm sm:grid-cols-4 sm:divide-x">
-              {[
-                { icon: MoveVertical, label: "Height", value: specs.height },
-                { icon: MoveHorizontal, label: "Length", value: specs.length },
-                { icon: Box, label: "Depth", value: specs.depth },
-                { icon: Layers, label: specs.shelfLabel, value: specs.shelves },
-              ].map(({ icon: Icon, label, value }) => (
-                <div key={label} className="flex flex-col gap-1 border-b border-slate-100 px-4 py-3.5 sm:border-b-0">
-                  <dt className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-navy/50">
-                    <Icon className="h-3.5 w-3.5 text-[#1f5fd6]" />
-                    {label}
-                  </dt>
-                  <dd className="truncate text-sm font-bold text-navy">{value}</dd>
-                </div>
-              ))}
-            </dl> */}
 
             <div>
               <h3 className="mb-4 text-lg font-semibold text-navy">Key Highlights</h3>
@@ -676,9 +653,8 @@ const closeQuote = useCallback(() => {
               <Card
                 key={p.title}
                 {...(p.slug ? { href: `/${p.slug}` } : {})}
-                className={`${CARD} group flex flex-col overflow-hidden ${
-                  p.slug ? "transition hover:-translate-y-0.5 hover:shadow-md" : ""
-                }`}
+                className={`${CARD} group flex flex-col overflow-hidden ${p.slug ? "transition hover:-translate-y-0.5 hover:shadow-md" : ""
+                  }`}
               >
                 {p.image && (
                   <div className="relative aspect-[4/3] bg-white">
@@ -721,9 +697,8 @@ const closeQuote = useCallback(() => {
                   type="button"
                   aria-expanded={open}
                   onClick={() => setOpenFaq(open ? -1 : i)}
-                  className={`flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-navy transition ${
-                    open ? "bg-blue-50/60" : "hover:bg-slate-50"
-                  }`}
+                  className={`flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-sm font-semibold text-navy transition ${open ? "bg-blue-50/60" : "hover:bg-slate-50"
+                    }`}
                 >
                   {f.q}
                   {open ? (
@@ -752,7 +727,7 @@ const closeQuote = useCallback(() => {
           })}
         </div>
       </Section>
- <QuoteModal open={quoteOpen} onClose={closeQuote} />
+      <QuoteModal open={quoteOpen} onClose={closeQuote} />
       {details.video && (
         <VideoModal open={video} onClose={() => setVideo(false)} src={details.video} />
       )}

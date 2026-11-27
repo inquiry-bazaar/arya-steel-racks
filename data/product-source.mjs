@@ -15,7 +15,7 @@ export const raw = [
   // ---- Supermarket Retail Display Racks ----
   {
     title: "Double Sided Gondola Retail Display Rack",
-    image: "/images/products/supermarket-display-rack_o.png",
+    image: "/products/2.webp",
     category: "Supermarket Retail Display Racks",
     subtitle: "Wall-mounted, 6–7 ft",
     desc: "Looking for a practical gondola rack solution? Arya Insulation Pvt Ltd manufactures the double sided gondola retail display rack with an MS steel primary structure for supermarkets, hypermarkets and large-format grocery stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -80,7 +80,7 @@ export const raw = [
   },
   {
     title: "Single Sided Wall Retail Display Rack",
-    image: "/images/products/supermarket-wall-rack.jpg",
+    image: "/products/3.webp",
     category: "Supermarket Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical wall rack for shop solution? Arya Insulation Pvt Ltd manufactures the single sided wall retail display rack with an MS steel primary structure for wall-side merchandising in retail shops and showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -146,7 +146,7 @@ export const raw = [
   },
   {
     title: "MS Supermarket Retail Display Rack",
-    image: "/images/products/ms-supermarket-retail-display-rack.jpg",
+    image: "/products/8.webp",
     category: "Supermarket Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical supermarket racks solution? Arya Insulation Pvt Ltd manufactures the ms supermarket retail display rack with an MS steel primary structure for supermarket retail display racks. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -212,7 +212,7 @@ export const raw = [
   },
   {
     title: "End Cap Retail Display Rack",
-    image: "/images/products/gondola-end-cap-rack.jpg",
+    image: "/products/9.webp",
     category: "Supermarket Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical supermarket end rack solution? Arya Insulation Pvt Ltd manufactures the end cap retail display rack with an MS steel primary structure for aisle ends and promotional zones in supermarkets. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -278,7 +278,7 @@ export const raw = [
   },
   {
     title: "Corner Retail Display Rack",
-    image: "/images/products/corner-display-rack.jpeg",
+    image: "/products/6.webp",
     category: "Supermarket Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical corner rack for shop solution? Arya Insulation Pvt Ltd manufactures the corner retail display rack with an MS steel primary structure for corner spaces in grocery shops and retail stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -344,7 +344,7 @@ export const raw = [
   },
   {
     title: "Perforated Back Retail Display Rack",
-    image: "/images/products/perforated-display-rack-with-hooks.jpeg",
+    image: "/products/4.webp",
     category: "Supermarket Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical perforated display rack solution? Arya Insulation Pvt Ltd manufactures the perforated back retail display rack with an MS steel primary structure for shops displaying hanging merchandise and packaged accessories. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -410,7 +410,7 @@ export const raw = [
   },
   {
     title: "Wire Mesh Back Retail Display Rack",
-    image: "/images/products/wire-mesh-back-retail-display-rack.jpg",
+    image: "/products/5.webp",
     category: "Supermarket Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical wire mesh display rack solution? Arya Insulation Pvt Ltd manufactures the wire mesh back retail display rack with an MS steel primary structure for retail stores requiring visible product display and hanging options. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -476,7 +476,7 @@ export const raw = [
   },
   {
     title: "Heavy Duty Retail Display Rack",
-    image: "/images/products/heavy-duty-retail-display-rack.jpg",
+    image: "/products/10.webp",
     category: "Supermarket Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical heavy duty supermarket rack solution? Arya Insulation Pvt Ltd manufactures the heavy duty retail display rack with an MS steel primary structure for supermarket retail display racks. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -542,7 +542,7 @@ export const raw = [
   },
   {
     title: "Island Promotional Retail Display Rack",
-    image: "/images/products/island-promotional-retail-display-rack.jpg",
+    image: "/products/11.webp",
     category: "Supermarket Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical supermarket island rack solution? Arya Insulation Pvt Ltd manufactures the island promotional retail display rack with an MS steel primary structure for retail promotions, product launches and point-of-sale campaigns. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -608,7 +608,7 @@ export const raw = [
   },
   {
     title: "Checkout Counter with Retail Display Rack",
-    image: "/images/products/cash-checkout-counter.jpg",
+    image: "/products/12.webp",
     category: "Supermarket Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical checkout counter for supermarket solution? Arya Insulation Pvt Ltd manufactures the checkout counter with retail display rack with an MS steel primary structure for checkout zones, billing counters and impulse-purchase areas. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -674,7 +674,7 @@ export const raw = [
   // ---- Grocery & Kirana Retail Display Racks ----
   {
     title: "Kirana Store Retail Display Rack",
-    image: "/images/products/kirana-store-rack.jpg",
+    image: "/products/1.webp",
     category: "Grocery & Kirana Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical kirana store racks solution? Arya Insulation Pvt Ltd manufactures the kirana store retail display rack with an MS steel primary structure for kirana stores, neighbourhood grocery shops and general stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -739,7 +739,7 @@ export const raw = [
   },
   {
     title: "Grocery Retail Display Rack for Shop",
-    image: "/images/products/grocery-store-rack.jpg",
+    image: "/products/14.webp",
     category: "Grocery & Kirana Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical grocery rack for shop solution? Arya Insulation Pvt Ltd manufactures the grocery retail display rack for shop with an MS steel primary structure for grocery & kirana retail display racks. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -805,7 +805,7 @@ export const raw = [
   },
   {
     title: "MS Retail Display Rack for Shop",
-    image: "/images/products/ms-retail-display-rack-for-shop.jpg",
+    image: "/products/7.webp",
     category: "Grocery & Kirana Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical ms rack for shop solution? Arya Insulation Pvt Ltd manufactures the ms retail display rack for shop with an MS steel primary structure for grocery & kirana retail display racks. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -871,7 +871,7 @@ export const raw = [
   },
   {
     title: "Iron Retail Display Rack for Shop",
-    image: "/images/products/iron-retail-display-rack-for-shop.jpg",
+    image: "/products/15.webp",
     category: "Grocery & Kirana Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical iron rack for shop solution? Arya Insulation Pvt Ltd manufactures the iron retail display rack for shop with an MS steel primary structure for grocery & kirana retail display racks. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -937,7 +937,7 @@ export const raw = [
   },
   {
     title: "Steel Retail Display Rack for Shop",
-    image: "/images/products/steel-retail-display-rack-for-shop.jpg",
+    image: "/products/19.webp",
     category: "Grocery & Kirana Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical steel rack for shop solution? Arya Insulation Pvt Ltd manufactures the steel retail display rack for shop with an MS steel primary structure for grocery & kirana retail display racks. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -1003,7 +1003,7 @@ export const raw = [
   },
   {
     title: "6 Feet Retail Display Rack for Shop",
-    image: "/images/products/6-feet-retail-display-rack-for-shop.jpg",
+    image: "/products/3.webp",
     category: "Grocery & Kirana Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical iron rack for shop 6 feet solution? Arya Insulation Pvt Ltd manufactures the 6 feet retail display rack for shop with an MS steel primary structure for grocery & kirana retail display racks. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -1069,7 +1069,7 @@ export const raw = [
   },
   {
     title: "Grocery Wall Retail Display Rack",
-    image: "/images/products/grocery-wall-retail-display-rack.jpg",
+    image: "/products/18.webp",
     category: "Grocery & Kirana Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical grocery wall rack solution? Arya Insulation Pvt Ltd manufactures the grocery wall retail display rack with an MS steel primary structure for wall-side merchandising in retail shops and showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -1135,7 +1135,7 @@ export const raw = [
   },
   {
     title: "Rice and Dal Retail Display Rack",
-    image: "/images/products/rice-and-dal-retail-display-rack.jpg",
+    image: "/products/21.webp",
     category: "Grocery & Kirana Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical rice display rack for shop solution? Arya Insulation Pvt Ltd manufactures the rice and dal retail display rack with an MS steel primary structure for grocery stores and provision shops. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -1201,7 +1201,7 @@ export const raw = [
   },
   {
     title: "Oil Tin Retail Display Rack",
-    image: "/images/products/oil-tin-retail-display-rack.jpg",
+    image: "/products/13.webp",
     category: "Grocery & Kirana Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical oil tin rack for shop solution? Arya Insulation Pvt Ltd manufactures the oil tin retail display rack with an MS steel primary structure for grocery stores and provision shops. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -1267,7 +1267,7 @@ export const raw = [
   },
   {
     title: "Kirana Counter Retail Display Rack",
-    image: "/images/products/kirana-counter-retail-display-rack.jpg",
+    image: "/products/12.webp",
     category: "Grocery & Kirana Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical kirana store counter solution? Arya Insulation Pvt Ltd manufactures the kirana counter retail display rack with an MS steel primary structure for kirana stores, neighbourhood grocery shops and general stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -1333,7 +1333,7 @@ export const raw = [
   // ---- Fruit & Vegetable Retail Display Racks ----
   {
     title: "Vegetable Retail Display Rack for Shop",
-    image: "/images/products/fruit-and-vegetable-rack.jpg",
+    image: "/products/23.webp",
     category: "Fruit & Vegetable Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical vegetable rack for shop solution? Arya Insulation Pvt Ltd manufactures the vegetable retail display rack for shop with an MS steel primary structure for fruit shops, vegetable markets and supermarket produce sections. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -1398,7 +1398,7 @@ export const raw = [
   },
   {
     title: "Fruit Retail Display Rack for Shop",
-    image: "/images/products/fruit-retail-display-rack-for-shop.jpg",
+    image: "/products/24.webp",
     category: "Fruit & Vegetable Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical fruit display rack for shop solution? Arya Insulation Pvt Ltd manufactures the fruit retail display rack for shop with an MS steel primary structure for fruit shops, vegetable markets and supermarket produce sections. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -1465,7 +1465,7 @@ export const raw = [
   {
     title: "Vegetable Retail Display Rack",
     slug: "3-tier-vegetable-retail-display-rack",
-    image: "/images/products/3-tier-vegetable-retail-display-rack.jpg",
+    image: "/products/17.webp",
     category: "Fruit & Vegetable Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical vegetable display rack solution? Arya Insulation Pvt Ltd manufactures the vegetable retail display rack with an MS steel primary structure for fruit shops, vegetable markets and supermarket produce sections. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -1531,7 +1531,7 @@ export const raw = [
   },
   {
     title: "Inclined Fruit Retail Display Rack",
-    image: "/images/products/inclined-fruit-retail-display-rack.jpg",
+    image: "/products/24.webp",
     category: "Fruit & Vegetable Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical fruit display stand for supermarket solution? Arya Insulation Pvt Ltd manufactures the inclined fruit retail display rack with an MS steel primary structure for fruit shops, vegetable markets and supermarket produce sections. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -1597,7 +1597,7 @@ export const raw = [
   },
   {
     title: "MS Fruit Retail Display Stand",
-    image: "/images/products/ms-fruit-retail-display-stand.jpg",
+    image: "/products/25.webp",
     category: "Fruit & Vegetable Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical fruit display stand solution? Arya Insulation Pvt Ltd manufactures the ms fruit retail display stand with an MS steel primary structure for fruit shops, vegetable markets and supermarket produce sections. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -1663,7 +1663,7 @@ export const raw = [
   },
   {
     title: "Basket Type Vegetable Retail Display Rack",
-    image: "/images/products/basket-type-vegetable-retail-display-rack.jpg",
+    image: "/products/23.webp",
     category: "Fruit & Vegetable Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical vegetable basket rack solution? Arya Insulation Pvt Ltd manufactures the basket type vegetable retail display rack with an MS steel primary structure for fruit shops, vegetable markets and supermarket produce sections. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -1729,7 +1729,7 @@ export const raw = [
   },
   {
     title: "Onion Potato Retail Display Rack",
-    image: "/images/products/onion-potato-retail-display-rack.jpg",
+    image: "/products/21.webp",
     category: "Fruit & Vegetable Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical onion potato rack solution? Arya Insulation Pvt Ltd manufactures the onion potato retail display rack with an MS steel primary structure for fruit shops, vegetable markets and supermarket produce sections. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -1795,7 +1795,7 @@ export const raw = [
   },
   {
     title: "Island Fruit and Vegetable Retail Display Rack",
-    image: "/images/products/island-fruit-and-vegetable-retail-display-rack.jpg",
+    image: "/products/25.webp",
     category: "Fruit & Vegetable Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical fruit and vegetable rack solution? Arya Insulation Pvt Ltd manufactures the island fruit and vegetable retail display rack with an MS steel primary structure for fruit shops, vegetable markets and supermarket produce sections. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -1861,7 +1861,7 @@ export const raw = [
   },
   {
     title: "Coconut Retail Display Stand",
-    image: "/images/products/coconut-retail-display-stand.jpg",
+    image: "/products/21.webp",
     category: "Fruit & Vegetable Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical coconut display stand solution? Arya Insulation Pvt Ltd manufactures the coconut retail display stand with an MS steel primary structure for fruit shops, vegetable markets and supermarket produce sections. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -1927,7 +1927,7 @@ export const raw = [
   },
   {
     title: "Crate Type Vegetable Retail Display Rack",
-    image: "/images/products/crate-type-vegetable-retail-display-rack.jpg",
+    image: "/products/17.webp",
     category: "Fruit & Vegetable Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical vegetable crate stand solution? Arya Insulation Pvt Ltd manufactures the crate type vegetable retail display rack with an MS steel primary structure for fruit shops, vegetable markets and supermarket produce sections. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -1993,7 +1993,7 @@ export const raw = [
   // ---- Garment Retail Display Racks ----
   {
     title: "Garment Retail Display Rack for Shop",
-    image: "/images/products/garment-display-rack_.png",
+    image: "/products/1.webp",
     category: "Garment Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical garment display rack for shop solution? Arya Insulation Pvt Ltd manufactures the garment retail display rack for shop with an MS steel primary structure for garment shops, clothing showrooms and apparel stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -2058,7 +2058,7 @@ export const raw = [
   },
   {
     title: "Cloth Retail Display Rack for Shop",
-    image: "/images/products/cloth-retail-display-rack-for-shop.jpg",
+    image: "/products/28.webp",
     category: "Garment Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical cloth rack for shop solution? Arya Insulation Pvt Ltd manufactures the cloth retail display rack for shop with an MS steel primary structure for garment shops, clothing showrooms and apparel stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -2124,7 +2124,7 @@ export const raw = [
   },
   {
     title: "Cloth Retail Display Stand",
-    image: "/images/products/cloth-retail-display-stand.jpg",
+    image: "/products/26.webp",
     category: "Garment Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical cloth stand for shop display solution? Arya Insulation Pvt Ltd manufactures the cloth retail display stand with an MS steel primary structure for garment shops, clothing showrooms and apparel stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -2190,7 +2190,7 @@ export const raw = [
   },
   {
     title: "Round Garment Retail Display Rack",
-    image: "/images/products/round-garment-retail-display-rack.jpg",
+    image: "/products/26.webp",
     category: "Garment Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical garment display rack solution? Arya Insulation Pvt Ltd manufactures the round garment retail display rack with an MS steel primary structure for garment shops, clothing showrooms and apparel stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -2256,7 +2256,7 @@ export const raw = [
   },
   {
     title: "Two Way Garment Retail Display Stand",
-    image: "/images/products/2-way-4-way-garment-stand.jpg",
+    image: "/products/26.webp",
     category: "Garment Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical two way garment stand solution? Arya Insulation Pvt Ltd manufactures the two way garment retail display stand with an MS steel primary structure for garment shops, clothing showrooms and apparel stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -2322,7 +2322,7 @@ export const raw = [
   },
   {
     title: "Four Way Garment Retail Display Stand",
-    image: "/images/products/2-way-4-way-garment-stand.jpg",
+    image: "/products/16.webp",
     category: "Garment Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical four way garment stand solution? Arya Insulation Pvt Ltd manufactures the four way garment retail display stand with an MS steel primary structure for garment shops, clothing showrooms and apparel stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -2388,7 +2388,7 @@ export const raw = [
   },
   {
     title: "Wall Mounted Garment Retail Display Rack",
-    image: "/images/products/wall-mounted-garment-rack.jpeg",
+    image: "/products/28.webp",
     category: "Garment Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical cloth hanger for shop display solution? Arya Insulation Pvt Ltd manufactures the wall mounted garment retail display rack with an MS steel primary structure for wall-side merchandising in retail shops and showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -2454,7 +2454,7 @@ export const raw = [
   },
   {
     title: "MS Pipe Garment Retail Display Rack",
-    image: "/images/products/ms-pipe-garment-retail-display-rack.jpg",
+    image: "/products/16.webp",
     category: "Garment Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical pipe garment rack solution? Arya Insulation Pvt Ltd manufactures the ms pipe garment retail display rack with an MS steel primary structure for garment shops, clothing showrooms and apparel stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -2520,7 +2520,7 @@ export const raw = [
   },
   {
     title: "Garment Retail Display Rack with Wheels",
-    image: "/images/products/garment-retail-display-rack-with-wheels.jpg",
+    image: "/products/17.webp",
     category: "Garment Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical garment rack with wheels solution? Arya Insulation Pvt Ltd manufactures the garment retail display rack with wheels with an MS steel primary structure for garment shops, clothing showrooms and apparel stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -2586,7 +2586,7 @@ export const raw = [
   },
   {
     title: "Saree Retail Display Rack",
-    image: "/images/products/saree-display-rack.jpg",
+    image: "/products/20.webp",
     category: "Garment Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical saree display rack solution? Arya Insulation Pvt Ltd manufactures the saree retail display rack with an MS steel primary structure for garment shops, clothing showrooms and apparel stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -2652,7 +2652,7 @@ export const raw = [
   // ---- Shoe & Bag Retail Display Racks ----
   {
     title: "Shoe Retail Display Rack for Shop",
-    image: "/images/products/shoe-display-rack.jpg",
+    image: "/products/14.webp",
     category: "Shoe & Bag Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical shoe rack for shop solution? Arya Insulation Pvt Ltd manufactures the shoe retail display rack for shop with an MS steel primary structure for footwear shops, shoe showrooms and bag stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -2717,7 +2717,7 @@ export const raw = [
   },
   {
     title: "Wall Mounted Shoe Retail Display Rack",
-    image: "/images/products/wall-mounted-shoe-rack.jpg",
+    image: "/products/3.webp",
     category: "Shoe & Bag Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical shoe display rack for shop solution? Arya Insulation Pvt Ltd manufactures the wall mounted shoe retail display rack with an MS steel primary structure for wall-side merchandising in retail shops and showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -2783,7 +2783,7 @@ export const raw = [
   },
   {
     title: "Shoe Retail Display Stand",
-    image: "/images/products/shoe-retail-display-stand.jpg",
+    image: "/products/14.webp",
     category: "Shoe & Bag Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical shoe stand for shop display solution? Arya Insulation Pvt Ltd manufactures the shoe retail display stand with an MS steel primary structure for footwear shops, shoe showrooms and bag stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -2849,7 +2849,7 @@ export const raw = [
   },
   {
     title: "Shoe Retail Display Rack for Showroom",
-    image: "/images/products/shoe-retail-display-rack-for-showroom.jpg",
+    image: "/products/18.webp",
     category: "Shoe & Bag Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical shoe display rack for retail store solution? Arya Insulation Pvt Ltd manufactures the shoe retail display rack for showroom with an MS steel primary structure for footwear shops, shoe showrooms and bag stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -2915,7 +2915,7 @@ export const raw = [
   },
   {
     title: "Island Shoe Retail Display Rack",
-    image: "/images/products/island-shoe-retail-display-rack.jpg",
+    image: "/products/11.webp",
     category: "Shoe & Bag Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical shoe display stand solution? Arya Insulation Pvt Ltd manufactures the island shoe retail display rack with an MS steel primary structure for footwear shops, shoe showrooms and bag stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -2981,7 +2981,7 @@ export const raw = [
   },
   {
     title: "Slipper Retail Display Stand",
-    image: "/images/products/slipper-retail-display-stand.jpg",
+    image: "/products/26.webp",
     category: "Shoe & Bag Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical slipper stand for shop solution? Arya Insulation Pvt Ltd manufactures the slipper retail display stand with an MS steel primary structure for footwear shops, shoe showrooms and bag stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -3047,7 +3047,7 @@ export const raw = [
   },
   {
     title: "Sports Shoe Retail Display Rack",
-    image: "/images/products/sports-shoe-retail-display-rack.jpg",
+    image: "/products/8.webp",
     category: "Shoe & Bag Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical sports shoe display rack solution? Arya Insulation Pvt Ltd manufactures the sports shoe retail display rack with an MS steel primary structure for footwear shops, shoe showrooms and bag stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -3113,7 +3113,7 @@ export const raw = [
   },
   {
     title: "Revolving Shoe Retail Display Stand",
-    image: "/images/products/revolving-shoe-retail-display-stand.jpg",
+    image: "/products/26.webp",
     category: "Shoe & Bag Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical revolving shoe stand solution? Arya Insulation Pvt Ltd manufactures the revolving shoe retail display stand with an MS steel primary structure for footwear shops, shoe showrooms and bag stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -3179,7 +3179,7 @@ export const raw = [
   },
   {
     title: "Shoe Shelf Retail Display Rack",
-    image: "/images/products/shoe-shelf-retail-display-rack.jpg",
+    image: "/products/8.webp",
     category: "Shoe & Bag Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical shoe shelf for shop solution? Arya Insulation Pvt Ltd manufactures the shoe shelf retail display rack with an MS steel primary structure for footwear shops, shoe showrooms and bag stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -3245,7 +3245,7 @@ export const raw = [
   },
   {
     title: "Bag Retail Display Rack",
-    image: "/images/products/bag-retail-display-rack.jpg",
+    image: "/products/28.webp",
     category: "Shoe & Bag Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical bag display rack solution? Arya Insulation Pvt Ltd manufactures the bag retail display rack with an MS steel primary structure for footwear shops, shoe showrooms and bag stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -3311,7 +3311,7 @@ export const raw = [
   // ---- Medical Store Retail Display Racks ----
   {
     title: "Medical Store Retail Display Rack",
-    image: "/images/products/pharmacy-medical-store-rack.png",
+    image: "/products/14.webp",
     category: "Medical Store Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical medical store racks solution? Arya Insulation Pvt Ltd manufactures the medical store retail display rack with an MS steel primary structure for medical stores, pharmacies and healthcare retail outlets. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -3376,7 +3376,7 @@ export const raw = [
   },
   {
     title: "Medical Store Retail Display Rack with Counter",
-    image: "/images/products/medical-store-retail-display-rack-with-counter.jpg",
+    image: "/products/12.webp",
     category: "Medical Store Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical medical store racks and counters solution? Arya Insulation Pvt Ltd manufactures the medical store retail display rack with counter with an MS steel primary structure for medical stores, pharmacies and healthcare retail outlets. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -3442,7 +3442,7 @@ export const raw = [
   },
   {
     title: "Pharmacy Wall Retail Display Rack",
-    image: "/images/products/pharmacy-wall-retail-display-rack.jpg",
+    image: "/products/18.webp",
     category: "Medical Store Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical pharmacy rack solution? Arya Insulation Pvt Ltd manufactures the pharmacy wall retail display rack with an MS steel primary structure for wall-side merchandising in retail shops and showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -3508,7 +3508,7 @@ export const raw = [
   },
   {
     title: "Medical Store Retail Display Rack with Drawers",
-    image: "/images/products/medicine-rack-with-drawers.jpg",
+    image: "/products/20.webp",
     category: "Medical Store Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical medical store rack design solution? Arya Insulation Pvt Ltd manufactures the medical store retail display rack with drawers with an MS steel primary structure for medical stores, pharmacies and healthcare retail outlets. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -3574,7 +3574,7 @@ export const raw = [
   },
   {
     title: "Pharmacy Gondola Retail Display Rack",
-    image: "/images/products/pharmacy-gondola-retail-display-rack.jpg",
+    image: "/products/19.webp",
     category: "Medical Store Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical pharmacy display rack solution? Arya Insulation Pvt Ltd manufactures the pharmacy gondola retail display rack with an MS steel primary structure for supermarkets, hypermarkets and large-format grocery stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -3640,7 +3640,7 @@ export const raw = [
   },
   {
     title: "Medicine Retail Display Rack",
-    image: "/images/products/medicine-retail-display-rack.jpg",
+    image: "/products/20.webp",
     category: "Medical Store Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical medicine display rack solution? Arya Insulation Pvt Ltd manufactures the medicine retail display rack with an MS steel primary structure for medical stores, pharmacies and healthcare retail outlets. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -3706,7 +3706,7 @@ export const raw = [
   },
   {
     title: "OTC Retail Display Rack",
-    image: "/images/products/otc-retail-display-rack.jpg",
+    image: "/products/22.webp",
     category: "Medical Store Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical otc display rack solution? Arya Insulation Pvt Ltd manufactures the otc retail display rack with an MS steel primary structure for medical stores, pharmacies and healthcare retail outlets. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -3772,7 +3772,7 @@ export const raw = [
   },
   {
     title: "Medical Counter Retail Display Rack",
-    image: "/images/products/medical-counter-retail-display-rack.jpg",
+    image: "/products/12.webp",
     category: "Medical Store Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical medical store counter solution? Arya Insulation Pvt Ltd manufactures the medical counter retail display rack with an MS steel primary structure for medical stores, pharmacies and healthcare retail outlets. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -3838,7 +3838,7 @@ export const raw = [
   },
   {
     title: "Baby Care Retail Display Rack",
-    image: "/images/products/baby-care-retail-display-rack.jpg",
+    image: "/products/8.webp",
     category: "Medical Store Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical baby products display rack solution? Arya Insulation Pvt Ltd manufactures the baby care retail display rack with an MS steel primary structure for medical stores, pharmacies and healthcare retail outlets. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -3904,7 +3904,7 @@ export const raw = [
   },
   {
     title: "Surgical Items Retail Display Rack",
-    image: "/images/products/surgical-items-retail-display-rack.jpg",
+    image: "/products/6.webp",
     category: "Medical Store Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical surgical display rack solution? Arya Insulation Pvt Ltd manufactures the surgical items retail display rack with an MS steel primary structure for medical stores, pharmacies and healthcare retail outlets. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -3970,7 +3970,7 @@ export const raw = [
   // ---- Mobile & Electronics Retail Display Racks ----
   {
     title: "Mobile Accessories Retail Display Rack",
-    image: "/images/products/mobile-shop-display-rack.jpg",
+    image: "/products/27.webp",
     category: "Mobile & Electronics Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical mobile accessories display rack solution? Arya Insulation Pvt Ltd manufactures the mobile accessories retail display rack with an MS steel primary structure for mobile shops, electronics stores and electrical showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -4035,7 +4035,7 @@ export const raw = [
   },
   {
     title: "Mobile Accessories Retail Display Stand",
-    image: "/images/products/mobile-accessories-retail-display-stand.jpg",
+    image: "/products/26.webp",
     category: "Mobile & Electronics Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical mobile accessories display stand for shop solution? Arya Insulation Pvt Ltd manufactures the mobile accessories retail display stand with an MS steel primary structure for mobile shops, electronics stores and electrical showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -4101,7 +4101,7 @@ export const raw = [
   },
   {
     title: "Mobile Accessories Hanging Retail Display Rack",
-    image: "/images/products/mobile-accessories-hanging-retail-display-rack.jpg",
+    image: "/products/22.webp",
     category: "Mobile & Electronics Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical mobile accessories display hanger solution? Arya Insulation Pvt Ltd manufactures the mobile accessories hanging retail display rack with an MS steel primary structure for mobile shops, electronics stores and electrical showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -4167,7 +4167,7 @@ export const raw = [
   },
   {
     title: "Phone Accessories Retail Display Rack",
-    image: "/images/products/phone-accessories-retail-display-rack.jpg",
+    image: "/products/28.webp",
     category: "Mobile & Electronics Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical phone accessories display rack solution? Arya Insulation Pvt Ltd manufactures the phone accessories retail display rack with an MS steel primary structure for mobile shops, electronics stores and electrical showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -4233,7 +4233,7 @@ export const raw = [
   },
   {
     title: "Mobile Cover Retail Display Stand",
-    image: "/images/products/mobile-cover-retail-display-stand.jpg",
+    image: "/products/26.webp",
     category: "Mobile & Electronics Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical mobile cover display stand solution? Arya Insulation Pvt Ltd manufactures the mobile cover retail display stand with an MS steel primary structure for mobile shops, electronics stores and electrical showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -4299,7 +4299,7 @@ export const raw = [
   },
   {
     title: "Charger and Cable Retail Display Rack",
-    image: "/images/products/charger-and-cable-retail-display-rack.jpg",
+    image: "/products/22.webp",
     category: "Mobile & Electronics Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical charger display stand solution? Arya Insulation Pvt Ltd manufactures the charger and cable retail display rack with an MS steel primary structure for mobile shops, electronics stores and electrical showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -4365,7 +4365,7 @@ export const raw = [
   },
   {
     title: "Electronics Retail Display Rack",
-    image: "/images/products/electronics-display-rack.jpg",
+    image: "/products/15.webp",
     category: "Mobile & Electronics Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical electronics display rack solution? Arya Insulation Pvt Ltd manufactures the electronics retail display rack with an MS steel primary structure for mobile shops, electronics stores and electrical showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -4431,7 +4431,7 @@ export const raw = [
   },
   {
     title: "Home Appliance Retail Display Rack",
-    image: "/images/products/home-appliance-display-rack.jpg",
+    image: "/products/7.webp",
     category: "Mobile & Electronics Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical home appliance display rack solution? Arya Insulation Pvt Ltd manufactures the home appliance retail display rack with an MS steel primary structure for mobile & electronics retail display racks. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -4497,7 +4497,7 @@ export const raw = [
   },
   {
     title: "LED Bulb Retail Display Rack",
-    image: "/images/products/led-bulb-retail-display-rack.jpg",
+    image: "/products/14.webp",
     category: "Mobile & Electronics Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical led bulb display stand solution? Arya Insulation Pvt Ltd manufactures the led bulb retail display rack with an MS steel primary structure for mobile shops, electronics stores and electrical showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -4563,7 +4563,7 @@ export const raw = [
   },
   {
     title: "Electrical Shop Retail Display Rack",
-    image: "/images/products/electrical-shop-retail-display-rack.jpg",
+    image: "/products/2.webp",
     category: "Mobile & Electronics Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical electrical shop rack solution? Arya Insulation Pvt Ltd manufactures the electrical shop retail display rack with an MS steel primary structure for mobile shops, electronics stores and electrical showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -4629,7 +4629,7 @@ export const raw = [
   // ---- Stationery, Cosmetic & Hardware Retail Display Racks ----
   {
     title: "Stationery Retail Display Rack",
-    image: "/images/products/stationery-display-rack.jpg",
+    image: "/products/27.webp",
     category: "Stationery, Cosmetic & Hardware Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical stationery rack for shop solution? Arya Insulation Pvt Ltd manufactures the stationery retail display rack with an MS steel primary structure for stationery shops, bookshops and educational stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -4694,7 +4694,7 @@ export const raw = [
   },
   {
     title: "Book Retail Display Rack",
-    image: "/images/products/book-rack-library-rack.jpg",
+    image: "/products/3.webp",
     category: "Stationery, Cosmetic & Hardware Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical book rack for shop solution? Arya Insulation Pvt Ltd manufactures the book retail display rack with an MS steel primary structure for stationery shops, bookshops and educational stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -4760,7 +4760,7 @@ export const raw = [
   },
   {
     title: "Cosmetic Retail Display Rack",
-    image: "/images/products/cosmetic-display-rack.jpg",
+    image: "/products/8.webp",
     category: "Stationery, Cosmetic & Hardware Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical cosmetic rack for shop solution? Arya Insulation Pvt Ltd manufactures the cosmetic retail display rack with an MS steel primary structure for cosmetic shops, beauty stores and personal-care showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -4826,7 +4826,7 @@ export const raw = [
   },
   {
     title: "Wall Mounted Cosmetic Retail Display Rack",
-    image: "/images/products/wall-mounted-cosmetic-retail-display-rack.jpg",
+    image: "/products/1.webp",
     category: "Stationery, Cosmetic & Hardware Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical cosmetic display rack for shop solution? Arya Insulation Pvt Ltd manufactures the wall mounted cosmetic retail display rack with an MS steel primary structure for wall-side merchandising in retail shops and showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -4892,7 +4892,7 @@ export const raw = [
   },
   {
     title: "Gift Shop Retail Display Rack",
-    image: "/images/products/gift-and-fancy-store-rack.jpg",
+    image: "/products/20.webp",
     category: "Stationery, Cosmetic & Hardware Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical gift shop display rack solution? Arya Insulation Pvt Ltd manufactures the gift shop retail display rack with an MS steel primary structure for gift shops, novelty stores and lifestyle outlets. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -4958,7 +4958,7 @@ export const raw = [
   },
   {
     title: "Toy Retail Display Rack",
-    image: "/images/products/toy-display-rack.jpg",
+    image: "/products/18.webp",
     category: "Stationery, Cosmetic & Hardware Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical toy display rack solution? Arya Insulation Pvt Ltd manufactures the toy retail display rack with an MS steel primary structure for toy shops and children's product stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -5024,7 +5024,7 @@ export const raw = [
   },
   {
     title: "Hardware Shop Retail Display Rack",
-    image: "/images/products/hardware-shop-retail-display-rack.jpg",
+    image: "/products/4.webp",
     category: "Stationery, Cosmetic & Hardware Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical hardware shop rack solution? Arya Insulation Pvt Ltd manufactures the hardware shop retail display rack with an MS steel primary structure for hardware stores, paint shops and tool retailers. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -5090,7 +5090,7 @@ export const raw = [
   },
   {
     title: "Paint Shop Retail Display Rack",
-    image: "/images/products/paint-shop-retail-display-rack.jpg",
+    image: "/products/10.webp",
     category: "Stationery, Cosmetic & Hardware Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical paint shop rack solution? Arya Insulation Pvt Ltd manufactures the paint shop retail display rack with an MS steel primary structure for hardware stores, paint shops and tool retailers. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -5156,7 +5156,7 @@ export const raw = [
   },
   {
     title: "Tools Retail Display Rack",
-    image: "/images/products/tools-retail-display-rack.jpg",
+    image: "/products/22.webp",
     category: "Stationery, Cosmetic & Hardware Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical tools display rack solution? Arya Insulation Pvt Ltd manufactures the tools retail display rack with an MS steel primary structure for hardware stores, paint shops and tool retailers. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -5222,7 +5222,7 @@ export const raw = [
   },
   {
     title: "Crockery Retail Display Rack",
-    image: "/images/products/crockery-display-rack.jpeg",
+    image: "/products/13.webp",
     category: "Stationery, Cosmetic & Hardware Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical crockery rack for shop solution? Arya Insulation Pvt Ltd manufactures the crockery retail display rack with an MS steel primary structure for crockery shops, kitchenware stores and homeware showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -5288,7 +5288,7 @@ export const raw = [
   // ---- Bakery, Snacks & Cold Drink Retail Display Racks ----
   {
     title: "Bakery Retail Display Rack",
-    image: "/images/products/bakery-display-rack.jpg",
+    image: "/products/25.webp",
     category: "Bakery, Snacks & Cold Drink Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical bakery display rack solution? Arya Insulation Pvt Ltd manufactures the bakery retail display rack with an MS steel primary structure for bakeries, cake shops and bakery counters. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -5353,7 +5353,7 @@ export const raw = [
   },
   {
     title: "Bread Retail Display Rack",
-    image: "/images/products/bread-retail-display-rack.jpg",
+    image: "/products/25.webp",
     category: "Bakery, Snacks & Cold Drink Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical bread rack for bakery solution? Arya Insulation Pvt Ltd manufactures the bread retail display rack with an MS steel primary structure for bakeries, cake shops and bakery counters. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -5419,7 +5419,7 @@ export const raw = [
   },
   {
     title: "Biscuit Retail Display Rack",
-    image: "/images/products/biscuit-retail-display-rack.jpg",
+    image: "/products/11.webp",
     category: "Bakery, Snacks & Cold Drink Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical biscuit display rack solution? Arya Insulation Pvt Ltd manufactures the biscuit retail display rack with an MS steel primary structure for snack shops, grocery stores and supermarket snack aisles. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -5485,7 +5485,7 @@ export const raw = [
   },
   {
     title: "Namkeen Retail Display Rack",
-    image: "/images/products/namkeen-retail-display-rack.jpg",
+    image: "/products/3.webp",
     category: "Bakery, Snacks & Cold Drink Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical namkeen display rack solution? Arya Insulation Pvt Ltd manufactures the namkeen retail display rack with an MS steel primary structure for snack shops, grocery stores and supermarket snack aisles. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -5551,7 +5551,7 @@ export const raw = [
   },
   {
     title: "Chips Retail Display Stand",
-    image: "/images/products/snacks-and-chips-display-rack.jpg",
+    image: "/products/26.webp",
     category: "Bakery, Snacks & Cold Drink Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical chips stand for shop solution? Arya Insulation Pvt Ltd manufactures the chips retail display stand with an MS steel primary structure for snack shops, grocery stores and supermarket snack aisles. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -5617,7 +5617,7 @@ export const raw = [
   },
   {
     title: "Chocolate Retail Display Stand",
-    image: "/images/products/chocolate-display-stand.jpg",
+    image: "/products/9.webp",
     category: "Bakery, Snacks & Cold Drink Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical chocolate display stand solution? Arya Insulation Pvt Ltd manufactures the chocolate retail display stand with an MS steel primary structure for snack shops, grocery stores and supermarket snack aisles. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -5683,7 +5683,7 @@ export const raw = [
   },
   {
     title: "Cold Drink Retail Display Rack",
-    image: "/images/products/cold-drink-retail-display-rack.jpg",
+    image: "/products/10.webp",
     category: "Bakery, Snacks & Cold Drink Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical cold drink rack for shop solution? Arya Insulation Pvt Ltd manufactures the cold drink retail display rack with an MS steel primary structure for beverage shops, grocery stores and supermarket beverage sections. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -5749,7 +5749,7 @@ export const raw = [
   },
   {
     title: "Cold Drink Retail Display Stand",
-    image: "/images/products/cold-drink-retail-display-stand.jpg",
+    image: "/products/13.webp",
     category: "Bakery, Snacks & Cold Drink Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical cold drink stand for shop solution? Arya Insulation Pvt Ltd manufactures the cold drink retail display stand with an MS steel primary structure for beverage shops, grocery stores and supermarket beverage sections. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -5815,7 +5815,7 @@ export const raw = [
   },
   {
     title: "Packaged Water Retail Display Rack",
-    image: "/images/products/packaged-water-retail-display-rack.jpg",
+    image: "/products/13.webp",
     category: "Bakery, Snacks & Cold Drink Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical water bottle rack for shop solution? Arya Insulation Pvt Ltd manufactures the packaged water retail display rack with an MS steel primary structure for beverage shops, grocery stores and supermarket beverage sections. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -5881,7 +5881,7 @@ export const raw = [
   },
   {
     title: "Tea and Coffee Retail Display Rack",
-    image: "/images/products/tea-and-coffee-retail-display-rack.jpg",
+    image: "/products/1.webp",
     category: "Bakery, Snacks & Cold Drink Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical tea display rack solution? Arya Insulation Pvt Ltd manufactures the tea and coffee retail display rack with an MS steel primary structure for beverage shops, grocery stores and supermarket beverage sections. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -5947,7 +5947,7 @@ export const raw = [
   // ---- Wall Panel & Promotional Retail Display Racks ----
   {
     title: "Pegboard Retail Display Rack",
-    image: "/images/products/pegboard-retail-display-rack.jpg",
+    image: "/products/4.webp",
     category: "Wall Panel & Promotional Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical pegboard display rack solution? Arya Insulation Pvt Ltd manufactures the pegboard retail display rack with an MS steel primary structure for shops displaying hanging merchandise and packaged accessories. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -6012,7 +6012,7 @@ export const raw = [
   },
   {
     title: "Pegboard Retail Display Stand",
-    image: "/images/products/pegboard-retail-display-stand.jpg",
+    image: "/products/15.webp",
     category: "Wall Panel & Promotional Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical pegboard display stand solution? Arya Insulation Pvt Ltd manufactures the pegboard retail display stand with an MS steel primary structure for shops displaying hanging merchandise and packaged accessories. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -6078,7 +6078,7 @@ export const raw = [
   },
   {
     title: "Pegboard Wall Retail Display Panel",
-    image: "/images/products/pegboard-wall-retail-display-panel.jpg",
+    image: "/products/22.webp",
     category: "Wall Panel & Promotional Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical pegboard display wall solution? Arya Insulation Pvt Ltd manufactures the pegboard wall retail display panel with an MS steel primary structure for wall-side merchandising in retail shops and showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -6144,7 +6144,7 @@ export const raw = [
   },
   {
     title: "Grid Wall Retail Display Panel",
-    image: "/images/products/grid-wall-retail-display-panel.jpg",
+    image: "/products/5.webp",
     category: "Wall Panel & Promotional Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical grid wall display solution? Arya Insulation Pvt Ltd manufactures the grid wall retail display panel with an MS steel primary structure for wall-side merchandising in retail shops and showrooms. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -6210,7 +6210,7 @@ export const raw = [
   },
   {
     title: "Slotted Channel Retail Display Rack",
-    image: "/images/products/slotted-channel-retail-display-rack.jpg",
+    image: "/products/28.webp",
     category: "Wall Panel & Promotional Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical wall channel display rack solution? Arya Insulation Pvt Ltd manufactures the slotted channel retail display rack with an MS steel primary structure for shops displaying hanging merchandise and packaged accessories. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -6276,7 +6276,7 @@ export const raw = [
   },
   {
     title: "Metal Retail Display Rack with Hooks",
-    image: "/images/products/metal-retail-display-rack-with-hooks.jpg",
+    image: "/products/27.webp",
     category: "Wall Panel & Promotional Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical metal display rack with hooks solution? Arya Insulation Pvt Ltd manufactures the metal retail display rack with hooks with an MS steel primary structure for shops displaying hanging merchandise and packaged accessories. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -6342,7 +6342,7 @@ export const raw = [
   },
   {
     title: "MS Retail Display Stand",
-    image: "/images/products/ms-retail-display-stand.jpg",
+    image: "/products/16.webp",
     category: "Wall Panel & Promotional Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical ms display stand solution? Arya Insulation Pvt Ltd manufactures the ms retail display stand with an MS steel primary structure for wall panel & promotional retail display racks. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -6408,7 +6408,7 @@ export const raw = [
   },
   {
     title: "Spinner Retail Display Stand",
-    image: "/images/products/spinner-retail-display-stand.jpg",
+    image: "/products/26.webp",
     category: "Wall Panel & Promotional Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical spinner display stand solution? Arya Insulation Pvt Ltd manufactures the spinner retail display stand with an MS steel primary structure for wall panel & promotional retail display racks. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -6474,7 +6474,7 @@ export const raw = [
   },
   {
     title: "Dump Bin Retail Display Rack",
-    image: "/images/products/wire-bin-basket-dump-bin.jpg",
+    image: "/products/21.webp",
     category: "Wall Panel & Promotional Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical dump bin display solution? Arya Insulation Pvt Ltd manufactures the dump bin retail display rack with an MS steel primary structure for wall panel & promotional retail display racks. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -6540,7 +6540,7 @@ export const raw = [
   },
   {
     title: "Floor Standing Promotional Retail Display Rack",
-    image: "/images/products/floor-standing-promotional-retail-display-rack.jpg",
+    image: "/products/11.webp",
     category: "Wall Panel & Promotional Retail Display Racks",
     subtitle: "",
     desc: "Looking for a practical promotional display stand solution? Arya Insulation Pvt Ltd manufactures the floor standing promotional retail display rack with an MS steel primary structure for retail promotions, product launches and point-of-sale campaigns. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",

@@ -134,7 +134,7 @@ export default function BgHeader({
             variants={stagger}
             initial="hidden"
             animate="show"
-            className="relative z-10 w-full min-w-0 max-w-[640px] lg:max-w-[520px] xl:max-w-[600px] mt-4"
+            className="relative z-10 w-full min-w-0 max-w-[640px] lg:max-w-[520px] xl:max-w-[600px] mt-4 ml-8"
           >
             {breadcrumbs.length > 0 && (
               <motion.nav variants={fadeUp} aria-label="Breadcrumb" className="mb-3 w-full min-w-0 sm:mb-5">
