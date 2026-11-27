@@ -14,9 +14,8 @@ import {
   Store,
 } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectCoverflow } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/effect-coverflow";
 import MediaSlot from "./MediaSlot";
 import { products } from "@/data/content";
 
@@ -61,7 +60,7 @@ export default function Products() {
           </Link>
         </motion.div>
 
-        {/* right: 3D coverflow stage */}
+        {/* right: product slider */}
         <motion.div
           initial={{ opacity: 0, x: 60 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -100,25 +99,17 @@ export default function Products() {
 
           <Swiper
             className="products-swiper relative z-10 !pb-24 !pt-6 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]"
-            modules={[Autoplay, EffectCoverflow]}
+            modules={[Autoplay]}
             onSwiper={(s) => (swiperRef.current = s)}
             onSlideChange={(s) => setActive(s.realIndex % products.length)}
-            effect="coverflow"
             grabCursor
             centeredSlides
             loop
             loopAdditionalSlides={products.length}
             slidesPerView="auto"
+            spaceBetween={20}
             speed={800}
             watchSlidesProgress
-            coverflowEffect={{
-              rotate: 18,
-              stretch: -10,
-              depth: 160,
-              modifier: 1,
-              scale: 0.9,
-              slideShadows: false,
-            }}
             autoplay={{ delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true }}
           >
             {slides.map((item) => {
@@ -142,14 +133,14 @@ export default function Products() {
                           group-[.swiper-slide-active]/slide:border-orange-400
                           group-[.swiper-slide-active]/slide:shadow-[0_0_0_3px_rgba(255,122,0,0.25),0_18px_40px_rgba(255,122,0,0.28)]"
                       >
-{/* product image — flush to card edges */}
-<div className="absolute inset-x-0 top-0 bottom-[28%] overflow-hidden rounded-t-[24px]">
-  <MediaSlot
-    src={item.image}
-    alt={item.title}
-    className="absolute inset-0 h-full w-full object-cover"
-  />
-</div>
+                        {/* product image, flush to card edges */}
+                        <div className="absolute inset-x-0 top-0 bottom-[28%] overflow-hidden rounded-t-[24px]">
+                          <MediaSlot
+                            src={item.image}
+                            alt={item.title}
+                            className="absolute inset-0 h-full w-full object-cover"
+                          />
+                        </div>
 
                         {/* top-right corner accent: blue by default, orange when active */}
                         <span
