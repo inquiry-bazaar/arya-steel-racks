@@ -57,7 +57,9 @@ export const navLinks = [
 
 const FEATURED = [
   "Double Sided Gondola Retail Display Rack",
-  "Garment Display Rack",
+  "Single Sided Wall Retail Display Rack",
+  "Perforated Back Retail Display Rack",
+  "Island Fruit and Vegetable Retail Display Rack"
 ];
 
 export const products = FEATURED.map((t) => catalogue.find((p) => p.title === t)).filter(Boolean);
