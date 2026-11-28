@@ -5,7 +5,7 @@ import { catalogue, categoryList } from "@/data/products";
 
 export default function ProductCatalog() {
   return (
-    <section id="catalogue" className="bg-white py-20">
+    <section id="catalogue" className="bg-white py-10">
       <div className="section-pad">
         <span className="eyebrow">
           <span className="h-[2px] w-5 bg-brand" /> Product Range

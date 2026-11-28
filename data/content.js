@@ -133,7 +133,7 @@ export const testimonials = [
     project: "Wall Display Racks",
     rating: 5,
     gif: "/testimonials/guy-3.gif",
-    image: "/images/products/wall-mounted-garment-rack.jpeg",
+    image: "/products/wall-mounted-cosmetic-retail-display-rack.webp",
     review: "Rated 5 out of 5 for the Wall Display Racks.",
     say: "Santosh from Maharashtra rated our Wall Display Racks 5 out of 5. Thank you, {name}!",
   },

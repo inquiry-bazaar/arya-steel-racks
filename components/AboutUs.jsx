@@ -137,7 +137,7 @@ export default function AboutUs() {
   });
 
   return (
-    <section id="about" className="relative overflow-x-clip bg-white py-20 lg:py-28">
+    <section id="about" className="relative overflow-x-clip bg-white py-10 lg:py-18">
       <div className="section-pad mx-auto w-full max-w-[1400px]">
         <div className="grid items-center gap-14 lg:grid-cols-[1.02fr_1fr] lg:gap-20">
           {/* ---------- photo collage ---------- */}

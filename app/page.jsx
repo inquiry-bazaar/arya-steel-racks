@@ -20,8 +20,8 @@ export default function Home() {
       <WhyChooseUs />
       <VideoShorts/>
       <Testimonials/>
-      <Process />
       <Industries/>
+      <Process /> 
       <FAQ />
       <CTABanner/>
     </main>
