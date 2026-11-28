@@ -17,7 +17,7 @@ import { navLinks } from "@/data/content";
 import { Logo } from "./Navbar";
 
 const contact = {
-  address: "Your street address, City, State - PIN code",
+  address: "Arya Industry Ground Floor Plote AT Kh No-13. 18/1 And 8 G Near Cocacola Factory Najafgarh South West Delhi-110043",
   phone: "+91 8587901795",
   email: "aryaindustry36@gmail.com",
   whatsapp: "+918587901795",
