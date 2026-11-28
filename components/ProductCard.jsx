@@ -47,7 +47,7 @@ export default function ProductCard({ p }) {
     <MediaSlot
       src={p.image}
       alt={p.title}
-      className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+      className="absolute inset-0 h-full w-full object-fill transition duration-500 group-hover:scale-105"
     />
   </div>
 </Link>

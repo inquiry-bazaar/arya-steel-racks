@@ -548,7 +548,7 @@ export default function ProductView({ product, category, related, details, waNum
             <MediaSlot
               src={gallery[0]?.src || product.image}
               alt={`${product.title} in store`}
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-fill"
             />
             <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-navy shadow-sm backdrop-blur">
               {category.name}
