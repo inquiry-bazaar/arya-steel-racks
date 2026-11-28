@@ -50,7 +50,24 @@ export default function BlogForm({ initial, originalSlug }) {
       askBeforePasteHTML: false,
       askBeforePasteFromWord: false,
       defaultActionOnPaste: "insert_clear_html",
-      uploader: { insertImageAsBase64URI: true },
+      // Body images go to R2 through the same endpoint as the cover image
+      // (base64 images would bloat the MongoDB document).
+      uploader: {
+        url: "/api/upload",
+        format: "json",
+        method: "POST",
+        withCredentials: true,
+        filesVariableName: () => "file",
+        isSuccess: (resp) => Boolean(resp && resp.url),
+        getMessage: (resp) => (resp && resp.message) || "",
+        process: (resp) => ({
+          files: resp && resp.url ? [resp.url] : [],
+          path: "",
+          baseurl: "",
+          error: resp && resp.url ? 0 : 1,
+          msg: (resp && resp.message) || "",
+        }),
+      },
       buttons:
         "bold,italic,underline,strikethrough,|,ul,ol,|,font,fontsize,paragraph,brush,|,link,image,table,|,align,undo,redo,|,hr,eraser,source,fullsize",
     }),

@@ -115,3 +115,76 @@ body {
   opacity: 0;
   will-change: transform, opacity;
 }
+
+/* ------------------------------------------------------------------
+   Admin form controls (used by components/admin/*)
+------------------------------------------------------------------- */
+@layer components {
+  .input {
+    @apply w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-[15px] text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400;
+  }
+  .input:focus {
+    @apply border-[#253970] ring-4 ring-[#253970]/10;
+  }
+  textarea.input {
+    @apply resize-y leading-relaxed;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-[#253970] px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-[#1c2c58] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#253970]/25;
+  }
+  .btn-outline {
+    @apply inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-[#0b2a5b] transition hover:border-[#253970] hover:bg-slate-50;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Blog article typography. Tailwind's preflight strips default styles
+   from h1-h6 / ul / ol / blockquote, so rich-text from the editor
+   needs them restored here.
+------------------------------------------------------------------- */
+.blog-content {
+  color: #334155;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+}
+.blog-content > :first-child { margin-top: 0; }
+.blog-content p { margin: 0 0 1.15em; }
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4 {
+  color: #0b2a5b;
+  font-weight: 800;
+  line-height: 1.25;
+  margin: 1.8em 0 0.6em;
+}
+.blog-content h1 { font-size: 2rem; }
+.blog-content h2 { font-size: 1.6rem; }
+.blog-content h3 { font-size: 1.3rem; }
+.blog-content h4 { font-size: 1.1rem; }
+.blog-content ul { list-style: disc; padding-left: 1.4em; margin: 0 0 1.15em; }
+.blog-content ol { list-style: decimal; padding-left: 1.4em; margin: 0 0 1.15em; }
+.blog-content li { margin: 0.35em 0; }
+.blog-content li::marker { color: #f97316; }
+.blog-content a { color: #253970; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.blog-content a:hover { color: #f97316; }
+.blog-content strong { color: #0f2557; font-weight: 700; }
+.blog-content img { max-width: 100%; height: auto; border-radius: 14px; margin: 1.4em 0; }
+.blog-content blockquote {
+  margin: 1.5em 0;
+  padding: 0.9em 1.2em;
+  border-left: 4px solid #f97316;
+  background: #f8fafc;
+  border-radius: 0 12px 12px 0;
+  color: #0f2557;
+  font-style: italic;
+}
+.blog-content hr { border: 0; border-top: 1px solid #e2e8f0; margin: 2em 0; }
+.blog-content table { width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 0.95rem; }
+.blog-content th,
+.blog-content td { border: 1px solid #e2e8f0; padding: 0.6em 0.9em; text-align: left; }
+.blog-content th { background: #eef3fb; color: #0f2557; font-weight: 700; }
+.blog-content pre { overflow-x: auto; background: #0f2557; color: #e8eefa; padding: 1em 1.2em; border-radius: 12px; margin: 1.4em 0; font-size: 0.9rem; }
+.blog-content code { font-size: 0.92em; }

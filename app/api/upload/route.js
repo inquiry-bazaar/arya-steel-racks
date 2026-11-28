@@ -25,6 +25,9 @@ export async function POST(req) {
     return NextResponse.json({ url, fileId: key })
   } catch (e) {
     console.error(e)
+    // Admin-only endpoint, so it is safe to say what is misconfigured
+    if (e.message?.startsWith("Missing R2 env vars"))
+      return NextResponse.json({ message: "Image storage is not configured on the server (" + e.message + ")" }, { status: 503 })
     return NextResponse.json({ message: "Upload failed" }, { status: 500 })
   }
 }

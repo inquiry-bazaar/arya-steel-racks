@@ -6,8 +6,8 @@ import { ArrowRight, Check } from "lucide-react";
 import QuoteModal from "./QuoteModal";
 
 const IMAGES = {
-  main: "/images/products/supermarket-display-rack_o.png",
-  side: "/departmental_racks.webp",
+  main: "/products/wall-mounted-garment-retail-display-rack.webp",
+  side: "/products/28.webp",
 };
 
 const PROCESS_HREF = "#process";
