@@ -16,12 +16,11 @@ import {
 import { navLinks } from "@/data/content";
 import { Logo } from "./Navbar";
 
-// TODO: replace these placeholders with your real details
 const contact = {
   address: "Your street address, City, State - PIN code",
-  phone: "+91 00000 00000",
-  email: "info@example.com",
-  whatsapp: "910000000000", // country code + number, digits only
+  phone: "+91 8587901795",
+  email: "aryaindustry36@gmail.com",
+  whatsapp: "+918587901795",
   whatsappMessage: "Hello, I would like to know more about your display racks.",
 };
 
@@ -66,7 +65,7 @@ const legal = [
 const socials = [
   {
     name: "Facebook",
-    href: "https://www.facebook.com/profile.php?viewas=100000686899395&id=61571410907364",
+    href: "https://www.facebook.com/people/Arya-Industries/61571410907364/",
     Icon: FaFacebookF,
   },
   {
