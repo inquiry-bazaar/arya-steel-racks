@@ -38,6 +38,7 @@ export const contact = {
   email: "aryaindustry36@gmail.com",
   gst: "07ECEPM6891P1ZN",
 };
+
 export const media = {
   heroImage: "/hero.webp",
   heroVideo: "/bg_main_enhanced_.mp4",
