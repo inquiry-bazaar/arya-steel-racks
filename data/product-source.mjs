@@ -16,6 +16,9 @@ export const raw = [
   {
     title: "Double Sided Gondola Retail Display Rack",
     image: "/products/2.webp",
+    gallery : [
+"/products/2.webp"
+    ],
     category: "Supermarket Retail Display Racks",
     subtitle: "Wall-mounted, 6–7 ft",
     desc: "Looking for a practical gondola rack solution? Arya Insulation Pvt Ltd manufactures the double sided gondola retail display rack with an MS steel primary structure for supermarkets, hypermarkets and large-format grocery stores. The layout, dimensions, display levels and finish can be planned according to your merchandise and store space.",
@@ -6797,10 +6800,9 @@ export function getProductDetails(product, company = {}) {
 
   const load = spec.load || "";
 
-  const gallery =
-    Array.isArray(product.gallery) && product.gallery.length
-      ? product.gallery.map((src, i) => ({ src, crop: 0, key: i }))
-      : [0, 1, 2, 3].map((crop) => ({ src: product.image, crop, key: crop }));
+  const gallery = [...new Set([product.image, ...(product.gallery || [])])]
+    .filter(Boolean)
+    .map((src, i) => ({ src, key: i }));
 
   const faqs = own.faqs || [
     { q: `What is a ${product.title}?`, a: product.desc },

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -45,6 +45,7 @@ import VideoModal from "./VideoModal";
 import WhatsAppIcon from "./WhatsAppIcon";
 import BgHeader from "./BgHeader";
 import QuoteModal from "./QuoteModal";
+import CTABanner from "./CTABanner";
 
 const BLUE = "#1f5fd6";
 const CARD = "rounded-2xl border border-slate-200/70 bg-white shadow-sm";
@@ -288,7 +289,46 @@ export default function ProductView({ product, category, related, details, waNum
   const wa = `https://wa.me/${waNumber}?text=${encodeURIComponent(
     `Hello, I would like a quote for ${product.title} (Size: ${sizes[size]}, Colour: ${colors[color].name}).`
   )}`;
+  // Remove entries with no src or a repeated src, keeping each alt with its image
+  const uniqueImages = useMemo(() => {
+    const seen = new Set();
+    return (gallery || [])
+      .map((g, i) => ({ ...g, alt: details.galleryAlts?.[i] || product.title }))
+      .filter((g) => {
+        if (!g.src || seen.has(g.src)) return false;
+        seen.add(g.src);
+        return true;
+      });
+  }, [gallery, details.galleryAlts, product.title]);
 
+  // Find images whose file is missing or broken
+  const [broken, setBroken] = useState([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    uniqueImages.forEach(({ src }) => {
+      const img = new window.Image();
+      img.onerror = () => {
+        if (!cancelled) {
+          setBroken((prev) => (prev.includes(src) ? prev : [...prev, src]));
+        }
+      };
+      img.src = src;
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [uniqueImages]);
+
+  const workingImages = uniqueImages.filter((g) => !broken.includes(g.src));
+
+  // If the gallery is empty (or none of its images load), use the main image
+  const images = workingImages.length
+    ? workingImages
+    : [{ src: product.image, alt: product.title, key: "main" }];
+
+  const current = images[active] || images[0];
+  const mainSrc = current.src;
   const go = (id) =>
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 
@@ -349,14 +389,14 @@ export default function ProductView({ product, category, related, details, waNum
               <div className={`${CARD} relative aspect-[4/3] overflow-hidden`}>
                 <AnimatePresence mode="wait">
                   <motion.div
-                    key={active}
+                    key={mainSrc}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
                     className="absolute inset-0"
                   >
-                    <Pic g={gallery[active]} pad="p-0" alt={details.galleryAlts[active] || product.title} />
+                    <Pic g={{ src: mainSrc }} alt={current?.alt || product.title} />
                   </motion.div>
                 </AnimatePresence>
 
@@ -372,20 +412,26 @@ export default function ProductView({ product, category, related, details, waNum
                 )}
               </div>
 
-              <div className="mt-3 flex gap-2.5 overflow-x-auto pb-1">
-                {gallery.map((g, i) => (
-                  <button
-                    key={g.key}
-                    type="button"
-                    aria-label={`Show image ${i + 1}`}
-                    onClick={() => setActive(i)}
-                    className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 bg-white transition sm:h-20 sm:w-20 ${active === i ? "border-[#1f5fd6]" : "border-slate-200 hover:border-slate-300"
+              {/* Thumbnails only when there is more than one real image */}
+              {images.length > 0 && (
+                <div className="mt-3 flex gap-2.5 overflow-x-auto pb-1">
+                  {images.map((g, i) => (
+                    <button
+                      key={g.src}
+                      type="button"
+                      aria-label={`Show image ${i + 1}`}
+                      onClick={() => setActive(i)}
+                      className={`relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 bg-white transition sm:h-20 sm:w-20 ${
+                        current?.src === g.src
+                          ? "border-[#1f5fd6]"
+                          : "border-slate-200 hover:border-slate-300"
                       }`}
-                  >
-                    <Pic g={g} pad="p-0" alt={details.galleryAlts[i] || ""} />
-                  </button>
-                ))}
-              </div>
+                    >
+                      <Pic g={g} alt={g.alt} />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* ---- Product info ---- */}
@@ -545,8 +591,9 @@ export default function ProductView({ product, category, related, details, waNum
       <Section id="overview" lead="Product" accent="Overview">
         <div className="grid items-stretch gap-6 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
           <div className={`${CARD} relative min-h-[320px] overflow-hidden md:min-h-[420px]`}>
-            <MediaSlot
-              src={gallery[0]?.src || product.image}
+                     <MediaSlot
+              key={images[0]?.src || product.image}
+              src={images[0]?.src || product.image}
               alt={`${product.title} in store`}
               className="absolute inset-0 h-full w-full object-fill"
             />
@@ -680,8 +727,7 @@ export default function ProductView({ product, category, related, details, waNum
           })}
         </div>
       </Section>
-
-      {/* ================= FAQ ================= */}
+<CTABanner/>
       <Section
         id="faq"
         lead="Frequently Asked"
