@@ -1,7 +1,5 @@
 
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import CategorySlider from "@/components/CategorySlider";
 import { catalogue, categoryList } from "@/data/products";
@@ -46,7 +44,7 @@ export default function ProductsPage() {
   eyebrow="Let Us Know your Query"
   accent="#f97316"
   text="Display racks, counters, trolleys and baskets built for supermarkets, garment stores and retail shops. Pick a category or scroll through everything."
-  backgroundImage="/products_hero.webp"
+  backgroundImage="/products_banner.png"
   breadcrumbs={[
     { label: "Home", href: "/" },
     { label: "Products" },     

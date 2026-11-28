@@ -38,14 +38,14 @@ const contactDetails = [
   {
     icon: Mail,
     label: "Email Us",
-    value: "info@aryadisplayrack.com",
-    href: "mailto:info@aryadisplayrack.com",
+    value: "aryaindustry36@gmail.com",
+    href: "mailto:aryaindustry36@gmail.com",
   },
   {
     icon: MapPin,
     label: "Visit Us",
     value: "New Delhi, India",
-    href: "#",
+    href: "https://maps.app.goo.gl/tZeM2MWPVeogfQP29",
   },
 ];
 

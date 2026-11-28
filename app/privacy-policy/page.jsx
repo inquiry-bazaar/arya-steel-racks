@@ -2,10 +2,9 @@ import BgHeader from "@/components/BgHeader";
 import Link from "next/link";
 
 const COMPANY = "ARYA INDUSTRY STEEL RACKS";
-const EMAIL = "info@arya.com";
-const PHONE = "+91 00000 00000";
-const ADDRESS = "[Your business address]";
-const UPDATED = "26 November 2026";
+const EMAIL = "aryaindustry36@gmail.com";
+const PHONE = "+918587901795";
+const ADDRESS = "Arya Industry Ground Floor Plote AT Kh No-13. 18/1 And 8 G Near Cocacola Factory Najafgarh South West Delhi-110043";
 
 export const metadata = {
   title: `Privacy Policy | ${COMPANY}`,
@@ -66,7 +65,7 @@ export default function PrivacyPolicyPage() {
         eyebrow="Your privacy matters to us"
         accent="#f97316"
         text="No spam, ever. View our Privacy Policy for details on how we handle your information."
-        backgroundImage="/products_hero.webp"
+        backgroundImage="/products_banner.png"
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: "Privacy Policy" },     

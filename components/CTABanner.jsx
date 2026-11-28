@@ -18,10 +18,10 @@ import QuoteModal from "@/components/QuoteModal";
 const CTA_BG = "/hero.webp";
 const contact = {
   name: "Arya Display Rack",
-  phone: "+91 7942647738",
-  phoneHref: "+917942647738",
-  email: "rvpariwar@yahoo.com",
-  whatsapp: "+917942647738",
+  phone: "+918587901795",
+  phoneHref: "+918587901795",
+  email: "info@aryadisplayrack.com",
+  whatsapp: "+918587901795",
   whatsappText: "Hello, I would like a quote for display racks.",
   gst: "07BTWPM5031P1ZV",
   website: "https://www.aryadisplayrack.com/",

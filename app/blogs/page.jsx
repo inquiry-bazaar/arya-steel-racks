@@ -15,7 +15,7 @@ export default function Blogs() {
           eyebrow="Latest Blogs"
         accent="#f9c32f"
           text="Insights That Shape Smarter, Better and Efficient Construction"
-          backgroundImage="/products_hero.webp"
+          backgroundImage="/products_banner.png"
         />
       <BlogPage/>
 

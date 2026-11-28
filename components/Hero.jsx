@@ -55,7 +55,7 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
           className="absolute -top-[84px] bottom-0 hidden lg:block"
-          style={{ left: "max(51%, 600px)", right: "calc(50% - 50vw)" }}
+          style={{ left: "max(60%, 600px)", right: "calc(50% - 50vw)" }}
         >
           <div
             className="absolute inset-0 bg-gradient-to-b from-brand via-brand/70 to-brand/10"

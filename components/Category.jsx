@@ -14,7 +14,7 @@ export default function Category({ category }) {
          eyebrow="Need a bulk Order for this product"
          accent="#f97316"
          text="Display racks, counters, trolleys and baskets built for supermarkets, garment stores and retail shops. Pick a category or scroll through everything."
-         backgroundImage="/products_hero.webp"
+         backgroundImage="/products_banner.png"
          breadcrumbs={[
            { label: "Home", href: "/" },
            { label: category.name , href : category.slug },

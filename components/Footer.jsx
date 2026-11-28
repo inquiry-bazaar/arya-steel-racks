@@ -138,9 +138,7 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-4 max-w-[400px]">
             <Logo />
             <p className="mt-5 text-[15px] leading-7 text-slate-600">
-              Ryka Restroom Cubicles combine visual appeal with everyday
-              functionality. Team Interior Solutions offers guaranteed
-              customer satisfaction.
+              Arya Industry is a India’s leading manufacturer and Supplier of premium-quality Supermarket Display Racks, Wooden Rack, Vegetable Rack, Grocery Display Rack, Slotted Angle Rack, Shopping Trolley and Basket, Cash Counter, Bingo Rack, Snacks Rack,  Industrial Storage, and more. Optimize Your Store Space with Arya Industry’s Exclusive Range of Supermarket Racks.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 mt-7">

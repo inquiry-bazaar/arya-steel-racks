@@ -6,10 +6,10 @@ export const company = {
   established: 2021,
   nature: "Manufacturer, Factory / Wholesale",
   ceo: "Sandeep Kumar",
-  address: "Ground Floor, Plot No-42, Block-B, Maharani Enclave, Hastsal, New Delhi - 110059, Delhi, India",
-  phone: "+91 7942647738",
-  phoneHref: "+917942647738",
-  email: "rvpariwar@yahoo.com",
+  address: "Arya Industry Ground Floor Plote AT Kh No-13. 18/1 And 8 G Near Cocacola Factory Najafgarh South West Delhi-110043",
+  phone: "+918587901795",
+  phoneHref: "+918587901795",
+  email: "aryaindustry36@gmail.com",
   gst: "07BTWPM5031P1ZV",
   website: "https://www.aryadisplayrack.com/",
   employees: "11 to 25 people",
@@ -40,7 +40,7 @@ export const contact = {
 };
 
 export const media = {
-  heroImage: "/hero.webp",
+  heroImage: "/hero_banner.png",
   heroVideo: "/bg_main_enhanced_.mp4",
   whyPoster: "/bg_main_poster_.webp",
   whyVideo: "/bg_main_enhanced_.mp4",

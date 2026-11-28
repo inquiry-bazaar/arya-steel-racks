@@ -5,7 +5,7 @@ export default function Map({
   height = 450,
 }) {
   const query = encodeURIComponent(address)
-  const src = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3498.9600940430405!2d77.26067077496!3d28.72073858007065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cff87da0efa3b%3A0xd7ca882078f92ee3!2sSisco%20Steel%20Products!5e0!3m2!1sen!2sin!4v1793432336429!5m2!1sen!2sin%22`
+  const src = `https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d112073.81938414769!2d76.995915!3d28.620564!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjjCsDM3JzE2LjIiTiA3NsKwNTknNDQuOCJF!5e0!3m2!1sen!2sus!4v1795436313387!5m2!1sen!2sus`
   const viewUrl = `https://www.google.com/maps/search/?api=1&query=${query}`
   const directions = `https://www.google.com/maps/dir/?api=1&destination=${query}`
 

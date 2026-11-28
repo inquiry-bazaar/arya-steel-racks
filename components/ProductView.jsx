@@ -81,14 +81,14 @@ const TABS = [
   { id: "faq", label: "FAQ", icon: HelpCircle },
 ];
 
-// Different crops of the same photo, used when a product has only one image
-const CROPS = [
-  { s: 1, o: "50% 50%" },
-  { s: 1.9, o: "50% 12%" },
-  { s: 1.9, o: "50% 88%" },
-  { s: 1.7, o: "12% 50%" },
-  { s: 1.7, o: "88% 50%" },
-];
+// // Different crops of the same photo, used when a product has only one image
+// const CROPS = [
+//   { s: 1, o: "50% 50%" },
+//   { s: 1.9, o: "50% 12%" },
+//   { s: 1.9, o: "50% 88%" },
+//   { s: 1.7, o: "12% 50%" },
+//   { s: 1.7, o: "88% 50%" },
+// ];
 
 const isLight = (hex) => {
   const h = hex.replace("#", "");
@@ -103,16 +103,12 @@ const isLight = (hex) => {
 };
 
 function Pic({ g, pad = "p-0", alt = "" }) {
-  const c = CROPS[(g.crop || 0) % CROPS.length];
+  // const c = CROPS[(g.crop || 0) % CROPS.length];
 
   return (
     <div className="absolute inset-0 overflow-hidden">
       <div
         className="absolute inset-0"
-        style={{
-          transform: `scale(${c.s})`,
-          transformOrigin: c.o,
-        }}
       >
         <MediaSlot
           src={g.src}
@@ -171,22 +167,26 @@ function FeatureItem({ icon, label, index, fallback, span }) {
 function AppCard({ icon, label, fallback }) {
   const Icon = ICONS[icon] || fallback;
   return (
-    <li
-      className={`${CARD} group relative flex flex-col items-start gap-4 overflow-hidden p-4 transition duration-200 hover:-translate-y-0.5 hover:border-[#1f5fd6] hover:shadow-md`}
-    >
-      <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-[#1f5fd6] transition group-hover:bg-[#1f5fd6] group-hover:text-white">
-        <Icon className="h-6 w-6" strokeWidth={1.6} />
-      </span>
-      <div className="flex w-full items-center justify-between gap-2">
-        <span className="text-sm font-semibold leading-tight text-navy">{label}</span>
-        <ArrowRight className="h-4 w-4 shrink-0 -translate-x-1 text-[#1f5fd6] opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100" />
-      </div>
-      <Icon
-        className="pointer-events-none absolute -bottom-4 -right-4 h-20 w-20 text-slate-100 transition group-hover:text-blue-50"
-        strokeWidth={1.2}
-        aria-hidden
-      />
-    </li>
+<li
+  className={`${CARD} group relative flex flex-col items-start gap-4 overflow-hidden p-4 transition duration-200 hover:-translate-y-0.5 hover:border-[#1f5fd6] hover:shadow-md`}
+>
+  <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-[#1f5fd6] transition group-hover:bg-[#1f5fd6] group-hover:text-white">
+    <Icon className="h-6 w-6" strokeWidth={1.6} />
+  </span>
+
+  <div className="relative z-10 flex w-full items-center justify-between gap-2">
+    <span className="block text-sm font-semibold leading-tight text-navy first-letter:uppercase">
+      {label}
+    </span>
+    {/* <ArrowRight className="h-4 w-4 shrink-0 -translate-x-1 text-[#1f5fd6] opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100" /> */}
+  </div>
+
+  <Icon
+    className="pointer-events-none absolute -bottom-4 -right-4 z-0 h-20 w-20 text-slate-100 transition group-hover:text-blue-50"
+    strokeWidth={1.2}
+    aria-hidden
+  />
+</li>
   );
 }
 
@@ -324,7 +324,7 @@ export default function ProductView({ product, category, related, details, waNum
         eyebrow="Need a bulk Order for this product"
         accent="#f97316"
         text="Display racks, counters, trolleys and baskets built for supermarkets, garment stores and retail shops. Pick a category or scroll through everything."
-        backgroundImage="/products_hero.webp"
+        backgroundImage="/products_banner.png"
         breadcrumbs={[
           { label: "Home", href: "/" },
           { label: category.name, href: category.slug },

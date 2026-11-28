@@ -1,10 +1,9 @@
 import BgHeader from "@/components/BgHeader";
 import Link from "next/link";
 
-const COMPANY = "Ryka Restroom Cubicles";
-const EMAIL = "info@example.com";
-const CITY = "[Your city]";
-const UPDATED = "26 November 2026";
+const COMPANY = "ARYA INDUSTRY";
+const EMAIL = "aryaindustry36@gmail.com";
+const CITY = "New Delhi";
 
 export const metadata = {
   title: `Terms & Conditions | ${COMPANY}`,
@@ -62,7 +61,7 @@ export default function TermsPage() {
     eyebrow="These terms govern your access to and use of ARYA INDUSTRY services."
     accent="#f97316"
     text="While using the website, you agree to be bound by these terms."
-    backgroundImage="/products_hero.webp"
+    backgroundImage="/products_banner.png"
     breadcrumbs={[
       { label: "Home", href: "/" },
       { label: "Terms & Condition" },     

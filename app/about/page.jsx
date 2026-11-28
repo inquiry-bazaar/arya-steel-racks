@@ -13,7 +13,7 @@ export default function About() {
   eyebrow="Know more about us"
   accent="#f97316"
   text="Display racks, counters, trolleys and baskets built for supermarkets, garment stores and retail shops. Pick a category or scroll through everything."
-  backgroundImage="/about_bg_.webp"
+  backgroundImage="/products_banner.png"
   breadcrumbs={[
     { label: "Home", href: "/" },
     { label: "About" },     
