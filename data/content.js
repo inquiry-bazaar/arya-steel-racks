@@ -1,7 +1,5 @@
 import { catalogue } from "./products";
 
-
-
 export const company = {
   name: "Arya Display Rack",
   tagline: "Manufacturer of Supermarket Display Racks & Shopping Trolleys",
