@@ -271,7 +271,7 @@ export default function Footer() {
       </div>
 
       {/* Back to top: appears after scrolling */}
-      <button
+      {/* <button
         type="button"
         onClick={scrollToTop}
         aria-label="Back to top"
@@ -283,7 +283,7 @@ export default function Footer() {
         }`}
       >
         <FaArrowUp aria-hidden="true" />
-      </button>
+      </button> */}
     </footer>
   );
 }
