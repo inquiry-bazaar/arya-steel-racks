@@ -11,7 +11,7 @@ export async function generateMetadata({ params }) {
   const blog = await getBlog(slug)
   if (!blog) return {}
   return {
-    title: blog.metaTitle || `${blog.title} | R.V. Infrastructural`,
+    title: blog.metaTitle || `${blog.title} | Arya Industry`,
     description: blog.metaDescription || plainText(blog.content).slice(0, 160),
     openGraph: { images: [blog.image] },
   }
