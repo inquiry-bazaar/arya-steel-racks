@@ -15,6 +15,7 @@ import {
 } from "react-icons/fa";
 import { navLinks } from "@/data/content";
 import { Logo } from "./Navbar";
+import { categoryList } from "@/data/products";
 
 const contact = {
   address: "Arya Industry Ground Floor Plote AT Kh No-13. 18/1 And 8 G Near Cocacola Factory Najafgarh South West Delhi-110043",
@@ -23,7 +24,11 @@ const contact = {
   whatsapp: "+918587901795",
   whatsappMessage: "Hello, I would like to know more about your display racks.",
 };
-
+// categoryList items have { name, slug }, so build the hrefs the footer needs
+const categoryLinks = categoryList.slice(0,7).map((c) => ({
+  name: c.name,
+  href: `/${c.slug}`,
+}));
 const contactItems = [
   {
     label: "Location",
@@ -48,14 +53,14 @@ const contactItems = [
 
 const whatsappHref = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
 
-const categoryList = [
-  { name: "Supermarket & Grocery", href: "/supermarket-and-grocery" },
-  { name: "Garment & Apparel", href: "/garment-and-apparel" },
-  { name: "Footwear, Beauty & Pharmacy", href: "/footwear-beauty-and-pharmacy" },
-  { name: "Electronics, Books & Gifts", href: "/electronics-books-and-gifts" },
-  { name: "Fixtures & Accessories", href: "/fixtures-and-accessories" },
-  { name: "Counters, Trolleys & Baskets", href: "/counters-trolleys-and-baskets" },
-];
+// const categoryList = [
+//   { name: "Supermarket & Grocery", href: "/supermarket-and-grocery" },
+//   { name: "Garment & Apparel", href: "/garment-and-apparel" },
+//   { name: "Footwear, Beauty & Pharmacy", href: "/footwear-beauty-and-pharmacy" },
+//   { name: "Electronics, Books & Gifts", href: "/electronics-books-and-gifts" },
+//   { name: "Fixtures & Accessories", href: "/fixtures-and-accessories" },
+//   { name: "Counters, Trolleys & Baskets", href: "/counters-trolleys-and-baskets" },
+// ];
 
 const legal = [
   { name: "Privacy Policy", href: "/privacy-policy" },
@@ -239,7 +244,7 @@ export default function Footer() {
     </div>
 
     <FooterColumn title="Pages" links={navLinks} />
-    <FooterColumn title="Our Categories" links={categoryList} />
+<FooterColumn title="Our Categories" links={categoryLinks} />
     <FooterColumn title="Legal" links={legal} />
 
     <div className="sm:col-span-2 lg:col-span-1">
