@@ -1,13 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 import { steps } from "@/data/content";
 
 const STAIR_BASE = 13; // left gap so row 1 also has room for the speed streaks
-const STAIR_SHIFT_DESKTOP = 6;
-const STAIR_SHIFT_MOBILE = 8;
+const STAIR_SHIFT_DESKTOP = 3;
 const HEADER_OFFSET = 230; // px: rendered height of the sticky header, adjust if the content overlaps it
 
 const EXTRA = [
@@ -84,16 +89,19 @@ const STREAKS = [
 
 /* ---------- Helpers ---------- */
 
-function useIsDesktop() {
-  const [isDesktop, setIsDesktop] = useState(false);
+// Pinned animation only on screens that are wide AND tall enough
+function useIsPinned() {
+  const [pinned, setPinned] = useState(false);
+
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    const update = () => setIsDesktop(mq.matches);
+    const mq = window.matchMedia("(min-width: 1280px) and (min-height: 700px)");
+    const update = () => setPinned(mq.matches);
     update();
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
   }, []);
-  return isDesktop;
+
+  return pinned;
 }
 
 function Streak({ s, i, run, reduce }) {
@@ -192,7 +200,7 @@ function CardImage({ src, alt, number }) {
 
 function StepRow({ step, index, isLast }) {
   const ref = useRef(null);
-  const isDesktop = useIsDesktop();
+  const pinned = useIsPinned();
   const extra = EXTRA[index] ?? {};
 
   const description = step.description ?? extra.description;
@@ -200,24 +208,23 @@ function StepRow({ step, index, isLast }) {
   const note = step.note ?? extra.note;
   const src = step.image ?? STEP_IMAGES[index] ?? `/process/step-${index + 1}.jpg`;
 
-  // Desktop: the tall track scrolls while the step stays pinned.
-  // Mobile: original natural-flow reveal.
   const { scrollYProgress: raw } = useScroll({
     target: ref,
-    offset: isDesktop
+    offset: pinned
       ? [`start ${HEADER_OFFSET}px`, "end end"]
-      : ["start 80%", "center 35%"],
+      : ["start 85%", "center 45%"],
   });
 
-  // Desktop: first 60% of the track plays the reveal, last 40% holds the finished step
-  // (useTransform clamps, so p stays at 1 during the hold).
-  const p = useTransform(raw, isDesktop ? [0, 0.6] : [0, 1], [0, 1]);
+  const p = useTransform(raw, pinned ? [0, 0.6] : [0, 1], [0, 1]);
+
+  // Large sideways movement only in the pinned layout
+  const move = (value) => (pinned ? value : 0);
 
   const cardOpacity = useTransform(p, [0, 0.25], [0, 1]);
-  const cardX = useTransform(p, [0, 0.3], [-160, 0]);
-  const cardY = useTransform(p, [0, 0.3], [-80, 0]);
-  const cardRotate = useTransform(p, [0, 0.3], [-8, 0]);
-  const cardScale = useTransform(p, [0, 0.3], [0.85, 1]);
+  const cardX = useTransform(p, [0, 0.3], [move(-160), 0]);
+  const cardY = useTransform(p, [0, 0.3], [pinned ? -80 : 40, 0]);
+  const cardRotate = useTransform(p, [0, 0.3], [move(-8), 0]);
+  const cardScale = useTransform(p, [0, 0.3], [pinned ? 0.85 : 0.95, 1]);
 
   const clip = useTransform(p, [0.05, 0.35], ["inset(0 100% 0 0)", "inset(0 0% 0 0)"]);
   const imgScale = useTransform(p, [0.05, 0.6], [1.35, 1]);
@@ -225,38 +232,53 @@ function StepRow({ step, index, isLast }) {
   const badgeScale = useTransform(p, [0.2, 0.38], [0, 1]);
   const badgeRotate = useTransform(p, [0.2, 0.38], [-180, 0]);
 
-  const ghostY = useTransform(p, [0, 1], [80, -40]);
+  const ghostY = useTransform(p, [0, 1], [pinned ? 80 : 20, pinned ? -40 : 0]);
   const ghostOpacity = useTransform(p, [0.1, 0.5], [0, 1]);
 
- const lineScale = useTransform(p, [0.2, 0.4], [0, 1]);
+  const lineScale = useTransform(p, [0.2, 0.4], [0, 1]);
 
   return (
     <li
       ref={ref}
-      className={`relative pb-10 lg:pb-0 ${isLast ? "lg:h-[190vh]" : "lg:h-[230vh]"}`}
-      style={{
-        "--shift-m": `${(index % 2) * STAIR_SHIFT_MOBILE}%`,
-        "--shift-d": `${STAIR_BASE + index * STAIR_SHIFT_DESKTOP}%`,
-      }}
+      className={`relative ${
+        pinned ? (isLast ? "h-[190vh]" : "h-[230vh]") : "pb-16 sm:pb-20"
+      }`}
     >
-      {/* pinned stage: stays on screen while this step plays and holds */}
+      {/* pinned stage on large screens, normal flow elsewhere */}
       <div
-        className="lg:sticky lg:flex lg:items-center"
+        className={pinned ? "sticky flex items-center" : ""}
         style={
-          isDesktop
+          pinned
             ? { top: HEADER_OFFSET, height: `calc(100vh - ${HEADER_OFFSET}px)` }
             : undefined
         }
       >
-        <div className="relative z-10 ml-[var(--shift-m)] flex w-full flex-col gap-8 lg:ml-[var(--shift-d)] lg:block lg:min-w-0 lg:flex-1">
+        <div
+          className={
+            pinned
+              ? "relative z-10 min-w-0 flex-1"
+              : "relative z-10 mx-auto grid w-full max-w-xl gap-12 md:max-w-none md:grid-cols-2 md:items-center md:gap-8 lg:gap-14"
+          }
+          style={
+            pinned
+              ? { marginLeft: `${STAIR_BASE + index * STAIR_SHIFT_DESKTOP}%` }
+              : undefined
+          }
+        >
           {/* speed streaks trailing behind the card */}
-          <SpeedLines />
+          {pinned && <SpeedLines />}
 
           <motion.div
             style={{ opacity: cardOpacity, x: cardX, y: cardY, rotate: cardRotate, scale: cardScale }}
-            className="glass-card relative w-full max-w-[420px] overflow-hidden rounded-3xl shadow-xl lg:w-[390px]"
+            className={`glass-card relative w-full overflow-hidden rounded-3xl shadow-xl ${
+              pinned ? "max-w-[390px]" : "mx-auto max-w-[480px]"
+            }`}
           >
-            <div className="relative h-[36vh] overflow-hidden">
+            <div
+              className={`relative overflow-hidden ${
+                pinned ? "h-[36vh]" : "h-56 sm:h-72"
+              }`}
+            >
               <motion.div style={{ clipPath: clip }} className="absolute inset-0">
                 <motion.div style={{ scale: imgScale }} className="h-full w-full">
                   <CardImage src={src} alt={step.title} number={index + 1} />
@@ -270,51 +292,62 @@ function StepRow({ step, index, isLast }) {
                 {index + 1}
               </motion.span>
             </div>
-            <div className="px-6 py-5">
-              <p className="text-lg font-bold leading-snug lg:text-xl">{step.title}</p>
+            <div className="px-5 py-4 sm:px-6 sm:py-5">
+              <p className="text-lg font-bold leading-snug xl:text-xl">{step.title}</p>
             </div>
           </motion.div>
 
-          {/* DETAILS: beside the card on desktop (centered on it, doesn't add row height) */}
-          <div className="relative max-w-xl lg:absolute lg:left-[calc(390px+3.5rem)] lg:top-1/2 lg:-translate-y-1/2">
+          {/* DETAILS */}
+          <div
+            className={
+              pinned
+                ? "absolute left-[calc(390px+3.5rem)] right-0 top-1/2 max-w-xl -translate-y-1/2"
+                : "relative min-w-0"
+            }
+          >
             <motion.span
               style={{ y: ghostY, opacity: ghostOpacity }}
-              className="pointer-events-none absolute -left-4 -top-16 select-none text-[9rem] font-black leading-none text-brand/10 lg:text-[11rem]"
+              className={`pointer-events-none absolute -left-1 select-none font-black leading-none text-brand/10 ${
+                pinned ? "-top-16 text-[11rem]" : "-top-10 text-8xl sm:text-9xl"
+              }`}
               aria-hidden
             >
               0{index + 1}
             </motion.span>
 
             <div className="relative">
-           <Reveal p={p} range={[0, 0.3]} x={-50} className="flex flex-wrap items-center gap-3">
-  <span className="eyebrow">
-    <span className="h-[2px] w-5 bg-brand" /> Step {index + 1}
-  </span>
-</Reveal>
+              <Reveal p={p} range={[0, 0.3]} x={move(-50)}>
+                <span className="eyebrow">
+                  <span className="h-[2px] w-5 bg-brand" /> Step {index + 1}
+                </span>
+              </Reveal>
 
-<Reveal p={p} range={[0, 0.3]} x={-80} className="mt-3">
-  <h3 className="text-3xl font-extrabold leading-tight tracking-tight lg:text-4xl">
-    {step.title}
-  </h3>
-  <motion.div
-    style={{ scaleX: lineScale, originX: 0 }}
-    className="mt-3 h-1 w-24 rounded-full bg-brand"
-  />
-</Reveal>
+              <Reveal p={p} range={[0, 0.3]} x={move(-80)} className="mt-3">
+                <h3 className="text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl xl:text-4xl">
+                  {step.title}
+                </h3>
+                <motion.div
+                  style={{ scaleX: lineScale, originX: 0 }}
+                  className="mt-3 h-1 w-24 rounded-full bg-brand"
+                />
+              </Reveal>
 
-{description && (
-  <Reveal p={p} range={[0, 0.3]} x={-60} className="mt-4">
-    <p className="text-base leading-relaxed opacity-75">{description}</p>
-  </Reveal>
-)}
+              {description && (
+                <Reveal p={p} range={[0, 0.3]} x={move(-60)} className="mt-4">
+                  <p className="text-sm leading-relaxed opacity-75 sm:text-base">
+                    {description}
+                  </p>
+                </Reveal>
+              )}
 
-              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              <div className="mt-5 grid gap-3 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
                 {points.map((pt, i) => (
                   <Reveal
                     key={pt}
                     p={p}
-                   range={[0.3 + i * 0.08, 0.47 + i * 0.08]}
-                    x={70}
+                    range={[0.3 + i * 0.08, 0.47 + i * 0.08]}
+                    x={move(70)}
+                    y={pinned ? 0 : 20}
                     className="flex items-start gap-3 rounded-2xl bg-white/70 p-3 shadow-sm"
                   >
                     <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand text-white">
@@ -326,9 +359,9 @@ function StepRow({ step, index, isLast }) {
               </div>
 
               {note && (
-                <Reveal p={p} range={[0.88, 1]} y={30} className="mt-5">
-                  <div className="inline-flex items-center gap-2 rounded-full bg-[#0f1f4b] px-5 py-2.5 text-sm font-semibold text-white">
-                    <span className="h-2 w-2 animate-pulse rounded-full bg-brand" />
+                <Reveal p={p} range={[0.75, 0.95]} y={30} className="mt-5">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-[#0f1f4b] px-4 py-2 text-xs font-semibold text-white sm:px-5 sm:py-2.5 sm:text-sm">
+                    <span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-brand" />
                     {note}
                   </div>
                 </Reveal>
@@ -341,12 +374,20 @@ function StepRow({ step, index, isLast }) {
   );
 }
 
+/* ---------- Section ---------- */
+
 export default function Process() {
+  const pinned = useIsPinned();
+
   return (
     <section id="process" className="bg-soft relative overflow-x-clip">
-      <div className="sticky top-0 z-30 w-full border-b border-navy/5 bg-soft backdrop-blur-md pt-20 pb-6">
-        <div className="section-pad mx-auto w-full max-w-[1400px] py-5">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <div
+        className={`z-30 w-full border-b border-navy/5 bg-soft backdrop-blur-md ${
+          pinned ? "sticky top-0 pb-6 pt-20" : "relative py-6 sm:py-10"
+        }`}
+      >
+        <div className={`section-pad mx-auto w-full max-w-[1400px] ${pinned ? "py-5" : ""}`}>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-xl">
               <span className="eyebrow">
                 <span className="h-[2px] w-5 bg-brand" /> How It Works
@@ -356,7 +397,7 @@ export default function Process() {
                 <span className="text-brand">4 Simple Steps</span>
               </h2>
             </div>
-            <a href="#faq" className="btn-navy !py-3 self-start lg:self-auto">
+            <a href="#faq" className="btn-navy !py-3 shrink-0 self-start sm:self-auto">
               Learn More <ArrowRight className="h-4 w-4" />
             </a>
           </div>
@@ -364,9 +405,14 @@ export default function Process() {
       </div>
 
       <div className="section-pad mx-auto w-full max-w-[1400px]">
-        <ol className="pb-10 pt-[4vh]">
+        <ol className="pb-4 pt-12 xl:pt-[4vh]">
           {steps.map((step, i) => (
-            <StepRow key={step.title} step={step} index={i} isLast={i === steps.length - 1} />
+            <StepRow
+              key={step.title}
+              step={step}
+              index={i}
+              isLast={i === steps.length - 1}
+            />
           ))}
         </ol>
       </div>
