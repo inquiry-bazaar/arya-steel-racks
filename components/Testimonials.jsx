@@ -286,19 +286,27 @@ export default function Testimonials({ items = DEFAULT_ITEMS }) {
   const ref = useRef(null);
   const [active, setActive] = useState(0);
   const total = items.length;
+const [showGif, setShowGif] = useState(false);
 
+useEffect(() => {
+  const mq = window.matchMedia("(min-width: 768px)");
+  const update = () => setShowGif(mq.matches);
+  update();
+  mq.addEventListener("change", update);
+  return () => mq.removeEventListener("change", update);
+}, []);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
   });
 
-  useEffect(() => {
-    items.forEach((it) => {
-      if (it.gif) new window.Image().src = it.gif;
-      if (it.image) new window.Image().src = it.image;
-      if (it.avatar) new window.Image().src = it.avatar;
-    });
-  }, [items]);
+ useEffect(() => {
+  items.forEach((it) => {
+    if (showGif && it.gif) new window.Image().src = it.gif;
+    if (it.image) new window.Image().src = it.image;
+    if (it.avatar) new window.Image().src = it.avatar;
+  });
+}, [items, showGif]);
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     const next = Math.min(
@@ -348,11 +356,12 @@ export default function Testimonials({ items = DEFAULT_ITEMS }) {
           <div className="grid items-center gap-4 lg:grid-cols-[1fr_1.1fr] lg:gap-10">
             {/* LEFT: the guy (GIF) + his speech bubble */}
             <div className="relative flex flex-col items-center lg:flex-row lg:items-end lg:justify-center">
-              {/* GIF - full size, sits BEHIND the bubble (z-10) */}
-              <div className="relative z-10 h-[28vh] w-[20vh] shrink-0 sm:h-[36vh] sm:w-[28vh] lg:h-[60vh] lg:w-[48vh]">
-                <Guy item={current} index={active} />
-                <Confetti burstKey={active} />
-              </div>
+{showGif && (
+  <div className="relative z-10 h-[36vh] w-[28vh] shrink-0 lg:h-[60vh] lg:w-[48vh]">
+    <Guy item={current} index={active} />
+    <Confetti burstKey={active} />
+  </div>
+)}
 
               {/* Speech bubble - ABOVE the GIF (z-30), pulled over its empty side space */}
               <div className="relative z-30 order-first mb-3 w-full max-w-[360px] lg:order-none lg:mb-[22vh] lg:-ml-[16vh]">
