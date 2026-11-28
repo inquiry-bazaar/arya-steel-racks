@@ -144,7 +144,7 @@ export default function Hero() {
         <div className="glass-card flex animate-float items-center gap-3 px-5 py-3">
           <Users className="h-8 w-8" />
           <div className="leading-tight">
-            <p className="text-[17px] font-extrabold">60+</p>
+            <p className="text-[17px] font-extrabold">100+</p>
             <p className="text-[12px] font-medium text-navy/70">Display Products</p>
           </div>
         </div>
