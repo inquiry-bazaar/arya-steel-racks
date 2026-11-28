@@ -51,7 +51,7 @@ export const navLinks = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products", dropdown: true },
   { label: "About Us", href: "/about" },
-  { label: "Our Articles", href: "/articles" },  
+  { label: "Our Articles", href: "/blogs" },  
   { label: "Contact Us", href: "/contact" },
 ];
 
