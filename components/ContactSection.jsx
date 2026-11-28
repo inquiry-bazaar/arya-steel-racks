@@ -1,11 +1,9 @@
-
 "use client";
 
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  ArrowUpRight,
   Building2,
   CheckCircle2,
   Clock3,
@@ -17,6 +15,7 @@ import {
   Send,
   UserRound,
 } from "lucide-react";
+import axios from "axios";
 
 const requirements = [
   "Supermarket & Grocery Racks",
@@ -49,42 +48,86 @@ const contactDetails = [
   },
 ];
 
-export default function ContactSection({ onSubmit }) {
-  const [formData, setFormData] = useState({
-    name: "",
-    company: "",
-    email: "",
-    phone: "",
-    requirement: "",
-    message: "",
-  });
+const initialFormData = {
+  name: "",
+  company: "",
+  email: "",
+  phone: "",
+  requirement: "",
+  message: "",
+};
 
+export default function ContactSection() {
+  const [formData, setFormData] = useState(initialFormData);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("");
+  const [whatsappUrl, setWhatsappUrl] = useState("");
 
   const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setStatus("");
 
-    if (onSubmit) {
-      try {
-        setLoading(true);
-        await onSubmit(formData);
-        setSubmitted(true);
-      } catch (error) {
-        console.error("Enquiry submission failed:", error);
-      } finally {
-        setLoading(false);
+    const { name, company, email, phone, requirement, message } = formData;
+
+    try {
+      const websiteUrl = window.location.hostname + window.location.pathname;
+
+      const payload = {
+        platform: websiteUrl,
+        platformEmail: "aryaindustry36@gmail.com",
+        supplierToken: "6a29506d0dd27bd1398dd5f8",
+        name,
+        phone,
+        email,
+        place: "N/A",
+        product: requirement,
+        // The payload has no company field, so it goes in the message
+        message: `Company: ${company || "N/A"}\n${message || "N/A"}`,
+      };
+
+      const { data } = await axios.post(
+        "https://brandbnalo.com/api/form/add",
+        payload
+      );
+
+      if (!data?.success) {
+        setStatus("❌ Failed to send. Please try again.");
+        return;
       }
-    } else {
-      console.log("Enquiry details:", formData);
+
+      const whatsappText = `Hi, I am ${name}.
+
+Company: ${company || "N/A"}
+Email: ${email}
+Product: ${requirement}
+
+Message: ${message || "N/A"}
+
+Contact: ${phone}`;
+
+      const waUrl = `https://wa.me/918587901795?text=${encodeURIComponent(
+        whatsappText
+      )}`;
+
+      setWhatsappUrl(waUrl);
       setSubmitted(true);
+      setFormData(initialFormData);
+
+      setTimeout(() => {
+        window.open(waUrl, "_blank", "noopener,noreferrer");
+      }, 1000);
+    } catch (error) {
+      console.error("Enquiry submission failed:", error);
+      setStatus("❌ Server error. Try again later.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -286,6 +329,14 @@ export default function ContactSection({ onSubmit }) {
                     Your enquiry has been received. Our team will get in
                     touch with you shortly.
                   </p>
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-6 rounded-xl bg-green-600 px-6 py-3 font-semibold text-white hover:bg-green-700"
+                  >
+                    Continue on WhatsApp
+                  </a>
                   <button
                     type="button"
                     onClick={() => setSubmitted(false)}
@@ -346,7 +397,10 @@ export default function ContactSection({ onSubmit }) {
 
                   {/* Requirement */}
                   <div>
-                    <label className="mb-3 block text-[16px] font-bold text-[#101B35]">
+                    <label
+                      htmlFor="requirement"
+                      className="mb-3 block text-[16px] font-bold text-[#101B35]"
+                    >
                       What are you looking for?{" "}
                       <span className="text-red-500">*</span>
                     </label>
@@ -358,6 +412,7 @@ export default function ContactSection({ onSubmit }) {
                       />
 
                       <select
+                        id="requirement"
                         name="requirement"
                         value={formData.requirement}
                         onChange={handleChange}
@@ -383,7 +438,10 @@ export default function ContactSection({ onSubmit }) {
 
                   {/* Message */}
                   <div>
-                    <label className="mb-3 block text-[16px] font-bold text-[#101B35]">
+                    <label
+                      htmlFor="message"
+                      className="mb-3 block text-[16px] font-bold text-[#101B35]"
+                    >
                       Project Details
                     </label>
 
@@ -394,6 +452,7 @@ export default function ContactSection({ onSubmit }) {
                       />
 
                       <textarea
+                        id="message"
                         name="message"
                         rows={4}
                         value={formData.message}
@@ -403,6 +462,16 @@ export default function ContactSection({ onSubmit }) {
                       />
                     </div>
                   </div>
+
+                  {/* Error message */}
+                  {status && (
+                    <p
+                      role="alert"
+                      className="text-center font-semibold text-red-600"
+                    >
+                      {status}
+                    </p>
+                  )}
 
                   {/* Submit button */}
                   <div className="pt-1">

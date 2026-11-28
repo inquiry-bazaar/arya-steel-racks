@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, CheckCircle2 } from "lucide-react";
+import axios from "axios";
 import { categoryList } from "@/data/products";
 
 const products = categoryList.map((category) => category.name);
@@ -27,6 +28,12 @@ export default function QuoteModal({ open, onClose, product }) {
 
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("");
+  const [whatsappUrl, setWhatsappUrl] = useState("");
+
+  const whatsappTimer = useRef(null);
+  const closeTimer = useRef(null);
+  const session = useRef(0); // changes each time the modal closes
 
   useEffect(() => {
     if (!open) return;
@@ -43,26 +50,113 @@ export default function QuoteModal({ open, onClose, product }) {
     };
   }, [open, onClose]);
 
+  // Clear timers when the modal closes or unmounts
+  useEffect(() => {
+    if (!open) return;
+
+    return () => {
+      session.current += 1;
+      clearTimeout(whatsappTimer.current);
+      clearTimeout(closeTimer.current);
+    };
+  }, [open]);
+
   // Reset form state after closing
   useEffect(() => {
     if (!open) {
-      const t = setTimeout(() => setSent(false), 300);
+      const t = setTimeout(() => {
+        setSent(false);
+        setLoading(false);
+        setStatus("");
+        setWhatsappUrl("");
+      }, 300);
       return () => clearTimeout(t);
     }
   }, [open]);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
+    const form = Object.fromEntries(new FormData(e.currentTarget));
+    const currentSession = session.current;
+
     setLoading(true);
+    setStatus("");
+
+    const {
+      name,
+      company,
+      phone,
+      email,
+      product: selectedProduct,
+      quantity,
+      message,
+    } = form;
 
     try {
-      // TODO: replace with your real endpoint / email service
-      // Until then, enquiries are NOT delivered to you.
-      console.log("Quote request:", data);
+      const websiteUrl = window.location.hostname + window.location.pathname;
+
+      const payload = {
+        platform: websiteUrl,
+        platformEmail: "aryaindustry36@gmail.com",
+        supplierToken: "6a29506d0dd27bd1398dd5f8",
+        name,
+        phone,
+        email,
+        place: "N/A",
+        product: selectedProduct,
+        // The payload has no company or quantity fields
+        message: `Company: ${company || "N/A"}
+Quantity: ${quantity || "N/A"}
+${message || "N/A"}`,
+      };
+
+      const { data } = await axios.post(
+        "https://brandbnalo.com/api/form/add",
+        payload
+      );
+
+      // Ignore the response if the modal was closed meanwhile
+      if (currentSession !== session.current) return;
+
+      if (!data?.success) {
+        setStatus("❌ Failed to send. Please try again.");
+        return;
+      }
+
+      const whatsappText = `Hi, I am ${name}.
+
+Company: ${company || "N/A"}
+Email: ${email}
+Product: ${selectedProduct}
+Quantity: ${quantity || "N/A"}
+
+Message: ${message || "N/A"}
+
+Contact: ${phone}`;
+
+      const waUrl = `https://wa.me/918587901795?text=${encodeURIComponent(
+        whatsappText
+      )}`;
+
+      setWhatsappUrl(waUrl);
       setSent(true);
+
+      whatsappTimer.current = setTimeout(() => {
+        const win = window.open(waUrl, "_blank");
+
+        // Auto-close only if the WhatsApp tab actually opened
+        if (win) {
+          win.opener = null;
+          closeTimer.current = setTimeout(onClose, 3000);
+        }
+      }, 1000);
+    } catch (error) {
+      console.error("Quote request failed:", error);
+      if (currentSession === session.current) {
+        setStatus("❌ Server error. Try again later.");
+      }
     } finally {
-      setLoading(false);
+      if (currentSession === session.current) setLoading(false);
     }
   }
 
@@ -154,10 +248,18 @@ export default function QuoteModal({ open, onClose, product }) {
                       We've received your request and will get back to you
                       shortly.
                     </p>
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-6 rounded-xl bg-green-600 px-6 py-3 text-sm font-semibold text-white hover:bg-green-700"
+                    >
+                      Continue on WhatsApp
+                    </a>
                     <button
                       type="button"
                       onClick={onClose}
-                      className="btn-orange mt-6"
+                      className="btn-orange mt-4"
                     >
                       Close
                     </button>
@@ -230,6 +332,14 @@ export default function QuoteModal({ open, onClose, product }) {
                         placeholder="Size, material, colour, delivery location, etc."
                         className={`${field} resize-none`}
                       />
+                      {status && (
+                        <p
+                          role="alert"
+                          className="text-center text-sm font-semibold text-red-600"
+                        >
+                          {status}
+                        </p>
+                      )}
                       <button
                         type="submit"
                         disabled={loading}
