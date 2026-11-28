@@ -249,9 +249,9 @@ Contact: ${phone}`;
                     strokeWidth={2}
                     className="mt-0.5 h-7 w-7 shrink-0 sm:mt-1 sm:h-10 sm:w-10"
                   />
-                  <p className="text-[13px] font-semibold leading-[1.5] sm:text-[16px] sm:leading-[1.6]">
+                  {/* <p className="text-[13px] font-semibold leading-[1.5] sm:text-[16px] sm:leading-[1.6]">
                     Our team is ready to discuss your project.
-                  </p>
+                  </p> */}
                 </div>
               </div>
 
