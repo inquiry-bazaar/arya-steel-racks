@@ -279,10 +279,16 @@ export default function Navbar() {
 
       {/* Mega Menu */}
       {mega && (
-        <div className="absolute inset-x-0 top-full hidden px-4 pb-4 lg:block">
-          <div className="mx-auto grid max-h-[calc(100vh-120px)] max-w-[1300px] grid-cols-[360px_1fr] gap-6 overflow-hidden rounded-b-[28px] border-t border-[#e6ecf7] bg-white p-6 shadow-[0_24px_60px_rgba(20,40,90,0.18)]">
+        <div>
+          <div
+            className={`mx-auto grid max-w-[1300px] grid-cols-[280px_minmax(0,1fr)] grid-rows-[minmax(0,1fr)] gap-6 overflow-hidden rounded-b-[28px] border-t border-[#e6ecf7] bg-white p-6 shadow-[0_24px_60px_rgba(20,40,90,0.18)] xl:grid-cols-[360px_minmax(0,1fr)] ${
+              scrolled
+                ? "h-[min(680px,calc(100vh-100px))]"
+                : "h-[min(680px,calc(100vh-140px))]"
+            }`}
+          >
             {/* Categories List */}
-            <div className="rounded-2xl border border-[#e6ecf7] bg-[#f6f8fc] p-4">
+            <div className="min-h-0 overflow-y-auto overscroll-contain rounded-2xl border border-[#e6ecf7] bg-[#f6f8fc] p-4">
               <div className="flex items-center justify-between border-b border-[#e6ecf7] pb-3">
                 <span className="flex items-center gap-2 text-[13px] font-extrabold uppercase tracking-wider text-navy">
                   <LayoutGrid className="h-4 w-4 text-brand" />
@@ -296,9 +302,7 @@ export default function Navbar() {
 
               <ul className="mt-3 space-y-2">
                 {categoryList.map((category) => {
-                  const active =
-                    activeCat === category.slug ||
-                    isCategoryActive(category.slug);
+                  const active = activeCat === category.slug;
 
                   return (
                     <li key={category.slug}>
@@ -350,7 +354,7 @@ export default function Navbar() {
             </div>
 
             {/* Products List */}
-            <div className="flex min-h-0 flex-col">
+            <div className="flex min-h-0 min-w-0 flex-col">
               <div className="mb-3 flex items-center justify-between">
                 <h3 className="text-[16px] font-extrabold text-navy">
                   {activeCategory?.name}
@@ -370,12 +374,16 @@ export default function Navbar() {
                 </div>
               </div>
 
-              <ul className="grid min-h-0 flex-1 grid-cols-2 gap-3 overflow-y-auto pr-2">
+              {/* key resets the scroll position when the category changes */}
+              <ul
+                key={activeCat}
+                className="grid min-h-0 flex-1 grid-cols-2 content-start gap-3 overflow-y-auto overscroll-contain pb-2 pr-2"
+              >
                 {catProducts.map((product, index) => (
                   <li key={product.slug}>
                     <Link
                       href={`/${product.slug}`}
-                      className="group flex items-center gap-3 rounded-2xl border border-[#e6ecf7] bg-white p-3 transition hover:border-brand hover:shadow-md"
+                      className="group flex h-full items-center gap-3 rounded-2xl border border-[#e6ecf7] bg-white p-3 transition hover:border-brand hover:shadow-md"
                     >
                       <span className="relative h-[72px] w-[72px] shrink-0 overflow-hidden rounded-xl border border-[#eef2fa] bg-white">
                         <MediaSlot
