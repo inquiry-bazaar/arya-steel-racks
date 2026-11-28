@@ -40,7 +40,7 @@ export function Logo() {
       />
 
       <div className="flex flex-col justify-center leading-tight">
-        <span className="whitespace-nowrap text-[22px] font-extrabold tracking-tight text-navy xl:text-[26px]">
+        <span className="whitespace-nowrap text-[18px] font-extrabold tracking-tight text-navy xl:text-[20px]">
           Arya Insulation <span className="text-brand">Pvt. Ltd.</span>
         </span>
 

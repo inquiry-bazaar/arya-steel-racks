@@ -3,9 +3,51 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaFacebookF, FaInstagram, FaYoutube, FaArrowUp } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+  FaArrowUp,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaWhatsapp,
+} from "react-icons/fa";
 import { navLinks } from "@/data/content";
 import { Logo } from "./Navbar";
+
+// TODO: replace these placeholders with your real details
+const contact = {
+  address: "Your street address, City, State - PIN code",
+  phone: "+91 00000 00000",
+  email: "info@example.com",
+  whatsapp: "910000000000", // country code + number, digits only
+  whatsappMessage: "Hello, I would like to know more about your display racks.",
+};
+
+const contactItems = [
+  {
+    label: "Location",
+    value: contact.address,
+    href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contact.address)}`,
+    Icon: FaMapMarkerAlt,
+    external: true,
+  },
+  {
+    label: "Phone",
+    value: contact.phone,
+    href: `tel:${contact.phone.replace(/[^\d+]/g, "")}`,
+    Icon: FaPhoneAlt,
+  },
+  {
+    label: "Email",
+    value: contact.email,
+    href: `mailto:${contact.email}`,
+    Icon: FaEnvelope,
+  },
+];
+
+const whatsappHref = `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(contact.whatsappMessage)}`;
 
 const categoryList = [
   { name: "Supermarket & Grocery", href: "/supermarket-and-grocery" },
@@ -44,12 +86,13 @@ const socials = [
   amber    #f5b301  accent: beam, underlines, hover fills (never used as text on light)
 */
 
+const headingClass =
+  "text-[16px] font-semibold text-[#0a1f44] mb-5 pb-3 border-b-2 border-[#f5b301] inline-block";
+
 function FooterColumn({ title, links }) {
   return (
     <nav aria-label={title}>
-      <h3 className="text-[16px] font-semibold text-[#0a1f44] mb-5 pb-3 border-b-2 border-[#f5b301] inline-block">
-        {title}
-      </h3>
+      <h3 className={headingClass}>{title}</h3>
       <ul className="space-y-3">
         {links.map((link) => (
           <li key={link.href}>
@@ -67,6 +110,45 @@ function FooterColumn({ title, links }) {
         ))}
       </ul>
     </nav>
+  );
+}
+
+function ContactColumn() {
+  return (
+    <div>
+      <h3 className={headingClass}>Contact Us</h3>
+      <address className="not-italic">
+        <ul className="space-y-4">
+          {contactItems.map(({ label, value, href, Icon, external }) => (
+            <li key={label}>
+              <a
+                href={href}
+                {...(external && { target: "_blank", rel: "noopener noreferrer" })}
+                className="group flex items-start gap-3 text-[14px] leading-6 text-slate-600 hover:text-[#0a1f44] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0a1f44] rounded-sm"
+              >
+                <span className="shrink-0 w-9 h-9 flex items-center justify-center rounded-md bg-white border border-slate-300 text-[#0a1f44] group-hover:bg-[#f5b301] group-hover:border-[#f5b301] transition-colors duration-200">
+                  <Icon aria-hidden="true" />
+                </span>
+                <span className="min-w-0 break-words pt-1.5">
+                  <span className="sr-only">{label}: </span>
+                  {value}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </address>
+
+      <a
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-6 inline-flex items-center gap-2 rounded-md bg-[#25D366] px-5 py-3 text-[14px] font-semibold text-[#0a1f44] hover:bg-[#1ebe5a] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0a1f44] focus-visible:ring-offset-2"
+      >
+        <FaWhatsapp aria-hidden="true" className="text-[20px]" />
+        Chat on WhatsApp
+      </a>
+    </div>
   );
 }
 
@@ -131,43 +213,41 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Main content */}
-      <div className="relative z-10 max-w-[1450px] mx-auto px-6 md:px-12 pt-16 pb-14">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-10">
-          {/* About */}
-          <div className="sm:col-span-2 lg:col-span-4 max-w-[400px]">
-            <Logo />
-            <p className="mt-5 text-[15px] leading-7 text-slate-600">
-              Arya Industry is a India’s leading manufacturer and Supplier of premium-quality Supermarket Display Racks, Wooden Rack, Vegetable Rack, Grocery Display Rack, Slotted Angle Rack, Shopping Trolley and Basket, Cash Counter, Bingo Rack, Snacks Rack,  Industrial Storage, and more. Optimize Your Store Space with Arya Industry’s Exclusive Range of Supermarket Racks.
-            </p>
+{/* Main content */}
+<div className="relative z-10 max-w-[1450px] mx-auto px-6 md:px-12 pt-16 pb-14">
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.5fr_0.7fr_1.35fr_1fr_1.35fr] gap-12 lg:gap-6 xl:gap-10">
+    {/* About */}
+    <div className="sm:col-span-2 lg:col-span-1 max-w-[400px]">
+      <Logo />
+      <p className="mt-5 text-[15px] leading-7 text-slate-600">
+        Arya Industry is India’s leading manufacturer and supplier of premium-quality Supermarket Display Racks, Wooden Rack, Vegetable Rack, Grocery Display Rack, Slotted Angle Rack, Shopping Trolley and Basket, Cash Counter, Bingo Rack, Snacks Rack, Industrial Storage, and more. Optimize your store space with Arya Industry’s exclusive range of supermarket racks.
+      </p>
 
-            <div className="flex flex-wrap items-center gap-3 mt-7">
-              {socials.map(({ name, href, Icon }) => (
-                <a
-                  key={name}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={name}
-                  className="w-10 h-10 flex items-center justify-center rounded-md bg-white border border-slate-300 text-[#0a1f44] text-[15px] hover:bg-[#f5b301] hover:border-[#f5b301] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0a1f44] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f5f7fa]"
-                >
-                  <Icon aria-hidden="true" />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div className="lg:col-span-2">
-            <FooterColumn title="Pages" links={navLinks} />
-          </div>
-          <div className="lg:col-span-4">
-            <FooterColumn title="Our Categories" links={categoryList} />
-          </div>
-          <div className="lg:col-span-2">
-            <FooterColumn title="Legal" links={legal} />
-          </div>
-        </div>
+      <div className="flex flex-wrap items-center gap-3 mt-7">
+        {socials.map(({ name, href, Icon }) => (
+          <a
+            key={name}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={name}
+            className="w-10 h-10 flex items-center justify-center rounded-md bg-white border border-slate-300 text-[#0a1f44] text-[15px] hover:bg-[#f5b301] hover:border-[#f5b301] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0a1f44] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f5f7fa]"
+          >
+            <Icon aria-hidden="true" />
+          </a>
+        ))}
       </div>
+    </div>
+
+    <FooterColumn title="Pages" links={navLinks} />
+    <FooterColumn title="Our Categories" links={categoryList} />
+    <FooterColumn title="Legal" links={legal} />
+
+    <div className="sm:col-span-2 lg:col-span-1">
+      <ContactColumn />
+    </div>
+  </div>
+</div>
 
       {/* Bottom bar */}
       <div className="relative z-10 bg-[#e5e7eb] border-t border-slate-300">
